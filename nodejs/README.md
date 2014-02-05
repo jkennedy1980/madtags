@@ -1,33 +1,27 @@
-grunt-init-express
-==================
+# MadTags
 
-grunt-init Express on Node.js
+HackFest 2014
 
-# grunt-init install
+## Getting Started
+Install the module with: `npm install MadTags`
 
-[grunt-init document](http://gruntjs.com/project-scaffolding)
+```javascript
+var MadTags = require('MadTags');
+MadTags.awesome(); // "awesome"
+```
 
-	$ npm install -g  grunt-init
+## Documentation
+_(Coming soon)_
 
+## Examples
+_(Coming soon)_
 
-	$ git clone https://github.com/kamiyam/grunt-init-express ~/.grunt-init/express
+## Contributing
+In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
+## Release History
+_(Nothing yet)_
 
-	$ mkdir work
-	
-	$ cd work ##( ← must be empty folder)
-	
-	$ grunt-init express
-	
-	$ cd app
-
-
-	$ express
-
-   destination is not empty, continue? (yes or no) yes
-
-	$ npm install
-	
-	$ cd ..
-
-	$ npm install && grunt
+## License
+Copyright (c) 2014 Joshua Kennedy  
+Licensed under the MIT license.
