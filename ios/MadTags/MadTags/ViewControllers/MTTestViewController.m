@@ -23,7 +23,7 @@
 {
     [super viewDidLoad];
 	self.socket = [[SocketIO alloc] initWithDelegate:self];
-	[self.socket connectToHost:@"localhost" onPort:80];
+	[self.socket connectToHost:@"Snickers.local" onPort:80];
 }
 
 - (IBAction)didClickSendPing:(id)sender {
@@ -32,6 +32,9 @@
 
 - (IBAction)didClickDone:(id)sender {
 	[self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)didPokeAlphonso:(id)sender {
 }
 
 #pragma mark - SocketIO Delegate

@@ -15,6 +15,7 @@
 		D22D001C18A2CBA200FBE7A3 /* SocketIOPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D001418A2CBA200FBE7A3 /* SocketIOPacket.m */; };
 		D22D001D18A2CBA200FBE7A3 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D001718A2CBA200FBE7A3 /* SocketIOTransportWebsocket.m */; };
 		D22D001E18A2CBA200FBE7A3 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D001918A2CBA200FBE7A3 /* SocketIOTransportXHR.m */; };
+		D22D002118A2DCCD00FBE7A3 /* asapi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D002018A2DCCD00FBE7A3 /* asapi.framework */; };
 		D2791CA818A2A2DF0043A465 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2791CA718A2A2DF0043A465 /* Foundation.framework */; };
 		D2791CAA18A2A2DF0043A465 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2791CA918A2A2DF0043A465 /* CoreGraphics.framework */; };
 		D2791CAC18A2A2DF0043A465 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2791CAB18A2A2DF0043A465 /* UIKit.framework */; };
@@ -60,6 +61,7 @@
 		D22D001718A2CBA200FBE7A3 /* SocketIOTransportWebsocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportWebsocket.m; sourceTree = "<group>"; };
 		D22D001818A2CBA200FBE7A3 /* SocketIOTransportXHR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOTransportXHR.h; sourceTree = "<group>"; };
 		D22D001918A2CBA200FBE7A3 /* SocketIOTransportXHR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOTransportXHR.m; sourceTree = "<group>"; };
+		D22D002018A2DCCD00FBE7A3 /* asapi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = asapi.framework; sourceTree = "<group>"; };
 		D2791CA418A2A2DF0043A465 /* MadTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2791CA718A2A2DF0043A465 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2791CA918A2A2DF0043A465 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D22D002118A2DCCD00FBE7A3 /* asapi.framework in Frameworks */,
 				D22D000D18A2C99900FBE7A3 /* Security.framework in Frameworks */,
 				D22D000B18A2C99000FBE7A3 /* libicucore.dylib in Frameworks */,
 				D22D000918A2C98800FBE7A3 /* CFNetwork.framework in Frameworks */,
@@ -157,6 +160,7 @@
 		D2791CA618A2A2DF0043A465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D22D002018A2DCCD00FBE7A3 /* asapi.framework */,
 				D22D000C18A2C99900FBE7A3 /* Security.framework */,
 				D22D000A18A2C99000FBE7A3 /* libicucore.dylib */,
 				D22D000818A2C98800FBE7A3 /* CFNetwork.framework */,
@@ -481,6 +485,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/scott/repos/madtags/ios/MadTags,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MadTags/MadTags-Prefix.pch";
 				INFOPLIST_FILE = "MadTags/MadTags-Info.plist";
@@ -494,6 +502,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/scott/repos/madtags/ios/MadTags,
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MadTags/MadTags-Prefix.pch";
 				INFOPLIST_FILE = "MadTags/MadTags-Info.plist";
