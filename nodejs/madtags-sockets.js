@@ -11,15 +11,23 @@
 				socket.emit( "pong", {} );
 			});
 
+			/**
+			CLIENT CLIENT CLIENT CLIENT CLIENT CLIENT 
+			*/
 			socket.on( 'joinClient', function( data ){
 				console.log( "GETTING JOIN: ", data );
 				game.joinClient( socket, data.gameCode, data.username );
 			});
 
+
+			/**
+			TV TV TV TV TV TV TV TV TV TV TV TV TV TV
+			*/
 			socket.on( 'joinTV', function( data ){
 				console.log( "GETTING JOIN: ", data );
 				game.joinTV( socket, data.gameCode  );
 			});
+			
 		});
 	};
 
