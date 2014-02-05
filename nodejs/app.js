@@ -1,26 +1,24 @@
-/**
- * Module dependencies.
- */
 
-var express = require('express'),
-  http = require('http'),
-  path = require('path');
+var express = require('express');
+var http = require('http');
+var path = require('path');
 
 var app = express();
 
 app.configure(function() {
-  app.set('port', process.env.PORT || 80);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'ejs');
-  app.use(express.favicon());
-  app.use(express.logger('dev')); //default dev
-  app.use(express.compress());
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
-  app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
+	app.set('port', process.env.PORT || 80);
+	app.set('views', __dirname + '/views');
+	app.set('view engine', 'ejs');
+	app.use(express.favicon());
+	app.use(express.logger('dev')); //default dev
+	app.use(express.compress());
+	app.use(connect.urlencoded())
+	app.use(connect.json());
+	app.use(express.methodOverride());
+	app.use(express.cookieParser('madtagsftw--secret'));
+	app.use(express.session());
+	app.use(app.router);
+	app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.get('/', function(req, res) {
