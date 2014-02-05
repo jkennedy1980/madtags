@@ -171,13 +171,13 @@
 		D2791CAD18A2A2DF0043A465 /* MadTags */ = {
 			isa = PBXGroup;
 			children = (
+				D2791CB918A2A2DF0043A465 /* Main.storyboard */,
 				D22D000E18A2CB5500FBE7A3 /* Socket.IO */,
 				D2791CEE18A2B88B0043A465 /* GameEngine */,
 				D2791CDC18A2A4AF0043A465 /* SocketRocket */,
 				D2791CE418A2A4AF0043A465 /* ViewControllers */,
 				D2791CB618A2A2DF0043A465 /* MTAppDelegate.h */,
 				D2791CB718A2A2DF0043A465 /* MTAppDelegate.m */,
-				D2791CB918A2A2DF0043A465 /* Main.storyboard */,
 				D2791CBF18A2A2DF0043A465 /* Images.xcassets */,
 				D2791CAE18A2A2DF0043A465 /* Supporting Files */,
 			);
