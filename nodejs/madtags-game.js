@@ -7,8 +7,6 @@
 		socket.madtagsGameCode = gameCode;
 		socket.join( socketUtils.clientRoomNameForSocket( socket ) );
 
-		socketUtils.sendMessageToAllClients( socket, "message", { "message" : "emiting to all clients" } );
-
 		emitChangeGamePhase( socket, 'waitingForPlayers', { "role": "admin" } );
 	}
 
@@ -16,8 +14,6 @@
 		socket.madtagsType = 'tv';
 		socket.madtagsGameCode = gameCode;
 		socket.join( socketUtils.tvRoomNameForSocket( socket ) );
-
-		socketUtils.sendMessageToAllTVs( socket, "message", { "message" : "emiting to all TVs" } );
 
 		emitChangeGamePhase( socket, 'waitingForPlayers', {} );
 	}
