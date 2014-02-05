@@ -8,6 +8,7 @@
 
 #import "MTTestViewController.h"
 #import "SocketIO.h"
+#import "SocketIOPacket.h"
 
 @interface MTTestViewController ()<SocketIODelegate>
 
@@ -26,8 +27,11 @@
 }
 
 - (IBAction)didClickSendPing:(id)sender {
-//	[self.rocket send:[NSString stringWithFormat:@"join"]];
-	[self.socket sendEvent:@"join" withData:@{@"username" : @"fucker", @"gameCode" : @"1234"}];
+	[self.socket sendEvent:@"ping" withData:@{@"message" : @"test"}];
+}
+
+- (IBAction)didClickDone:(id)sender {
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - SocketIO Delegate
@@ -36,27 +40,37 @@
 {
 	NSLog( @"Did Connect");
 }
+
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
 	NSLog( @"Did Disconnect");
 }
+
 - (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet;
 {
 	NSLog( @"Did Receive");
 }
+
 - (void) socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet;
 {
 	NSLog( @"didReceiveJSON");
 
 }
+
 - (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet;
 {
 	NSLog( @"didReceiveEvent");
+	NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [packet.data dataUsingEncoding:NSUTF8StringEncoding]
+                                    options: NSJSONReadingMutableContainers
+                                      error: nil];
+	NSLog( @"dict: %@", dict );
 }
+
 - (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet;
 {
 	NSLog( @"didSendMessage");
 }
+
 - (void) socketIO:(SocketIO *)socket onError:(NSError *)error;
 {
 	NSLog( @"onError");
