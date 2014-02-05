@@ -1,0 +1,56 @@
+{
+  "name": "MadTags",
+  "description": "HackFest 2014",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jkennedy1980/madtags",
+  "author": {
+    "name": "Joshua Kennedy",
+    "email": "josh@deadmeta4.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jkennedy1980/madtags.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jkennedy1980/madtags/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/jkennedy1980/madtags/blob/master/LICENSE"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "matchdep": "~0.1.2",
+    "grunt": "~0.4.1",
+    "grunt-regarde": "~0.1.1",
+    "grunt-contrib-connect": "~0.3.0",
+    "grunt-contrib-livereload": "~0.1.2",
+    "grunt-open": "~0.2.0",
+    "grunt-connect-proxy": "~0.1.4",
+    "grunt-exec": "~0.4.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-compass": "~0.3.0",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-express-server": "~0.4.0",
+    "grunt-contrib-cssmin": "~0.6.1"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "grunt",
+    "node.js",
+    "express"
+  ]
+}
