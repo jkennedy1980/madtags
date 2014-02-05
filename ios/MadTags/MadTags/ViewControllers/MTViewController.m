@@ -13,6 +13,10 @@
 
 @property (nonatomic,strong) MTSocketWrapper *wrapper;
 
+@property (weak, nonatomic) IBOutlet UIView *containerViewContainer;
+@property (weak, nonatomic) IBOutlet UIView *userJoinContainer;
+@property (weak, nonatomic) IBOutlet UIView *waitingForPlayersContainer;
+
 @end
 
 
@@ -50,12 +54,36 @@
     [self.wrapper disconnect];
 }
 
+-(void) transitionToContainerView:(UIView*) containerView;
+{
+    containerView.alpha = 0.0;
+    [self.containerViewContainer bringSubviewToFront:containerView];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        containerView.alpha = 1.0;
+        
+    } completion:^(BOOL finished) {
+        
+        for( UIView *subview in self.containerViewContainer.subviews ){
+            if( subview != containerView ){
+                subview.alpha = 0.0;
+            }
+        }
+        
+    }];
+}
+
+-(void) didClickJoinWithGameCode:(NSString*) gameCode username:(NSString*) username;
+{
+    [self.wrapper joinGameWithCode:@"1234" username:@"Josh Kennedy"];
+}
 
 #pragma mark - Wrapper Delegate
 
 -(void) didConnect;
 {
-    [self.wrapper joinGameWithCode:@"1234" username:@"Josh Kennedy"];
+    
 }
 
 -(void) didDisconnect;
@@ -65,7 +93,11 @@
 
 -(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) dictionary;
 {
-    
+    if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
+        [self transitionToContainerView:self.waitingForPlayersContainer];
+    }else{
+        NSLog( @"Unknown game phase: %@", gamePhase );
+    }
 }
 
 @end

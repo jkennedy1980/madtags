@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTUserJoinViewController.h"
 
-@interface MTViewController : UIViewController
+@interface MTViewController : UIViewController<MTUserJoinViewControllerDelegate>
 
 @end

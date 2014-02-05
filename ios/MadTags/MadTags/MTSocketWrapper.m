@@ -75,6 +75,17 @@
 	NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [packet.data dataUsingEncoding:NSUTF8StringEncoding]
                                                          options: NSJSONReadingMutableContainers
                                                            error: nil];
+    
+    NSString *eventName = [dict objectForKey:@"name"];
+    if( [@"changeGamePhase" isEqualToString:eventName] ){
+        NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
+        
+        NSDictionary *data = [args objectForKey:@"data"];
+        NSString *phaseName = [args objectForKey:@"phase"];
+        
+        [self.delegate changeToGamePhase:phaseName data:data];
+    }
+    
 	NSLog( @"dict: %@", dict );
 }
 
