@@ -6,6 +6,11 @@
 		io.sockets.on( 'connection', function( socket ){
 			console.log( "GETTING CONNNECTION" );
 
+			socket.on( 'ping', function( data ){
+				console.log( "GETTING PING: ", data );
+				socket.emit( "pong", {} );
+			});
+
 			socket.on( 'joinClient', function( data ){
 				console.log( "GETTING JOIN: ", data );
 				game.joinClient( socket, data.gameCode, data.username );
