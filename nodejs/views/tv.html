@@ -1,9 +1,9 @@
-<% include header.ejs %>
+<% include header.html %>
 
-	<h1>Game Phase Changes</h1>
+	<h1>TV Game Phase Changes</h1>
 	<ul id="gamePhaseChanges"></ul>
 
-<% include scripts.ejs %>
+<% include scripts.html %>
 	<script>
 		var socket = io.connect();
 
@@ -15,4 +15,4 @@
 		});
 		
 	</script>
-<% include footer.ejs %>
+<% include footer.html %>

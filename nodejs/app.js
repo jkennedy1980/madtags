@@ -9,8 +9,10 @@ var app = express();
 
 app.configure(function() {
 	app.set('port', process.env.PORT || 80);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'ejs');
+	app.engine( 'html', require('ejs').renderFile );
+	app.set( 'views', __dirname + '/views' );
+	app.set( 'view engine', 'ejs' );
+	app.set( 'view options', { layout: false } );
 	app.use(express.favicon());
 	app.use(express.logger('dev')); //default dev
 	app.use(express.compress());
