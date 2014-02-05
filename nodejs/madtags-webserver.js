@@ -11,7 +11,7 @@
 	}
 
 	function getTV( req, res ){
-		res.render('index');
+		res.render('tv');
 	}
 	
 })();
