@@ -7,12 +7,12 @@
 //
 
 #import "MTTestViewController.h"
-#import "SRWebSocket.h"
+#import "SocketIO.h"
 
-@interface MTTestViewController ()<SRWebSocketDelegate>
+@interface MTTestViewController ()<SocketIODelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pingResponseLabel;
-@property (nonatomic, strong) SRWebSocket *rocket;
+@property (nonatomic, strong) SocketIO *socket;
 @end
 
 @implementation MTTestViewController
@@ -21,39 +21,45 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	NSURL *url = [NSURL URLWithString:@"ws://localhost:80"];
-	self.rocket = [[SRWebSocket alloc] initWithURL:url];
-	self.rocket.delegate = self;
-	[self.rocket open];
+	self.socket = [[SocketIO alloc] initWithDelegate:self];
+	[self.socket connectToHost:@"localhost" onPort:80];
 }
 
 - (IBAction)didClickSendPing:(id)sender {
-	[self.rocket send:[NSString stringWithFormat:@"join"]];
+//	[self.rocket send:[NSString stringWithFormat:@"join"]];
+	[self.socket sendEvent:@"join" withData:@{@"username" : @"fucker", @"gameCode" : @"1234"}];
 }
 
-#pragma mark - Rocket Delegate
+#pragma mark - SocketIO Delegate
 
-// message will either be an NSString if the server is using text
-// or NSData if the server is using binary.
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message;
+- (void) socketIODidConnect:(SocketIO *)socket;
 {
-	NSString *leMessage = (NSString*) message;
-	NSLog(@"Did Receive Message: %@", leMessage );
+	NSLog( @"Did Connect");
 }
-
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket;
+- (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
-	NSLog(@"Socket did open: %@", webSocket );
+	NSLog( @"Did Disconnect");
 }
-
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
+- (void) socketIO:(SocketIO *)socket didReceiveMessage:(SocketIOPacket *)packet;
 {
-	NSLog( @"Shit a hamster: %@, %@", webSocket, error );
+	NSLog( @"Did Receive");
 }
-
-- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean;
+- (void) socketIO:(SocketIO *)socket didReceiveJSON:(SocketIOPacket *)packet;
 {
-	NSLog( @"Did close socket: %@, code=%d, reason=%@, clean:%d", webSocket, (int)code, reason, wasClean );
+	NSLog( @"didReceiveJSON");
+
+}
+- (void) socketIO:(SocketIO *)socket didReceiveEvent:(SocketIOPacket *)packet;
+{
+	NSLog( @"didReceiveEvent");
+}
+- (void) socketIO:(SocketIO *)socket didSendMessage:(SocketIOPacket *)packet;
+{
+	NSLog( @"didSendMessage");
+}
+- (void) socketIO:(SocketIO *)socket onError:(NSError *)error;
+{
+	NSLog( @"onError");
 }
 
 @end
