@@ -1,14 +1,15 @@
 {
   "name": "MadTags",
   "description": "HackFest 2014",
-  "version": "0.1.0",
+  "version": "0.1.0-4",
   "homepage": "https://github.com/jkennedy1980/madtags",
   "author": {
     "name": "Joshua Kennedy",
     "email": "josh@deadmeta4.com"
   },
   "scripts": {
-    "start": "supervisor -e js,json,html app.js"
+    "start": "node app.js",
+    "sup": "supervisor -e js,json,html app.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   },
   "dependencies": {
     "express": "~3.4.4",
+    "connect": "2.12.0",
     "ejs": "~0.8.4",
     "socket.io": "0.9.16",
     "socket.io-client": "0.9.16"
@@ -37,5 +39,6 @@
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-watch": "~0.5.3"
   },
-  "keywords": []
+  "keywords": [],
+  "subdomain": "madtags"
 }
