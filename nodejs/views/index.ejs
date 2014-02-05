@@ -17,9 +17,8 @@
 	<![endif]-->
 </head>
 <body>
-	<div>Hello!</div>
-
-	<div id="data"></div>
+	<h1>Game Phase Changes</h1>
+	<ul id="gamePhaseChanges"></ul>
 
 	<script src="http://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 	<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
@@ -27,11 +26,11 @@
 	<script>
 		var socket = io.connect();
 
-		socket.emit( 'join', { message: 'hey there man' } );
+		socket.emit( 'joinClient', { username: "Josh", gameCode: "1234" } );
 
-		socket.on( 'message', function( data ){
-			console.log( data );
-			$('#data').text( JSON.stringify( data ) );
+		socket.on( 'changeGamePhase', function( data ){
+			var html = $("<li><strong>" + data.phase + "</strong> - " + JSON.stringify(data.data) + "</li>");
+			$('#gamePhaseChanges').append( html );
 		});
 		
 	</script>
