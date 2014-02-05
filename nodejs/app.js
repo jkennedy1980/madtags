@@ -2,6 +2,8 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var connect = require('connect');
+
 
 var app = express();
 
@@ -21,22 +23,17 @@ app.configure(function() {
 	app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.get('/', function(req, res) {
-  res.render('index');
-});
 
 var server = http.createServer( app );
 var io = require('socket.io').listen( server );
 
+
+
+require('./madtags-sockets.js')( io );
+
+require('./madtags-webserver.js')( app );
+
+
 server.listen( app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
-
-io.sockets.on( 'connection', function( socket ){
-	console.log( "GETTING CONNNECTION" );
-
-	socket.on( 'join', function( data ){
-		console.log( "JOINING: ", data );
-		socket.emit( 'message', { response: data } );
-	});
+  console.log( "Express server listening on port " + app.get('port') );
 });
