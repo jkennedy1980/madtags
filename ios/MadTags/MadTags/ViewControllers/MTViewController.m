@@ -8,6 +8,8 @@
 
 #import "MTViewController.h"
 #import "MTSocketWrapper.h"
+#import "MTPlayerChooseCardViewController.h"
+#import "MTCard.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate>
 
@@ -16,6 +18,9 @@
 @property (weak, nonatomic) IBOutlet UIView *containerViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *userJoinContainer;
 @property (weak, nonatomic) IBOutlet UIView *waitingForPlayersContainer;
+@property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
+
+@property (weak, nonatomic) IBOutlet MTPlayerChooseCardViewController *playerChooseCardController;
 
 @end
 
@@ -32,6 +37,40 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
 
     [self appWillEnterForeground];
+    
+    
+    for( UIViewController *childController in self.childViewControllers ){
+        if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
+            self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
+        }
+    }
+    
+    
+    MTCard *card1 = [[MTCard alloc] init];
+    card1.sentence = @"This is a card 1";
+    
+    MTCard *card2 = [[MTCard alloc] init];
+    card2.sentence = @"This is a card 2";
+    
+    MTCard *card3 = [[MTCard alloc] init];
+    card3.sentence = @"This is a card 3";
+    
+    MTCard *card4 = [[MTCard alloc] init];
+    card4.sentence = @"This is a card 4";
+    
+    MTCard *card5 = [[MTCard alloc] init];
+    card5.sentence = @"This is a card 5";
+    
+    NSMutableArray *cards = [NSMutableArray array];
+    [cards addObject:card1];
+    [cards addObject:card2];
+    [cards addObject:card3];
+    [cards addObject:card4];
+    [cards addObject:card5];
+
+    self.playerChooseCardController.cards = cards;
+    
+    [self transitionToContainerView:self.playerChooseCardContainer];
 }
 
 - (void)dealloc
