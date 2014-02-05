@@ -1,14 +1,24 @@
 ( function(){
 
+	var socketUtils = require('./madtags-socketutils.js');
+
 	exports.joinClient = function( socket, gameCode, username ){
 		socket.madtagsType = 'client';
-		socket.join( gameCode );
+		socket.madtagsGameCode = gameCode;
+		socket.join( socketUtils.clientRoomNameForSocket( socket ) );
+
+		socketUtils.sendMessageToAllClients( socket, "message", { "message" : "emiting to all clients" } );
+
 		emitChangeGamePhase( socket, 'waitingForPlayers', { "role": "admin" } );
 	}
 
 	exports.joinTV = function( socket, gameCode ){
 		socket.madtagsType = 'tv';
-		socket.join( gameCode );
+		socket.madtagsGameCode = gameCode;
+		socket.join( socketUtils.tvRoomNameForSocket( socket ) );
+
+		socketUtils.sendMessageToAllTVs( socket, "message", { "message" : "emiting to all TVs" } );
+
 		emitChangeGamePhase( socket, 'waitingForPlayers', {} );
 	}
 

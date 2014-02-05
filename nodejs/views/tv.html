@@ -7,12 +7,17 @@
 	<script>
 		var socket = io.connect();
 
-		socket.emit( 'joinClient', { username: "Josh", gameCode: "1234" } );
+		socket.emit( 'joinTV', { username: "Josh", gameCode: "1234" } );
 
 		socket.on( 'changeGamePhase', function( data ){
 			var html = $("<li><strong>" + data.phase + "</strong> - " + JSON.stringify(data.data) + "</li>");
 			$('#gamePhaseChanges').append( html );
 		});
 		
+		socket.on( 'message', function( data ){
+			var html = $("<li><strong>MESSAGE</strong> - " + data.message + "</li>");
+			$('#gamePhaseChanges').append( html );
+		});
+
 	</script>
 <% include footer.html %>
