@@ -36,6 +36,8 @@
         self.layer.shadowOpacity = 0.3;
         self.layer.shadowRadius = 5.0;
         
+        self.buttonVisible = YES;
+        
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, 100.0 )];
         self.textLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.textLabel.numberOfLines = 999;
@@ -115,6 +117,16 @@
     CGSize size = [self.textLabel sizeThatFits:CGSizeMake( self.bounds.size.width - kPadding*2, 100.0 )];
     self.textLabel.frame = CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, size.height );
     
+    if( !self.buttonVisible ){
+        self.selectButton.alpha = 0.0;
+    }else{
+        self.selectButton.alpha = 1.0;
+    }
+    
+    if( self.isJudge ){
+        [self.selectButton setTitle:@"Fav" forState:UIControlStateNormal];
+    }
+    
     if( self.selected ){
         self.selectButton.selected = YES;
         self.selectButton.layer.backgroundColor = [UIColor clearColor].CGColor;
@@ -128,8 +140,10 @@
          
 -(void) playClockDidTick:(NSNotification*) notification;
 {
-    NSNumber *clockTime = [notification.userInfo objectForKey:MTPlayTimerTickTimeKey];
-    [self.selectButton setTitle:[NSString stringWithFormat:@":%@", clockTime] forState:UIControlStateNormal];
+    if( self.buttonVisible && !self.isJudge ){
+        NSNumber *clockTime = [notification.userInfo objectForKey:MTPlayTimerTickTimeKey];
+        [self.selectButton setTitle:[NSString stringWithFormat:@":%@", clockTime] forState:UIControlStateNormal];
+    }
 }
 
 -(void) setSelected:(BOOL)selected;
@@ -148,6 +162,12 @@
 -(void) setIsJudge:(BOOL)isJudge;
 {
     _isJudge = isJudge;
+    [self setupButton];
+}
+
+-(void) setButtonVisible:(BOOL)buttonVisible;
+{
+    _buttonVisible = buttonVisible;
     [self setupButton];
 }
 
