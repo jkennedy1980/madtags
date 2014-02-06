@@ -42,7 +42,7 @@
 			});
 
 			socket.on( 'judgement', function( data) {
-				console.log( "GOT A VOTE", data );
+				console.log( "GOT A JUDGEMENT", data );
 				game.judgment( socket, data.sentence );
 			});
 

@@ -54,7 +54,9 @@
 		var cards = cardDeck.cards();
 		var tag = tags.nextTag();
 		game.tag = tag;
-		for( var cSocket in socketUtils.allClientSockets( socket) ){
+		var allThemSockets = socketUtils.allClientSockets( socket);
+		for( var socketId in allThemSockets ){
+			var cSocket = allThemSockets[socketId];
 			var payload = {};
 			payload.phase = 'Playing';
 			var sentences = cards.slice( cardIndex, cardIndex + 5);
@@ -90,7 +92,7 @@
 		socketUtils.sendMessageToAllTVs( socket, 'judging', { 'tag' : game.tag });
 	}
 
-	exports.judgment = function( socket, gameCode, card ){
+	exports.judgment = function( socket, card ){
 		socketUtils.sendMessageToAllTVs( socket, 'final', { 'card' : card, 'tag' : game.tag });
 		socketUtils.respondOnAllClientSockets( socket, 'final', { 'sentence' : card, 'tag' : game.tag });
 		game = new Game();
