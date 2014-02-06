@@ -135,7 +135,31 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:MTPlayTimerTickNotification object:nil userInfo:@{MTPlayTimerTickTimeKey:@(self.playClock)}];
     self.playClock = self.playClock - 1;
-    if( self.playClock < 0 ) [self stopPlayTimer];
+    if( self.playClock < 0 ){
+        [self stopPlayTimer];
+        if( self.isJudge ){
+            [self sendJudgeEndOfPlayMessage];
+        }else{
+            [self sendPlayerEndOfPlayMessage];
+        }
+    }
+}
+
+-(void) sendPlayerEndOfPlayMessage;
+{
+    MTCard *selectedCard = self.playerChooseCardController.selectedCard;
+    [self.wrapper sendPlayerEndOfPlayMessage:@"1234" selectedCardString:selectedCard.sentence];
+}
+
+-(void) sendJudgeEndOfPlayMessage;
+{
+    __weak MTViewController *weakSelf = self;
+    
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after( popTime, dispatch_get_main_queue(), ^(void){
+        [weakSelf.wrapper sendJudgeEndOfPlayMessage:@"1234"];
+    });
 }
 
 -(void) transitionToContainerView:(UIView*) containerView;
@@ -179,12 +203,15 @@
 -(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) data;
 {
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
+        
         NSString *role = [data objectForKey:@"role"];
 		self.isJudge = [@"JUDGE" isEqualToString:role];
         self.waitingForPlayersController.canStartGame = self.isJudge;
 		self.waitingForPlayersController.wrapper = self.wrapper;
         [self transitionToContainerView:self.waitingForPlayersContainer];
+        
 	}else if ([@"Playing" isEqualToString:gamePhase] ){
+        
 		NSArray *sentences = [data objectForKey:@"sentences"];
 		NSString *tag = [data objectForKey:@"tag"];
 		
@@ -197,7 +224,9 @@
 		self.playerChooseCardController.cards = cards;
 		self.playerChooseCardController.isJudge = self.isJudge;
 
+        [self startPlayTimer];
 		[self transitionToContainerView:self.playerChooseCardContainer];
+        
     }else if( [@"error" isEqualToString:gamePhase] ){
         
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:[data objectForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];

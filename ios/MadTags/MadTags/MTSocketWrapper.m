@@ -50,6 +50,17 @@
     [self.socket sendEvent:@"start" withData:@{ @"gameCode": gameCode }];
 }
 
+-(void) sendJudgeEndOfPlayMessage:(NSString*) gameCode;
+{
+    [self.socket sendEvent:@"getSubmissions" withData:@{ @"gameCode": gameCode }];
+}
+
+-(void) sendPlayerEndOfPlayMessage:(NSString*) gameCode selectedCardString:(NSString*) cardString;
+{
+    [self.socket sendEvent:@"submit" withData:@{ @"gameCode": gameCode, @"selectedSentence": cardString }];
+}
+
+
 #pragma mark - SocketIO Delegate
 
 - (void) socketIODidConnect:(SocketIO *)socket;
