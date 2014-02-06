@@ -45,29 +45,29 @@
 }
 
 .tv-tag-1 {
-	-webkit-transform: translate(40px, -90px);
+	-webkit-transform: translate(70px, -90px);
 }
 
 .tv-tag-2 {
-	-webkit-transform: translate(-40px, -60px);
+	-webkit-transform: translate(-70px, -60px);
 }
 
 .tv-tag-3 {
-	-webkit-transform: translate(40px, -30px);
+	-webkit-transform: translate(100px, -30px);
 }
 
 .tv-tag-4 {
-	-webkit-transform: translate(-40px, 0px);
+	-webkit-transform: translate(-100px, 0px);
 }
 
 .tv-tag-5 {
-	-webkit-transform: translate(40px, 30px);
+	-webkit-transform: translate(100px, 30px);
 }
 
 .tv-tag-6 {
-	-webkit-transform: translate(-40px, 60px);
+	-webkit-transform: translate(-70px, 60px);
 }
 
 .tv-tag-7 {
-	-webkit-transform: translate(40px, 90px);
+	-webkit-transform: translate(70px, 90px);
 }
