@@ -42,7 +42,12 @@
 
 -(void) joinGameWithCode:(NSString*) gameCode username:(NSString*) username;
 {
-    [self.socket sendEvent:@"joinClient" withData:@{ @"username": @"Josh Kennedy", @"gameCode": @"1234" }];
+    [self.socket sendEvent:@"joinClient" withData:@{ @"username": username, @"gameCode": gameCode }];
+}
+
+-(void) startGameWithCode:(NSString*) gameCode;
+{
+    [self.socket sendEvent:@"start" withData:@{ @"gameCode": gameCode }];
 }
 
 #pragma mark - SocketIO Delegate

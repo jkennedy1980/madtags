@@ -35,9 +35,10 @@
 			return;
 		}
 
+		game.gamePhase = 'PLAYING';
 		var cards = cardDeck.cards();
 		var tag = tags.nextTag();
-		socketUtils.responsOnAllClientSockets( socket, 'START', { 'cards' : cards, 'tag' : tag });
+		socketUtils.respondOnAllClientSockets( socket, 'Playing', { 'sentences' : cards, 'tag' : tag });
 	}
 
 	exports.startGame = function( socket, gameCode ){

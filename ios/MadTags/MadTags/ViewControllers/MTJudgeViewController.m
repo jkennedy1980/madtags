@@ -20,16 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    BOOL isJudge = YES;
-    
-    if( isJudge ){
-        self.cardViewContainer.isJudge = YES;
-        self.cardViewContainer.buttonVisible = YES;
-    }else{
-        self.cardViewContainer.isJudge = NO;
-        self.cardViewContainer.buttonVisible = NO;
-    }
+	
+    self.cardViewContainer.buttonAction = MTCardActionJudging;
     self.cardViewContainer.delegate = self;
     self.cardViewContainer.cards = self.cards;
 }
@@ -40,6 +32,13 @@
     self.cardViewContainer.cards = cards;
 }
 
+-(void) setIsJudge:(BOOL)isJudge;
+{
+	_isJudge = isJudge;
+
+	self.cardViewContainer.isJudge = isJudge;
+	self.cardViewContainer.buttonAction = MTCardActionJudging;
+}
 
 #pragma mark - MTCardViewContainerDelegate
 
