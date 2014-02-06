@@ -63,7 +63,7 @@
 			// message = { phase: 'Playing', data: {tag: 'tag'}}
 			if (message['phase'] == 'Playing') {
 				// show card
-				showNewCard(data['tag'], 'Now Playing:');
+				showNewCard(message['data']['tag'], 'Now Playing:');
 			} else if (message['phase'] == 'waitingForPlayers') {
 				console.log('message:', message);
 			}
@@ -193,20 +193,21 @@
 			// disabling type for now
 			// var logoCss = getLogoCss(type);
 			// $('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
+
 			console.log('cardState:', cardState);
 			if (cardState == 1) {
 				minimizeCard();
 				setTimeout(function() {
-					$('.tv .card-content .header').hide().text(header);
-					$('.tv .card-content .title').hide().text(sentence);
+					$('.tv .card-content .header').hide().html(header);
+					$('.tv .card-content .title').hide().html(sentence);
 					maximizeCard(function() {
 						$('.tv .card-content .header').delay(200).fadeIn(250);
 						$('.tv .card-content .title').delay(200).fadeIn(250);
 					});
 				}, 500);
 			} else {
-				$('.tv .card-content .header').hide().text(header);
-				$('.tv .card-content .title').hide().text(sentence);
+				$('.tv .card-content .header').hide().html(header);
+				$('.tv .card-content .title').hide().html(sentence);
 				maximizeCard(function() {
 					$('.tv .card-content .header').delay(200).fadeIn(250);
 					$('.tv .card-content .title').delay(200).fadeIn(250)
