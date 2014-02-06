@@ -78,6 +78,8 @@
         }
     }
 	
+    self.startNewGameButton.alpha = 0.0;
+    
 	self.userJoinContainer.alpha = 1.0;
 	self.waitingForPlayersContainer.alpha = 0.0;
 	self.playerChooseCardContainer.alpha = 0.0;
@@ -117,12 +119,13 @@
 //    self.playerChooseCardController.cards = cards;
 //    [self transitionToContainerView:self.playerChooseCardContainer];
 
+//    
 //    MTCard *card1 = [[MTCard alloc] init];
 //    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
 //    card1.words = @[@"Toyota"];
 //
 //    self.roundWinnerViewController.card = card1;
-//    [self transitionToContainerView:self.roundWinnerContainer];
+//    [self transitionToContainerView:self.roundWinnerContainer playerButtonVisible:NO];
 //    
     
 //    [self startPlayTimer];
@@ -132,7 +135,6 @@
 {
     // Secret button hit, must be having problems, panic!
 	[self.wrapper restartGame:@"1234"];
-    [self transitionToContainerView:self.waitingForPlayersContainer];
 }
 
 - (void)dealloc
@@ -202,7 +204,7 @@
     });
 }
 
--(void) transitionToContainerView:(UIView*) containerView;
+-(void) transitionToContainerView:(UIView*) containerView playerButtonVisible:(BOOL) playerButtonVisible;
 {
     containerView.alpha = 0.0;
     [self.containerViewContainer bringSubviewToFront:containerView];
@@ -210,6 +212,12 @@
     [UIView animateWithDuration:0.3 animations:^{
         
         containerView.alpha = 1.0;
+        
+        if( playerButtonVisible ){
+            self.startNewGameButton.alpha = 1.0;
+        }else{
+            self.startNewGameButton.alpha = 0.0;
+        }
         
     } completion:^(BOOL finished) {
         
@@ -236,7 +244,6 @@
 -(void) didClickStart;
 {
     [self.wrapper restartGame:@"1234"];
-    [self transitionToContainerView:self.waitingForPlayersContainer];
 }
 
 #pragma mark - Wrapper Delegate
@@ -272,7 +279,7 @@
 		self.isJudge = [@"JUDGE" isEqualToString:role];
         self.waitingForPlayersController.canStartGame = self.isJudge;
 		self.waitingForPlayersController.wrapper = self.wrapper;
-        [self transitionToContainerView:self.waitingForPlayersContainer];
+        [self transitionToContainerView:self.waitingForPlayersContainer playerButtonVisible:YES];
 		
 		NSUInteger playerIndex = [[data objectForKey:@"playerIndex"] integerValue];
 		self.taggers = [[MTTaggers alloc] initWithSeed:playerIndex delegate:self];
@@ -293,7 +300,7 @@
 
         [self startPlayTimer];
         
-		[self transitionToContainerView:self.playerChooseCardContainer];
+		[self transitionToContainerView:self.playerChooseCardContainer playerButtonVisible:YES];
         
     }else if( [@"Judging" isEqualToString:gamePhase] ){
         
@@ -308,7 +315,7 @@
 		
 		self.judgeGameController.cards = cards;
 		self.judgeGameController.isJudge = self.isJudge;
-        [self transitionToContainerView:self.judgeGameContainer];
+        [self transitionToContainerView:self.judgeGameContainer playerButtonVisible:YES];
         
     }else if( [@"final" isEqualToString:gamePhase] ){
         
@@ -318,11 +325,11 @@
         MTCard *card = [[MTCard alloc] initWithSentence:sentence words:@[tag]];
 		
 		self.roundWinnerViewController.card = card;
-        [self transitionToContainerView:self.roundWinnerContainer];
+        [self transitionToContainerView:self.roundWinnerContainer playerButtonVisible:NO];
         
     }else if( [@"gameEnd" isEqualToString:gamePhase] ){
     
-        [self transitionToContainerView:self.userJoinContainer];
+        [self transitionToContainerView:self.userJoinContainer playerButtonVisible:NO];
         
     }else if( [@"error" isEqualToString:gamePhase] ){
         
