@@ -84,7 +84,7 @@
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
 	NSLog( @"Did Disconnect");
-    [self performSelector:@selector(reconnect) withObject:nil afterDelay:3.0];
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.0];
     [self.delegate didDisconnect];
 }
 
@@ -126,6 +126,7 @@
 - (void) socketIO:(SocketIO *)socket onError:(NSError *)error;
 {
 	NSLog( @"onError");
+	[self.delegate didError:error];
 }
 
 @end

@@ -38,6 +38,7 @@
 		D22D003218A2E4B500FBE7A3 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D003118A2E4B500FBE7A3 /* AdSupport.framework */; };
 		D22D009318A2FC1000FBE7A3 /* MTGracenoteEntourage.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D009218A2FC1000FBE7A3 /* MTGracenoteEntourage.m */; };
 		D22D009518A2FD2B00FBE7A3 /* GracenoteACR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D009418A2FD2B00FBE7A3 /* GracenoteACR.framework */; };
+		D22D009818A3DD4300FBE7A3 /* MTTaggers.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D009718A3DD4300FBE7A3 /* MTTaggers.m */; };
 		D2791CA818A2A2DF0043A465 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2791CA718A2A2DF0043A465 /* Foundation.framework */; };
 		D2791CAA18A2A2DF0043A465 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2791CA918A2A2DF0043A465 /* CoreGraphics.framework */; };
 		D2791CAC18A2A2DF0043A465 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2791CAB18A2A2DF0043A465 /* UIKit.framework */; };
@@ -116,6 +117,8 @@
 		D22D009118A2FC1000FBE7A3 /* MTGracenoteEntourage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTGracenoteEntourage.h; sourceTree = "<group>"; };
 		D22D009218A2FC1000FBE7A3 /* MTGracenoteEntourage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTGracenoteEntourage.m; sourceTree = "<group>"; };
 		D22D009418A2FD2B00FBE7A3 /* GracenoteACR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GracenoteACR.framework; sourceTree = "<group>"; };
+		D22D009618A3DD4300FBE7A3 /* MTTaggers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTaggers.h; sourceTree = "<group>"; };
+		D22D009718A3DD4300FBE7A3 /* MTTaggers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTaggers.m; sourceTree = "<group>"; };
 		D2791CA418A2A2DF0043A465 /* MadTags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MadTags.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2791CA718A2A2DF0043A465 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2791CA918A2A2DF0043A465 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -237,6 +240,8 @@
 			children = (
 				D22D009018A2FBCE00FBE7A3 /* Gracenote */,
 				D22D002318A2E02200FBE7A3 /* Alphonso */,
+				D22D009618A3DD4300FBE7A3 /* MTTaggers.h */,
+				D22D009718A3DD4300FBE7A3 /* MTTaggers.m */,
 			);
 			path = Taggers;
 			sourceTree = "<group>";
@@ -515,6 +520,7 @@
 				D22D001B18A2CBA200FBE7A3 /* SocketIOJSONSerialization.m in Sources */,
 				03F32B3818A2DF5500C7129F /* MTSocketWrapper.m in Sources */,
 				03F32B4918A2F1C700C7129F /* MTCardView.m in Sources */,
+				D22D009818A3DD4300FBE7A3 /* MTTaggers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

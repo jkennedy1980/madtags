@@ -10,6 +10,8 @@
 
 @protocol MTSocketWrapperDelegate <NSObject>
 
+-(void) didError:(NSError*) error;
+
 -(void) didConnect;
 
 -(void) didDisconnect;
