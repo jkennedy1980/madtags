@@ -2,3 +2,71 @@
 	height: 100%;
 	width: 100%;
 }
+
+.tv .overlay {
+	position: absolute;
+	bottom: 0px;
+	padding-left: 60px;
+	padding-right: 60px;
+	padding-bottom: 30px;
+	width: 100%
+}
+
+.tv-tag {
+	color: #fff;
+	display: none;
+	font-size: 35pt;
+	font-weight: bold;
+	font-family: 'Helvetica Neue';
+	position: absolute;
+	padding-left: 56px;
+	overflow: hidden;
+	width: 250px;
+	height: 64px;
+	-web-text-shadow: 3px 3px 3px #000;
+	text-shadow: 3px 3px 3px #000;
+	-web-kit-transform-origin: 50% 50%;
+}
+
+.tv-tag-logo-zb {
+	background: url(/images/zeeboxtag.png) 0px 8px no-repeat;
+	background-size: 48px 48px;
+}
+
+.tv-tag-logo-gn {
+	background: url(/images/gracenotetag.png) 0px 8px no-repeat;
+	background-size: 48px 48px;
+}
+
+.tv-tag-logo-al {
+	background: url(/images/alphonsotag.png) 0px 8px no-repeat;
+	background-size: 48px 48px;
+}
+
+.tv-tag-1 {
+	-webkit-transform: translate(40px, -90px);
+}
+
+.tv-tag-2 {
+	-webkit-transform: translate(-40px, -60px);
+}
+
+.tv-tag-3 {
+	-webkit-transform: translate(40px, -30px);
+}
+
+.tv-tag-4 {
+	-webkit-transform: translate(-40px, 0px);
+}
+
+.tv-tag-5 {
+	-webkit-transform: translate(40px, 30px);
+}
+
+.tv-tag-6 {
+	-webkit-transform: translate(-40px, 60px);
+}
+
+.tv-tag-7 {
+	-webkit-transform: translate(40px, 90px);
+}

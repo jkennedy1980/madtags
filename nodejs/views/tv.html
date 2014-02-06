@@ -4,8 +4,25 @@
 	  <source src="/video/1.m4v" type="video/mp4">
 	</video>
 
-	<h1>TV Game Phase Changes</h1>
-	<ul id="gamePhaseChanges"></ul>
+	<div class="overlay">
+		<div class="row">
+			<div class="col-sm-8">
+				<h1>TV Game Phase Changes</h1>
+				<ul id="gamePhaseChanges"></ul>
+			</div>
+			<div class="col-sm-1">
+			</div>
+			<div class="col-sm-3">
+				<div class="tv-tag tv-tag-1 tv-tag-logo-zb">Rogain</div>
+				<div class="tv-tag tv-tag-7 tv-tag-logo-zb">Chevrolet</div>
+				<div class="tv-tag tv-tag-2 tv-tag-logo-gn">Toyota</div>
+				<div class="tv-tag tv-tag-6 tv-tag-logo-al">So You Think You Can Dance</div>
+				<div class="tv-tag tv-tag-3 tv-tag-logo-al">Special K</div>
+				<div class="tv-tag tv-tag-5 tv-tag-logo-gn">NyQuil</div>
+				<div class="tv-tag tv-tag-4 tv-tag-logo-zb">Tampax</div>
+			</div>
+		</div>
+	</div>
 
 	<% include scripts.html %>
 	<script>
@@ -35,6 +52,67 @@
 	        videoPlayer.src = nextVideo;
 	        videoPlayer.play();
 		};
+
+		// popping in a new tag
+		var tagCSSsOdd = ['.tv-tag-1', '.tv-tag-3', '.tv-tag-5', '.tv-tag-7'];
+		var tagCSSsEven = ['.tv-tag-2', '.tv-tag-4', '.tv-tag-6'];
+		var useOddPosition = Math.floor(Math.random()*1);
+		var tagJObjs = [];
+		var tagsInUse = [];
+		var tagMonitor;
+
+		function getNewRandomTag() {
+			var tagCSSs;
+			if (useOddPosition) {
+				tagCSSs = tagCSSsOdd;
+			} else {
+				tagCSSs = tagCSSsEven;
+			}
+			do {
+				newTag = tagCSSs[Math.floor((Math.random()*tagCSSs.length))]; // provides something random between 0-6
+			} while (tagsInUse.length > 0 && tagsInUse.indexOf(newTag) > -1);
+			console.log('newTag:', newTag);
+			console.log('tagsInUse:', tagsInUse);
+			return newTag;
+		}
+		
+		function popInTag(newBrand, type) {
+			var logoCss = 'tv-tag-logo-zb';
+			if (type == 'zeebox') {
+				logoCss = 'tv-tag-logo-zb';
+			} else if (type == 'gracenote') {
+				logoCss = 'tv-tag-logo-gn';
+			} else  if (type == 'alphonso') {
+				logoCss = 'tv-tag-logo-al';
+			}
+			useOddPosition = !useOddPosition;
+			var randomTag =  getNewRandomTag();
+			console.log('randomTag:', randomTag);
+			removeTagIfNeeded();
+			tagsInUse.push(randomTag);
+			var jTagCell = $(randomTag);
+			console.log('tagCell:', jTagCell);
+			jTagCell.removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss).text(newBrand).fadeIn(400);
+		}
+
+		function removeTag() {
+			if (tagsInUse.length > 0) {
+				var tagToRemove = tagsInUse[0];
+				tagsInUse.shift();
+				$(tagToRemove).fadeOut(1000);
+				clearInterval(tagMonitor);
+				tagMonitor = setInterval(removeTag, 10000);
+			}
+		}
+
+		function removeTagIfNeeded() {
+			if (tagsInUse.length > 2) {
+				removeTag();
+			}
+		}
+
+		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
+		tagMonitor = setInterval(removeTag, 10000);
 	</script>
 </div>
 <% include footer.html %>
