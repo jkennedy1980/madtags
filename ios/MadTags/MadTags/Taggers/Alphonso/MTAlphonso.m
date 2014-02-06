@@ -28,8 +28,9 @@
     self = [super init];
 #if ! TARGET_IPHONE_SIMULATOR
     if (self) {
+		self.sourceName = @"Alphonso";
 
-       self.asapi_thang = [asapi sharedInstance];
+		self.asapi_thang = [asapi sharedInstance];
 		
 		asapi_err_t errcode = [self.asapi_thang init_with_api_key:[NSString stringWithUTF8String:ALPHONSO_API_KEY] and_status_callback:^(asapi_state *state){
 			if(state.err == ASAPI_SUCCESS) {

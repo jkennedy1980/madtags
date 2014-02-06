@@ -33,7 +33,7 @@
 {
     [super viewDidLoad];
     
-    self.userNameTextFieldContainer.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.userNameTextFieldContainer.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.userNameTextFieldContainer.layer.borderWidth = 1.0;
     
     self.joinButton.layer.cornerRadius = floor( self.joinButton.bounds.size.width / 2.0 );

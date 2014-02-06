@@ -29,6 +29,8 @@
     self.tableView.backgroundView.backgroundColor = [UIColor clearColor];
     
     self.discoveredTags = [NSMutableArray array];
+    
+    self.startButton.layer.cornerRadius = floor( self.startButton.bounds.size.width / 2.0 );
 }
 
 - (IBAction)didClickStartButton:(id)sender;

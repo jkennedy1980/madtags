@@ -70,7 +70,10 @@
 -(void) sendToGameCode:(NSString*) gameCode tag:(NSDictionary*)tagDict;
 {
 	NSString *word = [tagDict objectForKey:MTTaggerWordKey];
-    [self.socket sendEvent:@"tag" withData:@{ @"gameCode": gameCode, @"tag": word }];
+	NSString *source  = [tagDict objectForKey:MTTaggerSourceNameKey];
+	if( !source ) source = @"Gracenote";
+	
+    [self.socket sendEvent:@"tag" withData:@{ @"gameCode": gameCode, @"tag": word, @"source" :  source}];
 }
 
 -(void) sendJudgementSentence:(NSString*) sentence;

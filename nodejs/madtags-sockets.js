@@ -24,7 +24,7 @@
 			socket.on( 'tag', function( data) {
 				console.log( "GETTING TAG: ", data );
 				tags.addTag( data.tag );
-				socketUtils.sendMessageToAllTVs( socket, 'tag', { 'tag' : data.tag });
+				socketUtils.sendMessageToAllTVs( socket, 'tag', { 'tag' : data.tag, 'source' : data.source });
 			});
 
 			socket.on( 'start', function( data ){
