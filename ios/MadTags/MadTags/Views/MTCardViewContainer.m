@@ -70,12 +70,7 @@
         view.buttonState = self.buttonState;
         [self addSubview:view];
     }
-    
-    if( self.subviews.count > 0 ){
-        MTCardView *firstView = [self.subviews objectAtIndex:0];
-        firstView.selected = YES;
-    }
-    
+
     [self updateCardLayout];
 }
 
@@ -109,7 +104,7 @@
     
     self.selectedCard = cardView.card;
     cardView.selected = YES;
-    [self.delegate didSelectCard:self.selectedCard];
+    [self.delegate didSelectCard:cardView.card];
 }
 
 -(void) updateCardLayoutAnimated:(BOOL) animated;

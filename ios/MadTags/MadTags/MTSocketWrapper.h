@@ -41,4 +41,6 @@
 
 -(void) sendToGameCode:(NSString*) gameCode tag:(NSDictionary*)tagDict;
 
+-(void) sendJudgementSentence:(NSString*) sentence;
+
 @end

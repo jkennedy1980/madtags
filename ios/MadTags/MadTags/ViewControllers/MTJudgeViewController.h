@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTCard.h"
+
+@protocol MTJudgeViewControllerDelegate <NSObject>
+
+-(void) didChooseFavCard:(MTCard*) card;
+
+@end
 
 @interface MTJudgeViewController : UIViewController
 
 @property (nonatomic,strong) NSArray *cards;
 @property (nonatomic,assign) BOOL isJudge;
+@property (nonatomic,weak) id<MTJudgeViewControllerDelegate> delegate;
 
 @end
