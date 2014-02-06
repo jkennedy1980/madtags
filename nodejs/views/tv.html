@@ -54,6 +54,9 @@
 			$('#gamePhaseChanges').append( html );
 		});	
 
+
+		// frontend UI shitz
+
 		// tv video (looping and shitz)
 		videoCount = 0;
 		videoPlayer = document.getElementById("tvvideo");
@@ -139,6 +142,8 @@
 		tagMonitor = setInterval(removeTag, 10000);
 
 		// card popups
+		var cardMonitor;
+
 		function showNewCard(sentence, type) {
 			var logoCss = getLogoCss(type);
 			$('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
@@ -150,6 +155,8 @@
 			$('.tv .card-minimized').removeClass('card-minimized').addClass('card-maximized');
 			$('.tv .card-content').show();
 			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
+			clearInterval(cardMonitor);
+			cardMonitor = setInterval(minimizeCard, 5000);
 		}
 
 		function minimizeCard() {
@@ -157,6 +164,9 @@
 			$('.tv .card-content').hide();
 			$('.tv .card-bottom-logo-maximized').removeClass('card-bottom-logo-maximized').addClass('card-bottom-logo-minimized');
 		}
+
+		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
+		cardMonitor = setInterval(minimizeCard, 5000);
 	</script>
 </div>
 <% include footer.html %>
