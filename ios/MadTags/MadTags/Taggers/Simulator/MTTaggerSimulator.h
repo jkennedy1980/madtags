@@ -11,4 +11,5 @@
 
 @interface MTTaggerSimulator : NSObject<MTTagger>
 @property (nonatomic, weak) id<MTTaggerDelegate>delegate;
+@property (nonatomic, strong) NSString *sourceName;
 @end

@@ -42,6 +42,7 @@
     if (self) {
 		NSError* error = nil;
 
+		self.sourceName = @"Gracenote";
 		// Do any additional setup after loading the view, typically from a nib.
 		
 		// Initialize the Entourage SDK

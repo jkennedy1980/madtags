@@ -328,10 +328,10 @@
 		D2791CAD18A2A2DF0043A465 /* MadTags */ = {
 			isa = PBXGroup;
 			children = (
+				D2791CB918A2A2DF0043A465 /* Main.storyboard */,
 				03B94AAD18A422EC00FC3E1E /* utils */,
 				03F32B5018A3E13A00C7129F /* images */,
 				D22D002218A2DFBC00FBE7A3 /* Taggers */,
-				D2791CB918A2A2DF0043A465 /* Main.storyboard */,
 				03F32B4318A2F10000C7129F /* Models */,
 				03F32B3F18A2F0B500C7129F /* Views */,
 				03F32B3618A2DF5500C7129F /* MTSocketWrapper.h */,
