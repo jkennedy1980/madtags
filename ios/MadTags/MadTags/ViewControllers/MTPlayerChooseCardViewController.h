@@ -11,5 +11,6 @@
 @interface MTPlayerChooseCardViewController : UIViewController
 
 @property (nonatomic,strong) NSArray *cards;
+@property (nonatomic,assign) BOOL isJudge;
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTSocketWrapper.h"
 
 @interface MTWaitingForPlayersViewController : UIViewController
+
+@property (nonatomic,assign) BOOL canStartGame;
+@property (strong, nonatomic) MTSocketWrapper *wrapper;
 
 @end

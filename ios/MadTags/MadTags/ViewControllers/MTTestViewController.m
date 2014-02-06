@@ -16,7 +16,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *pingResponseLabel;
 @property (nonatomic, strong) SocketIO *socket;
-@property (nonatomic, strong) MTAlphonso *leAlphonso;
+//@property (nonatomic, strong) MTAlphonso *leAlphonso;
 @property (nonatomic, strong)MTGracenoteEntourage *entouage;
 @end
 

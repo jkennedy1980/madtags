@@ -11,6 +11,7 @@
 #import "MTPlayerChooseCardViewController.h"
 #import "MTCard.h"
 #import "MTJudgeViewController.h"
+#import "MTWaitingForPlayersViewController.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate>
 
@@ -22,9 +23,11 @@
 @property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
 @property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
 
-@property (weak, nonatomic) IBOutlet MTPlayerChooseCardViewController *playerChooseCardController;
-@property (weak, nonatomic) IBOutlet MTJudgeViewController *judgeViewController;
+@property (weak, nonatomic) MTWaitingForPlayersViewController *waitingForPlayersController;
+@property (weak, nonatomic) MTPlayerChooseCardViewController *playerChooseCardController;
+@property (weak, nonatomic) MTJudgeViewController *judgeGameController;
 
+@property (assign, nonatomic) BOOL isJudge;
 
 #define kPlayTimerLength 30
 @property (strong, nonatomic) NSTimer *playTimer;
@@ -50,42 +53,50 @@
     
     
     for( UIViewController *childController in self.childViewControllers ){
-        if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
+        if( [childController isKindOfClass:[MTWaitingForPlayersViewController class]] ){
+            self.waitingForPlayersController = (MTWaitingForPlayersViewController*) childController;
+        }else if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
             self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
         }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
-            self.judgeViewController = (MTJudgeViewController*)childController;
+            self.judgeGameController = (MTJudgeViewController*)childController;
         }
     }
+	
+	self.userJoinContainer.alpha = 1.0;
+	self.waitingForPlayersContainer.alpha = 0.0;
+	self.playerChooseCardContainer.alpha = 0.0;
+    self.judgeGameContainer.alpha = 0.0;
     
     
-    MTCard *card1 = [[MTCard alloc] init];
-    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
-    card1.words = @[@"Toyota"];
-    
-    MTCard *card2 = [[MTCard alloc] init];
-    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
-    card2.words = @[@"Toyota"];
-
-    MTCard *card3 = [[MTCard alloc] init];
-    card3.sentence = @"This is a card 3";
-    
-    MTCard *card4 = [[MTCard alloc] init];
-    card4.sentence = @"This is a card 4";
-    
-    MTCard *card5 = [[MTCard alloc] init];
-    card5.sentence = @"This is a card 5";
-    
-    NSMutableArray *cards = [NSMutableArray array];
-    [cards addObject:card1];
-    [cards addObject:card2];
-    [cards addObject:card3];
-    [cards addObject:card4];
-    [cards addObject:card5];
-
-    self.judgeViewController.cards = cards;
-    
-    [self transitionToContainerView:self.judgeGameContainer];
-    
+//    MTCard *card1 = [[MTCard alloc] init];
+//    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+//    card1.words = @[@"Toyota"];
+//    
+//    MTCard *card2 = [[MTCard alloc] init];
+//    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
+//    card2.words = @[@"Toyota"];
+//
+//    MTCard *card3 = [[MTCard alloc] init];
+//    card3.sentence = @"This is a card 3";
+//    
+//    MTCard *card4 = [[MTCard alloc] init];
+//    card4.sentence = @"This is a card 4";
+//    
+//    MTCard *card5 = [[MTCard alloc] init];
+//    card5.sentence = @"This is a card 5";
+//    
+//    NSMutableArray *cards = [NSMutableArray array];
+//    [cards addObject:card1];
+//    [cards addObject:card2];
+//    [cards addObject:card3];
+//    [cards addObject:card4];
+//    [cards addObject:card5];
+//
+//    self.playerChooseCardController.cards = cards;
+//    
+//    [self transitionToContainerView:self.playerChooseCardContainer];
+//    
+//    [self startPlayTimer];
 }
 
 - (void)dealloc
@@ -156,19 +167,41 @@
 
 -(void) didConnect;
 {
-    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    
 }
 
 -(void) didDisconnect;
 {
     // TODO: resume
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
--(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) dictionary;
+-(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) data;
 {
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
-        
+        NSString *role = [data objectForKey:@"role"];
+		self.isJudge = [@"JUDGE" isEqualToString:role];
+        self.waitingForPlayersController.canStartGame = self.isJudge;
+		self.waitingForPlayersController.wrapper = self.wrapper;
         [self transitionToContainerView:self.waitingForPlayersContainer];
+	}else if ([@"Playing" isEqualToString:gamePhase] ){
+		NSArray *sentences = [data objectForKey:@"sentences"];
+		NSString *tag = [data objectForKey:@"tag"];
+		
+		NSMutableArray *cards = [NSMutableArray array];
+		for ( NSString *sentence in sentences ){
+			MTCard *card = [[MTCard alloc] initWithSentence:sentence words:@[tag]];
+			[cards addObject:card];
+		}
+		
+		self.playerChooseCardController.cards = cards;
+		self.playerChooseCardController.isJudge = self.isJudge;
+
+		[self transitionToContainerView:self.playerChooseCardContainer];
+    }else if( [@"error" isEqualToString:gamePhase] ){
+        
+        [[[UIAlertView alloc] initWithTitle:@"Oops!" message:[data objectForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	
     }else{
         NSLog( @"Unknown game phase: %@", gamePhase );
     }

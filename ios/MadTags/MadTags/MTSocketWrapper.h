@@ -29,4 +29,6 @@
 
 -(void) joinGameWithCode:(NSString*) gameCode username:(NSString*) username;
 
+-(void) startGameWithCode:(NSString*) gameCode;
+
 @end

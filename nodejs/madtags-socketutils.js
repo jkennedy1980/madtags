@@ -16,12 +16,36 @@
 		return socket.madtagsGameCode + "-client";
 	}
 
+	exports.allClientSockets = function( socket ){
+		return socket.manager.sockets.in( exports.clientRoomNameForSocket(socket) ).sockets;
+	}
+
 	exports.respondOnSocket = function( socket, gamePhase, data ){
 		var payload = {};
 		payload.phase = gamePhase;
 		if( data ) payload.data = data;
 		socket.emit( 'gamePhase', payload );
-		socket.emit( message, data );
+
+		console.log( "SENT 1 CLIENT: ", payload );
 	}
+
+	exports.respondOnAllClientSockets = function( socket, gamePhase, data ){
+		var payload = {};
+		payload.phase = gamePhase;
+		if( data ) payload.data = data;
+		socket.manager.sockets.in( exports.clientRoomNameForSocket(socket) ).emit( 'gamePhase', payload );
+
+		console.log( "SENT ALL CLIENTS: ", payload );
+	}
+
+	exports.respondOnTVSocket = function( gamePhase, data ){
+		var payload = {};
+		payload.phase = gamePhase;
+		if( data ) payload.data = data;
+		socket.manager.sockets.in( exports.tvRoomNameForSocket(socket) ).emit( 'gamePhase', payload );
+
+		console.log( "SENT TO TV: ", payload );
+	}
+
 
 })();

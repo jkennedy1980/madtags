@@ -31,7 +31,7 @@
 -(void) connect;
 {
     if( !self.socket.isConnected ){
-        [self.socket connectToHost:@"JOSHs-MacBook-Pro.local" onPort:80];
+        [self.socket connectToHost:@"192.168.1.4" onPort:80];
     }
 }
 
@@ -42,7 +42,12 @@
 
 -(void) joinGameWithCode:(NSString*) gameCode username:(NSString*) username;
 {
-    [self.socket sendEvent:@"joinClient" withData:@{ @"username": @"Josh Kennedy", @"gameCode": @"1234" }];
+    [self.socket sendEvent:@"joinClient" withData:@{ @"username": username, @"gameCode": gameCode }];
+}
+
+-(void) startGameWithCode:(NSString*) gameCode;
+{
+    [self.socket sendEvent:@"start" withData:@{ @"gameCode": gameCode }];
 }
 
 #pragma mark - SocketIO Delegate
@@ -74,10 +79,10 @@
 	NSLog( @"didReceiveEvent");
 	NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [packet.data dataUsingEncoding:NSUTF8StringEncoding]
                                                          options: NSJSONReadingMutableContainers
-                                                           error: nil];
+                                                        error: nil];
     
     NSString *eventName = [dict objectForKey:@"name"];
-    if( [@"changeGamePhase" isEqualToString:eventName] ){
+    if( [@"gamePhase" isEqualToString:eventName] ){
         NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
         
         NSDictionary *data = [args objectForKey:@"data"];

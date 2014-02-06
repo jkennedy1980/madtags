@@ -10,23 +10,31 @@
 
 @interface MTWaitingForPlayersViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
 @end
 
 @implementation MTWaitingForPlayersViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
 
+- (IBAction)didClickStartButton:(id)sender;
+{
+	[self.wrapper startGameWithCode:@"1234"];
+}
+
+-(void) setCanStartGame:(BOOL)canStartGame;
+{
+    _canStartGame = canStartGame;
+    
+    if( _canStartGame ){
+        self.startButton.alpha = 1.0;
+    }else{
+        self.startButton.alpha = 0.0;
+    }
+
+}
 
 @end
