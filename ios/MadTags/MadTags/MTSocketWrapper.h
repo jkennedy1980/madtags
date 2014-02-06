@@ -31,4 +31,8 @@
 
 -(void) startGameWithCode:(NSString*) gameCode;
 
+-(void) sendJudgeEndOfPlayMessage:(NSString*) gameCode;
+
+-(void) sendPlayerEndOfPlayMessage:(NSString*) gameCode selectedCardString:(NSString*) cardString;
+
 @end

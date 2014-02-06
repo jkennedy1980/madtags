@@ -50,6 +50,23 @@
     [self.socket sendEvent:@"start" withData:@{ @"gameCode": gameCode }];
 }
 
+-(void) sendJudgeEndOfPlayMessage:(NSString*) gameCode;
+{
+    [self.socket sendEvent:@"getSubmissions" withData:@{ @"gameCode": gameCode }];
+}
+
+-(void) sendPlayerEndOfPlayMessage:(NSString*) gameCode selectedCardString:(NSString*) cardString;
+{
+    [self.socket sendEvent:@"submit" withData:@{ @"gameCode": gameCode, @"selectedSentence": cardString }];
+}
+
+-(void) reconnect;
+{
+    [self.socket disconnect];
+    [self connect];
+}
+
+
 #pragma mark - SocketIO Delegate
 
 - (void) socketIODidConnect:(SocketIO *)socket;
@@ -61,6 +78,7 @@
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
 	NSLog( @"Did Disconnect");
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:3.0];
     [self.delegate didDisconnect];
 }
 
