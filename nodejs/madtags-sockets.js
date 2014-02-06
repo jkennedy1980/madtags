@@ -37,7 +37,12 @@
 
 			socket.on( 'getSubmissions', function( data ){
 				console.log( "GETTING SUBMISSIONS: ", data );
-				game.getSubmissions( socket, data.gameCode, data.card );
+				game.getSubmissions( socket, data.gameCode );
+			});
+
+			socket.on( 'judgement', function( data) {
+				console.log( "GOT A VOTE", data );
+				game.judgment( socket, data.card );
 			});
 
 			socket.on( 'restart', function( data ){
