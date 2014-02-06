@@ -180,6 +180,7 @@
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
         NSString *role = [data objectForKey:@"role"];
         self.waitingForPlayersController.canStartGame = [@"JUDGE" isEqualToString:role];
+		self.waitingForPlayersController.wrapper = self.wrapper;
         [self transitionToContainerView:self.waitingForPlayersContainer];
     }else{
         NSLog( @"Unknown game phase: %@", gamePhase );

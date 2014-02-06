@@ -29,7 +29,7 @@
 		console.log( "SENT 1 CLIENT: ", payload );
 	}
 
-	exports.responsOnAllClientSockets = function( gamePhase, data ){
+	exports.respondOnAllClientSockets = function( socket, gamePhase, data ){
 		var payload = {};
 		payload.phase = gamePhase;
 		if( data ) payload.data = data;
