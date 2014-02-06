@@ -1,6 +1,6 @@
 <% include header.html %>
 <div class="tv">
-	<video id="tvvideo" width="320" height="240" autoplay controls onended="cycleVideo()">
+	<video id="tvvideo" width="320" height="240" autoplay onended="cycleVideo()">
 	  <source src="/video/1.m4v" type="video/mp4">
 	</video>
 
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 	</div>
-	<div>
+	<div class="debug">>
 		<h1>TV Game Phase Changes</h1>
 		<ul id="gamePhaseChanges"></ul>
 	</div>
