@@ -37,11 +37,13 @@
 	self.cardContainerView.isJudge = isJudge;
 }
 
+
+
 #pragma mark - MTCardViewContainerDelegate
 
 -(void) didSelectCard:(MTCard*) card;
 {
-    
+    _selectedCard = card;
 }
 
 @end

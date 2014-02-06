@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTCard.h"
 
 @interface MTPlayerChooseCardViewController : UIViewController
 
 @property (nonatomic,strong) NSArray *cards;
 @property (nonatomic,assign) BOOL isJudge;
+@property (nonatomic,strong,readonly) MTCard *selectedCard;
 
 @end
