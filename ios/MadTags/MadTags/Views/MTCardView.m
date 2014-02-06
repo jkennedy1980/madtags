@@ -46,6 +46,7 @@
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.textLabel];
         
+        
         self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.selectButton.frame = CGRectMake( floor((self.bounds.size.width - kSelectButtonDimension) / 2.0), self.bounds.size.height - kSelectButtonDimension - kSelectButtonBottomPadding, kSelectButtonDimension, kSelectButtonDimension);
         self.selectButton.layer.cornerRadius = floor( kSelectButtonDimension / 2.0 );
@@ -55,8 +56,8 @@
         [self setupButton];
         
         
-        self.selectedMarker = [[UIView alloc] initWithFrame:CGRectMake( self.bounds.size.width - 30.0, 10.0, 20, 20)];
-        self.selectedMarker.layer.cornerRadius = 10.0;
+        self.selectedMarker = [[UIView alloc] initWithFrame:CGRectMake( self.bounds.size.width - 30.0, 10.0, 14, 14)];
+        self.selectedMarker.layer.cornerRadius = 7;
         self.selectedMarker.backgroundColor = [self highlightColor];
         self.selectedMarker.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         [self addSubview:self.selectedMarker];
