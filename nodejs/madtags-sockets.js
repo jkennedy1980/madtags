@@ -2,6 +2,7 @@
 	
 	var game = require('./madtags-game.js');
 	var tags = require('./madtags-tags.js');
+	var socketUtils = require('./madtags-socketUtils.js');
 
 	module.exports = function( io ){
 		io.sockets.on( 'connection', function( socket ){

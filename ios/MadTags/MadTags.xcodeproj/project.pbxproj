@@ -57,6 +57,8 @@
 		D2791CE818A2A4AF0043A465 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CE018A2A4AF0043A465 /* NSData+SRB64Additions.m */; };
 		D2791CE918A2A4AF0043A465 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CE318A2A4AF0043A465 /* SRWebSocket.m */; };
 		D2791CEA18A2A4AF0043A465 /* MTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CE618A2A4AF0043A465 /* MTViewController.m */; };
+		D2A38D8818A422A8006DC2FE /* MTTaggerSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = D2A38D8718A422A8006DC2FE /* MTTaggerSimulator.m */; };
+		D2A38D8918A42A5D006DC2FE /* MTAlphonso.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D002518A2E04D00FBE7A3 /* MTAlphonso.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +152,8 @@
 		D2791CE618A2A4AF0043A465 /* MTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTViewController.m; sourceTree = "<group>"; };
 		D2791CEB18A2A8790043A465 /* MTTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTestViewController.h; sourceTree = "<group>"; };
 		D2791CEC18A2A8790043A465 /* MTTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTestViewController.m; sourceTree = "<group>"; };
+		D2A38D8618A422A8006DC2FE /* MTTaggerSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTTaggerSimulator.h; sourceTree = "<group>"; };
+		D2A38D8718A422A8006DC2FE /* MTTaggerSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTTaggerSimulator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -243,6 +247,7 @@
 			children = (
 				D22D009618A3DD4300FBE7A3 /* MTTaggers.h */,
 				D22D009718A3DD4300FBE7A3 /* MTTaggers.m */,
+				D2A38D8518A42276006DC2FE /* Simulator */,
 				D22D009018A2FBCE00FBE7A3 /* Gracenote */,
 				D22D002318A2E02200FBE7A3 /* Alphonso */,
 			);
@@ -401,6 +406,15 @@
 			path = GameEngine;
 			sourceTree = "<group>";
 		};
+		D2A38D8518A42276006DC2FE /* Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				D2A38D8618A422A8006DC2FE /* MTTaggerSimulator.h */,
+				D2A38D8718A422A8006DC2FE /* MTTaggerSimulator.m */,
+			);
+			path = Simulator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -518,12 +532,14 @@
 				D2791CE718A2A4AF0043A465 /* base64.c in Sources */,
 				03F32B4218A2F0EE00C7129F /* MTCardViewContainer.m in Sources */,
 				03F32B4C18A2F39F00C7129F /* MTPlayerChooseCardViewController.m in Sources */,
+				D2A38D8818A422A8006DC2FE /* MTTaggerSimulator.m in Sources */,
 				D22D001D18A2CBA200FBE7A3 /* SocketIOTransportWebsocket.m in Sources */,
 				D22D001A18A2CBA200FBE7A3 /* SocketIO.m in Sources */,
 				03F32B3E18A2E65600C7129F /* MTWaitingForPlayersViewController.m in Sources */,
 				D2791CB818A2A2DF0043A465 /* MTAppDelegate.m in Sources */,
 				D22D001B18A2CBA200FBE7A3 /* SocketIOJSONSerialization.m in Sources */,
 				03F32B3818A2DF5500C7129F /* MTSocketWrapper.m in Sources */,
+				D2A38D8918A42A5D006DC2FE /* MTAlphonso.m in Sources */,
 				03F32B4918A2F1C700C7129F /* MTCardView.m in Sources */,
 				D22D009818A3DD4300FBE7A3 /* MTTaggers.m in Sources */,
 				03B94AAC18A415CA00FC3E1E /* MTRoundWinnerViewController.m in Sources */,
