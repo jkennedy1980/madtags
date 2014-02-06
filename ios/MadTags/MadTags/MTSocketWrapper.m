@@ -60,6 +60,12 @@
     [self.socket sendEvent:@"submit" withData:@{ @"gameCode": gameCode, @"selectedSentence": cardString }];
 }
 
+-(void) reconnect;
+{
+    [self.socket disconnect];
+    [self connect];
+}
+
 
 #pragma mark - SocketIO Delegate
 
@@ -72,6 +78,7 @@
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
 	NSLog( @"Did Disconnect");
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:3.0];
     [self.delegate didDisconnect];
 }
 
