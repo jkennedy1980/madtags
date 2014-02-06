@@ -132,6 +132,7 @@
 {
     // Secret button hit, must be having problems, panic!
 	[self.wrapper restartGame:@"1234"];
+    [self transitionToContainerView:self.waitingForPlayersContainer];
 }
 
 - (void)dealloc
@@ -308,7 +309,17 @@
 		self.judgeGameController.cards = cards;
 		self.judgeGameController.isJudge = self.isJudge;
         [self transitionToContainerView:self.judgeGameContainer];
-
+        
+    }else if( [@"final" isEqualToString:gamePhase] ){
+        
+        NSString *sentence = [data objectForKey:@"sentence"];
+		NSString *tag = [data objectForKey:@"tag"];
+		
+        MTCard *card = [[MTCard alloc] initWithSentence:sentence words:@[tag]];
+		
+		self.roundWinnerViewController.card = card;
+        [self transitionToContainerView:self.roundWinnerContainer];
+        
     }else if( [@"error" isEqualToString:gamePhase] ){
         
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:[data objectForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
