@@ -60,6 +60,7 @@
 		var tagJObjs = [];
 		var tagsInUse = [];
 		var tagMonitor;
+		var tagLogos = ['tv-tag-logo-zb', 'tv-tag-logo-gn', 'tv-tag-logo-al'];
 
 		function getNewRandomTag() {
 			var tagCSSs;
@@ -78,12 +79,16 @@
 		
 		function popInTag(newBrand, type) {
 			var logoCss = 'tv-tag-logo-zb';
-			if (type == 'zeebox') {
-				logoCss = 'tv-tag-logo-zb';
-			} else if (type == 'gracenote') {
-				logoCss = 'tv-tag-logo-gn';
-			} else  if (type == 'alphonso') {
-				logoCss = 'tv-tag-logo-al';
+			if (type) {
+				if (type == 'zeebox') {
+					logoCss = 'tv-tag-logo-zb';
+				} else if (type == 'gracenote') {
+					logoCss = 'tv-tag-logo-gn';
+				} else  if (type == 'alphonso') {
+					logoCss = 'tv-tag-logo-al';
+				}
+			} else {
+				logoCss = tagLogos[Math.floor((Math.random()*tagLogos.length))];
 			}
 			useOddPosition = !useOddPosition;
 			var randomTag =  getNewRandomTag();
