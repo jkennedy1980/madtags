@@ -79,7 +79,7 @@
 	NSLog( @"didReceiveEvent");
 	NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [packet.data dataUsingEncoding:NSUTF8StringEncoding]
                                                          options: NSJSONReadingMutableContainers
-                                                           error: nil];
+                                                        error: nil];
     
     NSString *eventName = [dict objectForKey:@"name"];
     if( [@"gamePhase" isEqualToString:eventName] ){
