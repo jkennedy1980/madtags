@@ -75,10 +75,12 @@
     
     NSString *tagEngine = [tag objectForKey:MTTaggerSourceNameKey];
     
-    if( [@"gracenote" isEqualToString:tagEngine] ){
+    if( [@"Gracenote" isEqualToString:tagEngine] ){
         cell.imageView.image = [UIImage imageNamed:@"gracenotetag_48x48"];
-    }else if( [@"alphonso" isEqualToString:tagEngine] ){
+    }else if( [@"Alphonso" isEqualToString:tagEngine] ){
         cell.imageView.image = [UIImage imageNamed:@"alphonsotag_48x48"];
+    }else if( [@"ZeeBox" isEqualToString:tagEngine] ){
+        cell.imageView.image = [UIImage imageNamed:@"zeeboxtag_48x48"];
     }
     
     cell.backgroundColor = [UIColor clearColor];
