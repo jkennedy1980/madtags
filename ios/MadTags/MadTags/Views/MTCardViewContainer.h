@@ -10,9 +10,12 @@
 #import "MTCard.h"
 
 typedef enum {
-	MTCardActionVoting,
-	MTCardActionJudging
-} MTCardActionType;
+    kMTButtonStateVoting,
+    kMTButtonStateWaitingForVotes,
+    kMTButtonStateJudging,
+    kMTButtonStateWaitingForJudging
+} MTButtonState;
+
 
 @protocol MTCardViewContainerDelegate <NSObject>
 
@@ -25,8 +28,7 @@ typedef enum {
 @property (nonatomic,weak) id<MTCardViewContainerDelegate> delegate;
 
 @property (nonatomic,strong) NSArray *cards;
-@property (nonatomic,assign) BOOL isJudge;
-@property (nonatomic,assign) MTCardActionType buttonAction;
+@property (nonatomic,assign) MTButtonState buttonState;
 @property (nonatomic,strong) MTCard *displayedCard;
 @property (nonatomic,strong) MTCard *selectedCard;
 

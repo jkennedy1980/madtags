@@ -40,11 +40,11 @@
 {
     _canStartGame = canStartGame;
     
-    if( _canStartGame ){
-        self.startButton.alpha = 1.0;
-    }else{
-        self.startButton.alpha = 0.0;
-    }
+//    if( _canStartGame ){
+//        self.startButton.alpha = 1.0;
+//    }else{
+//        self.startButton.alpha = 0.0;
+//    }
 
 }
 
