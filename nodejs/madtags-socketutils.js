@@ -16,4 +16,12 @@
 		return socket.madtagsGameCode + "-client";
 	}
 
+	exports.respondOnSocket = function( socket, gamePhase, data ){
+		var payload = {};
+		payload.phase = gamePhase;
+		if( data ) payload.data = data;
+		socket.emit( 'gamePhase', payload );
+		socket.emit( message, data );
+	}
+
 })();
