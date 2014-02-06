@@ -57,6 +57,9 @@
 
 		// frontend UI shitz
 
+		var tagDelay = 10000;
+		var cardDelay = 30000;
+
 		// tv video (looping and shitz)
 		videoCount = 0;
 		videoPlayer = document.getElementById("tvvideo");
@@ -110,7 +113,7 @@
 			return logoCss;
 		}
 		
-		function popInTag(newBrand, type) {
+		function showNewTag(newBrand, type) {
 			var logoCss = getLogoCss(type);
 			useOddPosition = !useOddPosition;
 			var randomTag =  getNewRandomTag();
@@ -128,7 +131,7 @@
 				tagsInUse.shift();
 				$(tagToRemove).fadeOut(1000);
 				clearInterval(tagMonitor);
-				tagMonitor = setInterval(removeTag, 10000);
+				tagMonitor = setInterval(removeTag, tagDelay);
 			}
 		}
 
@@ -139,7 +142,7 @@
 		}
 
 		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
-		tagMonitor = setInterval(removeTag, 10000);
+		tagMonitor = setInterval(removeTag, tagDelay);
 
 		// card popups
 		var cardMonitor;
@@ -156,7 +159,7 @@
 			$('.tv .card-content').show();
 			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
 			clearInterval(cardMonitor);
-			cardMonitor = setInterval(minimizeCard, 5000);
+			cardMonitor = setInterval(minimizeCard, tagDelay);
 		}
 
 		function minimizeCard() {
@@ -166,7 +169,7 @@
 		}
 
 		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
-		cardMonitor = setInterval(minimizeCard, 5000);
+		cardMonitor = setInterval(minimizeCard, tagDelay);
 	</script>
 </div>
 <% include footer.html %>
