@@ -16,17 +16,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFp-vK-v5q">
-                                <rect key="frame" x="231" y="20" width="76" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BFp-vK-v5q">
+                                <rect key="frame" x="102" y="11" width="198" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="198" id="LPe-gf-Aij"/>
+                                    <constraint firstAttribute="height" constant="43" id="ZMb-ro-eWC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="New Game">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didClickNewGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="J6E-fV-4iL"/>
+                                    <action selector="didClickNewGame:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="a6y-bY-E3t"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f24-Jg-SCj" userLabel="ContainerViewContainer">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f24-Jg-SCj" userLabel="ContainerViewContainer">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -46,7 +51,7 @@
                                             <segue destination="3gb-je-ih1" kind="embed" identifier="waitingForPlayers" id="EIx-ZX-MVw"/>
                                         </connections>
                                     </containerView>
-                                    <containerView alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="794-cO-57i" userLabel="playerChooseCard">
+                                    <containerView alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="794-cO-57i" userLabel="playerChooseCard">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -54,7 +59,7 @@
                                             <segue destination="PkM-Mb-rPo" kind="embed" id="Rh2-Xd-UNe"/>
                                         </connections>
                                     </containerView>
-                                    <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hby-wl-ru5" userLabel="judge">
+                                    <containerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hby-wl-ru5" userLabel="judge">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -64,24 +69,29 @@
                                     </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="794-cO-57i" secondAttribute="bottom" id="DIE-5w-rvA"/>
-                                    <constraint firstItem="794-cO-57i" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="HHU-Hv-TAl"/>
-                                    <constraint firstItem="hby-wl-ru5" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="Kqp-3P-4RO"/>
-                                    <constraint firstAttribute="bottom" secondItem="hby-wl-ru5" secondAttribute="bottom" id="NgH-QE-JLU"/>
-                                    <constraint firstAttribute="trailing" secondItem="794-cO-57i" secondAttribute="trailing" id="PoA-mk-WkF"/>
-                                    <constraint firstAttribute="trailing" secondItem="hby-wl-ru5" secondAttribute="trailing" id="QhS-Oq-4FW"/>
-                                    <constraint firstItem="794-cO-57i" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="a4W-pG-uK4"/>
-                                    <constraint firstItem="hby-wl-ru5" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="gaK-Nh-hj2"/>
-                                </constraints>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MadTags" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttC-hF-iPG">
+                                <rect key="frame" x="20" y="17" width="88" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="HMY-tx-Bsf"/>
+                                    <constraint firstAttribute="width" constant="88" id="xL6-qR-6Ho"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oo5-Yl-Pnb" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="bottom" id="2aC-iw-skI"/>
-                            <constraint firstAttribute="trailing" secondItem="f24-Jg-SCj" secondAttribute="trailing" id="eAU-Dg-y6n"/>
-                            <constraint firstItem="f24-Jg-SCj" firstAttribute="top" secondItem="BFp-vK-v5q" secondAttribute="bottom" constant="14" id="gQx-4L-bWe"/>
-                            <constraint firstItem="f24-Jg-SCj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="wNp-ZI-NEW"/>
+                            <constraint firstItem="BFp-vK-v5q" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="11" id="E3d-83-MTT"/>
+                            <constraint firstItem="oo5-Yl-Pnb" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="bottom" id="FZM-WB-4Ck"/>
+                            <constraint firstAttribute="trailing" secondItem="BFp-vK-v5q" secondAttribute="trailing" constant="20" id="Nbz-TB-sKH"/>
+                            <constraint firstItem="f24-Jg-SCj" firstAttribute="top" secondItem="BFp-vK-v5q" secondAttribute="bottom" constant="10" id="UJl-YB-LvS"/>
+                            <constraint firstItem="ttC-hF-iPG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="17" id="Ukf-0w-4we"/>
+                            <constraint firstItem="f24-Jg-SCj" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="VOw-TC-o25"/>
+                            <constraint firstItem="ttC-hF-iPG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" id="fAE-NS-67G"/>
+                            <constraint firstAttribute="trailing" secondItem="f24-Jg-SCj" secondAttribute="trailing" id="t7m-AP-51h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Edy-KQ-kIJ"/>
@@ -89,6 +99,7 @@
                         <outlet property="containerViewContainer" destination="f24-Jg-SCj" id="EFe-2k-gaW"/>
                         <outlet property="judgeGameContainer" destination="hby-wl-ru5" id="pVE-E3-VRO"/>
                         <outlet property="playerChooseCardContainer" destination="794-cO-57i" id="E6L-bT-rZP"/>
+                        <outlet property="startNewGameButton" destination="BFp-vK-v5q" id="NZF-qx-uu5"/>
                         <outlet property="userJoinContainer" destination="bYf-2R-SQo" id="SFA-e2-cYc"/>
                         <outlet property="waitingForPlayersContainer" destination="SOY-nd-aUI" id="zlP-WW-8iP"/>
                     </connections>
@@ -185,16 +196,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="userJoin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12e-0u-Inc">
-                                <rect key="frame" x="127" y="20" width="66" height="19"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-39-TkO">
+                                <rect key="frame" x="79" y="287" width="162" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-39-TkO">
-                                <rect key="frame" x="119" y="270" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="DKd-gP-EbE"/>
+                                    <constraint firstAttribute="height" constant="44" id="lSh-Pj-Vpm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="JOIN GAME">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -202,10 +211,51 @@
                                     <action selector="didClickJoinButton:" destination="nCm-y7-59H" eventType="touchUpInside" id="LEf-Cu-136"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmN-cw-0aw">
+                                <rect key="frame" x="20" y="224" width="280" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-OG-Oqy">
+                                        <rect key="frame" x="8" y="5" width="264" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="A3Q-vn-Z1f"/>
+                                            <constraint firstAttribute="width" constant="264" id="GNX-G1-51O"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="join"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="nCm-y7-59H" id="fPB-Rv-NFC"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="ByJ-QN-4PS"/>
+                                    <constraint firstAttribute="width" constant="280" id="oSL-iM-gQr"/>
+                                    <constraint firstItem="YbO-OG-Oqy" firstAttribute="top" secondItem="mmN-cw-0aw" secondAttribute="top" constant="5" id="pyR-Ee-ADv"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logomadtags_222x186.png" translatesAutoresizingMaskIntoConstraints="NO" id="5kN-rj-Bv8">
+                                <rect key="frame" x="50" y="57" width="221" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="mmN-cw-0aw" firstAttribute="leading" secondItem="9xl-jh-dHp" secondAttribute="leading" constant="20" id="6VW-ZZ-CWA"/>
+                            <constraint firstItem="mmN-cw-0aw" firstAttribute="top" secondItem="7hB-Mj-mjF" secondAttribute="bottom" constant="224" id="990-bd-D7c"/>
+                            <constraint firstItem="1A8-39-TkO" firstAttribute="leading" secondItem="9xl-jh-dHp" secondAttribute="leading" constant="79" id="DrW-QX-DvA"/>
+                            <constraint firstAttribute="trailing" secondItem="1A8-39-TkO" secondAttribute="trailing" constant="79" id="Fm8-IR-Fsz"/>
+                            <constraint firstAttribute="trailing" secondItem="mmN-cw-0aw" secondAttribute="trailing" constant="20" id="dP8-CS-fAT"/>
+                            <constraint firstItem="1A8-39-TkO" firstAttribute="top" secondItem="mmN-cw-0aw" secondAttribute="bottom" constant="16" id="eSQ-qz-Nzr"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="joinButton" destination="1A8-39-TkO" id="K6p-q8-xIO"/>
+                        <outlet property="userNameTextField" destination="YbO-OG-Oqy" id="hHj-aE-mlq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KRQ-f5-tef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -223,13 +273,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="waitingForPlayers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWg-ag-I2c">
-                                <rect key="frame" x="92" y="20" width="137" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmw-wZ-3dw">
                                 <rect key="frame" x="114" y="276" width="92" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -302,7 +345,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdh-HL-BS0" customClass="MTCardViewContainer">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.52156865600000002" green="0.087972152250000005" blue="0.037597625320000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -323,6 +366,9 @@
             <point key="canvasLocation" x="1172" y="882"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logomadtags_222x186.png" width="111" height="93"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

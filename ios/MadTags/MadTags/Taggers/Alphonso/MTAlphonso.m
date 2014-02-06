@@ -43,7 +43,9 @@
 								   waitUntilDone:NO];
 			}
 		} and_result_callback:^(asapi_match *content) {
-				NSLog(@"Got a Tagline %@, brand %@, Hits %d, Timestamp %@", content.tagline, content.brand, content.hits, content.start );
+			NSLog(@"Got a Tagline %@, brand %@, Hits %ld, Timestamp %@", content.tagline, content.brand, (long)content.hits, content.start );
+			NSDictionary *tagDict = @{MTTaggerWordKey : content.brand, MTTaggerIsProductKey : @(1)};
+			[self.delegate didTagContent:tagDict];
 		}];
 		
 		if(errcode == ASAPI_SUCCESS){
@@ -59,7 +61,7 @@
 
 - (void) progress_callback:(NSNumber *)state_m
 {
-    asapi_state_t state = [state_m integerValue];
+    asapi_state_t state = (asapi_state_t)[state_m integerValue];
     NSString *msg;
     
     switch (state) {
@@ -88,7 +90,7 @@
 
 - (void) progress_callback_err:(NSNumber *)errNum
 {
-    NSLog( @"Got Callback: %d", [errNum integerValue] );
+    NSLog( @"Got Callback: %d", (int)[errNum integerValue] );
 }
 
 

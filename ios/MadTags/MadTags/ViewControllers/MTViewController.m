@@ -12,10 +12,13 @@
 #import "MTCard.h"
 #import "MTJudgeViewController.h"
 #import "MTWaitingForPlayersViewController.h"
+#import "MTUserJoinViewController.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) MTSocketWrapper *wrapper;
+
+@property (weak, nonatomic) IBOutlet UIButton *startNewGameButton;
 
 @property (weak, nonatomic) IBOutlet UIView *containerViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *userJoinContainer;
@@ -23,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
 @property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
 
+@property (weak, nonatomic) MTUserJoinViewController *userJoinViewController;
 @property (weak, nonatomic) MTWaitingForPlayersViewController *waitingForPlayersController;
 @property (weak, nonatomic) MTPlayerChooseCardViewController *playerChooseCardController;
 @property (weak, nonatomic) MTJudgeViewController *judgeGameController;
@@ -53,7 +57,10 @@
     
     
     for( UIViewController *childController in self.childViewControllers ){
-        if( [childController isKindOfClass:[MTWaitingForPlayersViewController class]] ){
+        if( [childController isKindOfClass:[MTUserJoinViewController class]] ){
+            self.userJoinViewController = (MTUserJoinViewController*) childController;
+            self.userJoinViewController.delegate = self;
+        }else if( [childController isKindOfClass:[MTWaitingForPlayersViewController class]] ){
             self.waitingForPlayersController = (MTWaitingForPlayersViewController*) childController;
         }else if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
             self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
@@ -99,7 +106,9 @@
 //    [self startPlayTimer];
 }
 
-- (IBAction)didClickNewGame:(id)sender {
+- (IBAction)didClickNewGame:(id)sender;
+{
+    // Secret button hit, must be having problems, panic!
 	[self.wrapper restartGame:@"1234"];
 }
 
@@ -188,7 +197,8 @@
 
 -(void) didClickJoinWithGameCode:(NSString*) gameCode username:(NSString*) username;
 {
-    [self.wrapper joinGameWithCode:@"1234" username:@"Josh Kennedy"];
+    [self.startNewGameButton setTitle:username forState:UIControlStateNormal];
+    [self.wrapper joinGameWithCode:@"1234" username:username];
 }
 
 #pragma mark - Wrapper Delegate
