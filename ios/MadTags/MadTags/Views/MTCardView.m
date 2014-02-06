@@ -8,6 +8,7 @@
 
 #import "MTCardView.h"
 #import "MTViewController.h"
+#import "MTSentenceUtils.h"
 
 @interface MTCardView()
 
@@ -23,6 +24,8 @@
 
 #define kGreen [UIColor colorWithRed:0.318 green:0.509 blue:0.166 alpha:1.000]
 #define kBlue [UIColor colorWithRed:0.057 green:0.259 blue:0.782 alpha:1.000]
+#define kDarkGray [UIColor colorWithRed:0.147 green:0.147 blue:0.147 alpha:1.000]
+
 
 @implementation MTCardView
 
@@ -100,29 +103,8 @@
 
 -(void) setupButton;
 {
-    NSArray *sentenceParts = [self.card.sentence componentsSeparatedByString: @"<<WORD>>"];
-    if( (sentenceParts.count - 1) > self.card.words.count ){
-        NSLog( @"Invalid card" );
-        return;
-    }
+    self.textLabel.attributedText = [MTSentenceUtils attributedStringForSentence:self.card.sentence withWords:self.card.words textColor:kDarkGray highlightColor:[self highlightColor]];
     
-    NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] init];
-    
-    int index = 0;
-    
-    for( NSString *part in sentenceParts ){
-        [attText appendAttributedString:[self attributedStringForSentence:part]];
-        
-        NSString *word = nil;
-        if( index < self.card.words.count ){
-            word = [self.card.words objectAtIndex:index];
-        }
-        
-        if( word ) [attText appendAttributedString:[self attributedStringForWord:word]];
-        index++;
-    }
-    
-    self.textLabel.attributedText = attText;
     CGSize size = [self.textLabel sizeThatFits:CGSizeMake( self.bounds.size.width - kPadding*2, 100.0 )];
     self.textLabel.frame = CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, size.height );
     
@@ -197,22 +179,6 @@
 {
     _card = card;
     [self setupButton];
-}
-
--(NSAttributedString*) attributedStringForSentence:(NSString*) sentence;
-{
-    NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] initWithString:sentence];
-    [attText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.147 green:0.147 blue:0.147 alpha:1.000] range:NSMakeRange(0, attText.length)];
-    [attText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Medium" size:30.0] range:NSMakeRange(0, attText.length)];
-    return attText;
-}
-
--(NSAttributedString*) attributedStringForWord:(NSString*) word;
-{
-    NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] initWithString:word];
-    [attText addAttribute:NSForegroundColorAttributeName value:[self highlightColor] range:NSMakeRange(0, attText.length)];
-    [attText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0] range:NSMakeRange(0, attText.length)];
-    return attText;
 }
 
 @end

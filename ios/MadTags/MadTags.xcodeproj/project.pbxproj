@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03B94AAC18A415CA00FC3E1E /* MTRoundWinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B94AAB18A415CA00FC3E1E /* MTRoundWinnerViewController.m */; };
+		03B94AB018A4234B00FC3E1E /* MTSentenceUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B94AAF18A4234B00FC3E1E /* MTSentenceUtils.m */; };
 		03F32B3818A2DF5500C7129F /* MTSocketWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B3718A2DF5500C7129F /* MTSocketWrapper.m */; };
 		03F32B3B18A2E64700C7129F /* MTUserJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B3A18A2E64700C7129F /* MTUserJoinViewController.m */; };
 		03F32B3E18A2E65600C7129F /* MTWaitingForPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B3D18A2E65600C7129F /* MTWaitingForPlayersViewController.m */; };
@@ -72,6 +73,8 @@
 /* Begin PBXFileReference section */
 		03B94AAA18A415CA00FC3E1E /* MTRoundWinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRoundWinnerViewController.h; sourceTree = "<group>"; };
 		03B94AAB18A415CA00FC3E1E /* MTRoundWinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRoundWinnerViewController.m; sourceTree = "<group>"; };
+		03B94AAE18A4234B00FC3E1E /* MTSentenceUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSentenceUtils.h; sourceTree = "<group>"; };
+		03B94AAF18A4234B00FC3E1E /* MTSentenceUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSentenceUtils.m; sourceTree = "<group>"; };
 		03F32B3618A2DF5500C7129F /* MTSocketWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSocketWrapper.h; sourceTree = "<group>"; };
 		03F32B3718A2DF5500C7129F /* MTSocketWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSocketWrapper.m; sourceTree = "<group>"; };
 		03F32B3918A2E64700C7129F /* MTUserJoinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUserJoinViewController.h; sourceTree = "<group>"; };
@@ -187,6 +190,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03B94AAD18A422EC00FC3E1E /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				03B94AAE18A4234B00FC3E1E /* MTSentenceUtils.h */,
+				03B94AAF18A4234B00FC3E1E /* MTSentenceUtils.m */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		03F32B3F18A2F0B500C7129F /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 		D2791CAD18A2A2DF0043A465 /* MadTags */ = {
 			isa = PBXGroup;
 			children = (
+				03B94AAD18A422EC00FC3E1E /* utils */,
 				03F32B5018A3E13A00C7129F /* images */,
 				D22D002218A2DFBC00FBE7A3 /* Taggers */,
 				D2791CB918A2A2DF0043A465 /* Main.storyboard */,
@@ -526,6 +539,7 @@
 				03F32B3818A2DF5500C7129F /* MTSocketWrapper.m in Sources */,
 				03F32B4918A2F1C700C7129F /* MTCardView.m in Sources */,
 				D22D009818A3DD4300FBE7A3 /* MTTaggers.m in Sources */,
+				03B94AB018A4234B00FC3E1E /* MTSentenceUtils.m in Sources */,
 				03B94AAC18A415CA00FC3E1E /* MTRoundWinnerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
