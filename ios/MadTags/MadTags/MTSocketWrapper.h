@@ -39,4 +39,6 @@
 
 -(void) restartGame:(NSString*)gameCode;
 
+-(void) sendToGameCode:(NSString*) gameCode tag:(NSDictionary*)tagDict;
+
 @end

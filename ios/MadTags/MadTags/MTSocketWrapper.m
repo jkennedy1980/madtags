@@ -9,6 +9,7 @@
 #import "MTSocketWrapper.h"
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
+#import "MTTaggers.h"
 
 @interface MTSocketWrapper ()<SocketIODelegate>
 
@@ -65,6 +66,13 @@
 {
     [self.socket sendEvent:@"submit" withData:@{ @"gameCode": gameCode, @"selectedSentence": cardString }];
 }
+
+-(void) sendToGameCode:(NSString*) gameCode tag:(NSDictionary*)tagDict;
+{
+	NSString *word = [tagDict objectForKey:MTTaggerWordKey];
+    [self.socket sendEvent:@"tag" withData:@{ @"gameCode": gameCode, @"tagWord": word }];
+}
+
 
 -(void) reconnect;
 {

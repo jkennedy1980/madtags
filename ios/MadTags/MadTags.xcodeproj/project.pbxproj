@@ -238,10 +238,10 @@
 		D22D002218A2DFBC00FBE7A3 /* Taggers */ = {
 			isa = PBXGroup;
 			children = (
-				D22D009018A2FBCE00FBE7A3 /* Gracenote */,
-				D22D002318A2E02200FBE7A3 /* Alphonso */,
 				D22D009618A3DD4300FBE7A3 /* MTTaggers.h */,
 				D22D009718A3DD4300FBE7A3 /* MTTaggers.m */,
+				D22D009018A2FBCE00FBE7A3 /* Gracenote */,
+				D22D002318A2E02200FBE7A3 /* Alphonso */,
 			);
 			path = Taggers;
 			sourceTree = "<group>";

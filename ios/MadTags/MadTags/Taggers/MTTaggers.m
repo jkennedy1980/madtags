@@ -17,11 +17,11 @@
 
 @implementation MTTaggers
 
-- (id)initWithSeed:(int)seed andTaggerClasses:(NSArray*)classes delegate:(id<MTTaggerDelegate>)delegate;
+- (id)initWithSeed:(int)seed delegate:(id<MTTaggerDelegate>)delegate;
 {
     self = [super init];
     if (self) {
-		self.taggerClasses = classes;
+		self.taggerClasses = @[[MTGracenoteEntourage class]]; //, [MTAlphonso class]];
 		self.tagger = [self taggerForSeed:seed];
 		self.tagger.delegate = delegate;
     }

@@ -13,8 +13,9 @@
 #import "MTJudgeViewController.h"
 #import "MTWaitingForPlayersViewController.h"
 #import "MTUserJoinViewController.h"
+#import "MTTaggers.h"
 
-@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate>
+@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate,MTTaggerDelegate>
 
 @property (nonatomic,strong) MTSocketWrapper *wrapper;
 
@@ -37,6 +38,7 @@
 @property (strong, nonatomic) NSTimer *playTimer;
 @property (assign, nonatomic) NSInteger playClock;
 
+@property (strong, nonatomic) MTTaggers *taggers;
 @end
 
 
@@ -235,6 +237,9 @@
         self.waitingForPlayersController.canStartGame = self.isJudge;
 		self.waitingForPlayersController.wrapper = self.wrapper;
         [self transitionToContainerView:self.waitingForPlayersContainer];
+		
+		NSUInteger playerIndex = [[data objectForKey:@"playerIndex"] integerValue];
+		self.taggers = [[MTTaggers alloc] initWithSeed:playerIndex delegate:self];
         
 	}else if ([@"Playing" isEqualToString:gamePhase] ){
         
@@ -275,6 +280,13 @@
     }else{
         NSLog( @"Unknown game phase: %@", gamePhase );
     }
+}
+
+#pragma mark - Tagger Delegate Methods
+
+-(void) didTagContent:(NSDictionary *)tagDict;
+{
+	[self.wrapper sendToGameCode:@"1234" tag:tagDict ];
 }
 
 @end
