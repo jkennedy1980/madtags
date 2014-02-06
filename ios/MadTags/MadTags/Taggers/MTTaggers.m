@@ -14,6 +14,7 @@
 @interface MTTaggers ()
 @property (nonatomic, strong) id<MTTagger> tagger;
 @property (nonatomic, strong) NSArray *taggerClasses;
+@property (nonatomic, strong) MTTaggerSimulator *simTagger;
 @end
 
 @implementation MTTaggers
@@ -23,10 +24,14 @@
     self = [super init];
     if (self) {
 #if TARGET_IPHONE_SIMULATOR
-		self.taggerClasses = @[[MTGracenoteEntourage class], [MTTaggerSimulator class]]; //, [MTAlphonso class]];
+		self.taggerClasses = @[[MTGracenoteEntourage class]]; //, [MTAlphonso class]];
 #else
 		self.taggerClasses = @[[MTGracenoteEntourage class], [MTAlphonso class]];
 #endif
+		
+		self.simTagger = [[MTTaggerSimulator alloc] init];
+		self.simTagger.delegate = delegate;
+							   
 		self.tagger = [self taggerForSeed:seed];
 		self.tagger.delegate = delegate;
     }
