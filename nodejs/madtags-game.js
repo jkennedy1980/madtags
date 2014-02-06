@@ -17,9 +17,13 @@
 
 			console.log("Making Judge: ", username );
 			game.gamePhase = 'JOINING';
+<<<<<<< HEAD
 			player.role = 'JUDGE';
 			game.judgeSocket = socket;
 
+=======
+			// player.role = 'JUDGE';
+>>>>>>> c61399ad7164b0505db7e9feae2a06e2dbd9e795
 		} else if ( game.gamePhase !== 'JOINING' ){
 
 			game.otherPlayerSockets.push(socket);

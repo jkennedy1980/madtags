@@ -11,6 +11,7 @@
 
 @interface MTUserJoinViewController ()<UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *userNameTextFieldContainer;
 @property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *joinButton;
 
@@ -31,6 +32,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.userNameTextFieldContainer.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.userNameTextFieldContainer.layer.borderWidth = 1.0;
+    
+    self.joinButton.layer.cornerRadius = floor( self.joinButton.bounds.size.width / 2.0 );
+    
     self.names = [NSMutableArray array];
     [self.names addObject:@"Marilyn"];
     [self.names addObject:@"Frank"];
@@ -44,12 +51,16 @@
 
 - (IBAction)didClickJoinButton:(id)sender;
 {
+    if( self.userNameTextField.text.length == 0 ) return;
+    
     [self.userNameTextField resignFirstResponder];
     [self.delegate didClickJoinWithGameCode:@"1234" username:self.userNameTextField.text];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;
 {
+    if( self.userNameTextField.text.length == 0 ) return NO;
+
     [self.userNameTextField resignFirstResponder];
     [self.delegate didClickJoinWithGameCode:@"1234" username:self.userNameTextField.text];
     return YES;

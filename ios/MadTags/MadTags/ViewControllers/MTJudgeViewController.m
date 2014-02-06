@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
 	
-    self.cardViewContainer.buttonAction = MTCardActionJudging;
+    self.cardViewContainer.buttonState = kMTButtonStateWaitingForJudging;
     self.cardViewContainer.delegate = self;
     self.cardViewContainer.cards = self.cards;
 }
@@ -35,9 +35,7 @@
 -(void) setIsJudge:(BOOL)isJudge;
 {
 	_isJudge = isJudge;
-
-	self.cardViewContainer.isJudge = isJudge;
-	self.cardViewContainer.buttonAction = MTCardActionJudging;
+    if( _isJudge ) self.cardViewContainer.buttonState = kMTButtonStateJudging;
 }
 
 #pragma mark - MTCardViewContainerDelegate

@@ -40,11 +40,11 @@
 {
     _canStartGame = canStartGame;
     
-    if( _canStartGame ){
-        self.startButton.alpha = 1.0;
-    }else{
-        self.startButton.alpha = 0.0;
-    }
+//    if( _canStartGame ){
+//        self.startButton.alpha = 1.0;
+//    }else{
+//        self.startButton.alpha = 0.0;
+//    }
 
 }
 
@@ -68,6 +68,14 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TagCell" forIndexPath:indexPath];
     cell.textLabel.text = [tag objectForKey:MTTaggerWordKey];
+    
+    NSString *tagEngine = [tag objectForKey:MTTaggerSourceNameKey];
+    
+    if( [@"gracenote" isEqualToString:tagEngine] ){
+        cell.imageView.image = [UIImage imageNamed:@"gracenotetag_48x48"];
+    }else if( [@"alphonso" isEqualToString:tagEngine] ){
+        cell.imageView.image = [UIImage imageNamed:@"alphonsotag_48x48"];
+    }
     
     cell.backgroundColor = [UIColor clearColor];
     cell.contentView.backgroundColor = [UIColor clearColor];

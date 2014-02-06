@@ -20,9 +20,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.cardContainerView.buttonAction = MTCardActionVoting;
+	self.cardContainerView.buttonState = kMTButtonStateVoting;
     self.cardContainerView.delegate = self;
-    self.cardContainerView.cards = self.cards;
 }
 
 -(void) setCards:(NSArray*) cards;
@@ -34,7 +33,9 @@
 -(void) setIsJudge:(BOOL)isJudge;
 {
 	_isJudge = isJudge;
-	self.cardContainerView.isJudge = isJudge;
+	if( _isJudge ){
+        self.cardContainerView.buttonState = kMTButtonStateWaitingForVotes;
+    }
 }
 
 

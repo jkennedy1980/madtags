@@ -36,9 +36,7 @@
         self.layer.shadowOffset = CGSizeZero;
         self.layer.shadowOpacity = 0.3;
         self.layer.shadowRadius = 5.0;
-        
-        self.buttonVisible = YES;
-        
+                
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, 100.0 )];
         self.textLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         self.textLabel.numberOfLines = 999;
@@ -92,7 +90,7 @@
 
 -(UIColor*) highlightColor;
 {
-    if( self.isJudge ){
+    if( self.buttonState == kMTButtonStateJudging || self.buttonState == kMTButtonStateWaitingForJudging ){
         return kBlue;
     }else{
         return kGreen;
@@ -127,15 +125,25 @@
     CGSize size = [self.textLabel sizeThatFits:CGSizeMake( self.bounds.size.width - kPadding*2, 100.0 )];
     self.textLabel.frame = CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, size.height );
     
-    if( !self.buttonVisible ){
-        self.selectButton.alpha = 0.0;
-    }else{
-        self.selectButton.alpha = 1.0;
-    }
     
-    if( self.isJudge ){
+    if( self.buttonState == kMTButtonStateVoting ){
+        
+        [self.selectButton setTitle:@":30" forState:UIControlStateNormal];
+
+    }else if( self.buttonState == kMTButtonStateJudging ){
+        
         [self.selectButton setTitle:@"Fav" forState:UIControlStateNormal];
+        
+    }else if( self.buttonState == kMTButtonStateWaitingForJudging ){
+        
+        [self.selectButton setTitle:@"Wait" forState:UIControlStateNormal];
+
+    }else if( self.buttonState == kMTButtonStateWaitingForVotes ){
+        
+        [self.selectButton setTitle:@"Wait" forState:UIControlStateNormal];
+        
     }
+ 
     
     self.selectedMarker.backgroundColor = [self highlightColor];
 
@@ -150,14 +158,22 @@
         [self.selectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.selectedMarker.alpha = 0.0;
     }
+    
+    NSLog( @"Button: %d", self.buttonState );
 }
 
 -(void) playClockDidTick:(NSNotification*) notification;
 {
-    if( self.buttonVisible && !self.isJudge ){
+    if( self.buttonState == kMTButtonStateVoting ){
         NSNumber *clockTime = [notification.userInfo objectForKey:MTPlayTimerTickTimeKey];
         [self.selectButton setTitle:[NSString stringWithFormat:@":%@", clockTime] forState:UIControlStateNormal];
     }
+}
+
+-(void) setButtonState:(MTButtonState)buttonState;
+{
+    _buttonState = buttonState;
+    [self setupButton];
 }
 
 -(void) setSelected:(BOOL)selected;
@@ -170,18 +186,6 @@
 -(void) setCard:(MTCard *)card;
 {
     _card = card;
-    [self setupButton];
-}
-
--(void) setIsJudge:(BOOL)isJudge;
-{
-    _isJudge = isJudge;
-    [self setupButton];
-}
-
--(void) setButtonVisible:(BOOL)buttonVisible;
-{
-    _buttonVisible = buttonVisible;
     [self setupButton];
 }
 

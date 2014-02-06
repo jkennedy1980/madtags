@@ -67,7 +67,7 @@
         view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         view.card = card;
         view.delegate = self;
-        view.isJudge = self.isJudge;
+        view.buttonState = self.buttonState;
         [self addSubview:view];
     }
     
@@ -88,6 +88,7 @@
 -(void) didDeselectCardView:(MTCardView*) cardView;
 {
     cardView.selected = NO;
+    self.selectedCard = nil;
     
     for( MTCardView *card in self.subviews ){
         if( cardView != card ){
@@ -95,9 +96,6 @@
         }
     }
     
-    MTCardView *selectedCardView = [self.subviews objectAtIndex:0];
-    self.selectedCard = selectedCardView.card;
-    selectedCardView.selected = YES;
     [self.delegate didSelectCard:self.selectedCard];
 }
 
@@ -128,18 +126,6 @@
 
 -(void) updateCardLayout;
 {
-    for( MTCardView *cardView in self.subviews ){
-		if( self.buttonAction == MTCardActionJudging && self.isJudge ){
-			cardView.buttonVisible = YES;
-			cardView.isJudge = YES;
-		}else if( self.buttonAction == MTCardActionVoting && self.isJudge == NO ){
-			cardView.buttonVisible = YES;
-			cardView.isJudge = NO;
-		}else{
-			cardView.buttonVisible = NO;
-		}
-	}
-	
     if( self.displayedCard ){
         [self updateCardLayoutForSelectedCard];
         return;
@@ -154,18 +140,12 @@
     }
 }
 
--(void) setIsJudge:(BOOL)isJudge;
+-(void) setButtonState:(MTButtonState)buttonState;
 {
-    _isJudge = isJudge;
-	[self updateCardLayout];
+    _buttonState = buttonState;
     for( MTCardView *cardView in self.subviews ){
-        cardView.isJudge = self.isJudge;
-    }
-}
-
--(void) setButtonAction:(MTCardActionType)buttonAction;
-{
-	_buttonAction = buttonAction;
+        cardView.buttonState = self.buttonState;
+	}
 	[self updateCardLayout];
 }
 

@@ -163,7 +163,11 @@
 -(void) sendPlayerEndOfPlayMessage;
 {
     MTCard *selectedCard = self.playerChooseCardController.selectedCard;
-    [self.wrapper sendPlayerEndOfPlayMessage:@"1234" selectedCardString:selectedCard.sentence];
+    if( !selectedCard && self.playerChooseCardController.cards.count > 0 ){
+        // Player didn't pick, choose first card
+        selectedCard = [self.playerChooseCardController.cards objectAtIndex:0];
+    }
+    if( selectedCard ) [self.wrapper sendPlayerEndOfPlayMessage:@"1234" selectedCardString:selectedCard.sentence];
 }
 
 -(void) sendJudgeEndOfPlayMessage;
@@ -252,10 +256,11 @@
 			[cards addObject:card];
 		}
 		
+        self.playerChooseCardController.isJudge = self.isJudge;
 		self.playerChooseCardController.cards = cards;
-		self.playerChooseCardController.isJudge = self.isJudge;
 
         [self startPlayTimer];
+        
 		[self transitionToContainerView:self.playerChooseCardContainer];
         
     }else if( [@"Judging" isEqualToString:gamePhase] ){

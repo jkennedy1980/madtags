@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MTCard.h"
-
+#import "MTCardViewContainer.h"
 
 @class MTCardView;
 
@@ -26,7 +26,6 @@
 @property (nonatomic,strong) MTCard *card;
 @property (nonatomic,assign) BOOL selected;
 @property (nonatomic,weak) id<MTCardViewDelegate> delegate;
-@property (nonatomic,assign) BOOL isJudge;
-@property (nonatomic,assign) BOOL buttonVisible;
+@property (nonatomic,assign) MTButtonState buttonState;
 
 @end
