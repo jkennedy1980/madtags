@@ -10,4 +10,13 @@
 
 @implementation MTCard
 
+- (id)initWithSentence:(NSString*)sentence words:(NSArray*)words;
+{
+    self = [super init];
+    if (self) {
+        self.sentence = sentence;
+		self.words = words;
+    }
+    return self;
+}
 @end

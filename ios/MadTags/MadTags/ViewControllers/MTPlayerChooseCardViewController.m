@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	self.cardContainerView.buttonAction = MTCardActionVoting;
     self.cardContainerView.delegate = self;
     self.cardContainerView.cards = self.cards;
 }
@@ -30,6 +31,11 @@
     self.cardContainerView.cards = cards;
 }
 
+-(void) setIsJudge:(BOOL)isJudge;
+{
+	_isJudge = isJudge;
+	self.cardContainerView.isJudge = isJudge;
+}
 
 #pragma mark - MTCardViewContainerDelegate
 

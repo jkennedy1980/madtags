@@ -106,6 +106,18 @@
 
 -(void) updateCardLayout;
 {
+    for( MTCardView *cardView in self.subviews ){
+		if( self.buttonAction == MTCardActionJudging && self.isJudge ){
+			cardView.buttonVisible = YES;
+			cardView.isJudge = YES;
+		}else if( self.buttonAction == MTCardActionVoting && self.isJudge == NO ){
+			cardView.buttonVisible = YES;
+			cardView.isJudge = NO;
+		}else{
+			cardView.buttonVisible = NO;
+		}
+	}
+	
     if( self.displayedCard ){
         [self updateCardLayoutForSelectedCard];
         return;
@@ -115,8 +127,6 @@
     CGFloat visibleCardHeight = self.bounds.size.height / self.cards.count;
     
     for( MTCardView *cardView in self.subviews ){
-        cardView.buttonVisible = self.buttonVisible;
-        cardView.isJudge = self.isJudge;
         cardView.frame = CGRectMake( 0, yOffset, cardView.bounds.size.width, cardView.bounds.size.height );
         yOffset += visibleCardHeight;
     }
@@ -125,17 +135,16 @@
 -(void) setIsJudge:(BOOL)isJudge;
 {
     _isJudge = isJudge;
+	[self updateCardLayout];
     for( MTCardView *cardView in self.subviews ){
         cardView.isJudge = self.isJudge;
     }
 }
 
--(void) setButtonVisible:(BOOL)buttonVisible;
+-(void) setButtonAction:(MTCardActionType)buttonAction;
 {
-    _buttonVisible = buttonVisible;
-    for( MTCardView *cardView in self.subviews ){
-        cardView.buttonVisible = self.buttonVisible;
-    }
+	_buttonAction = buttonAction;
+	[self updateCardLayout];
 }
 
 -(void) updateCardLayoutForSelectedCard;

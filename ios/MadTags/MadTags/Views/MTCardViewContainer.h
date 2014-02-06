@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MTCard.h"
 
+typedef enum {
+	MTCardActionVoting,
+	MTCardActionJudging
+} MTCardActionType;
+
 @protocol MTCardViewContainerDelegate <NSObject>
 
 -(void) didSelectCard:(MTCard*) card;
@@ -21,7 +26,7 @@
 
 @property (nonatomic,strong) NSArray *cards;
 @property (nonatomic,assign) BOOL isJudge;
-@property (nonatomic,assign) BOOL buttonVisible;
+@property (nonatomic,assign) MTCardActionType buttonAction;
 @property (nonatomic,strong) MTCard *displayedCard;
 @property (nonatomic,strong) MTCard *selectedCard;
 

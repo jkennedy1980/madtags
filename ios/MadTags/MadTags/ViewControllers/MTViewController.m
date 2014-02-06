@@ -27,6 +27,7 @@
 @property (weak, nonatomic) MTPlayerChooseCardViewController *playerChooseCardController;
 @property (weak, nonatomic) MTJudgeViewController *judgeGameController;
 
+@property (assign, nonatomic) BOOL isJudge;
 
 #define kPlayTimerLength 30
 @property (strong, nonatomic) NSTimer *playTimer;
@@ -179,10 +180,25 @@
 {
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
         NSString *role = [data objectForKey:@"role"];
-        self.waitingForPlayersController.canStartGame = [@"JUDGE" isEqualToString:role];
+		self.isJudge = [@"JUDGE" isEqualToString:role];
+        self.waitingForPlayersController.canStartGame = self.isJudge;
 		self.waitingForPlayersController.wrapper = self.wrapper;
         [self transitionToContainerView:self.waitingForPlayersContainer];
-    }else{
+	}else if ([@"Playing" isEqualToString:gamePhase] ){
+		NSArray *sentences = [data objectForKey:@"sentences"];
+		NSString *tag = [data objectForKey:@"tag"];
+		
+		NSMutableArray *cards = [NSMutableArray array];
+		for ( NSString *sentence in sentences ){
+			MTCard *card = [[MTCard alloc] initWithSentence:sentence words:@[tag]];
+			[cards addObject:card];
+		}
+		
+		self.playerChooseCardController.cards = cards;
+		self.playerChooseCardController.isJudge = self.isJudge;
+
+		[self transitionToContainerView:self.playerChooseCardContainer];
+	}else{
         NSLog( @"Unknown game phase: %@", gamePhase );
     }
 }

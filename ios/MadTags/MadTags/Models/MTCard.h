@@ -13,4 +13,6 @@
 @property (nonatomic,strong) NSString *sentence;
 @property (nonatomic,strong) NSArray *words;
 
+- (id)initWithSentence:(NSString*)sentence words:(NSArray*)words;
+
 @end
