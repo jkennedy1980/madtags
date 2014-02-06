@@ -197,14 +197,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-39-TkO">
-                                <rect key="frame" x="79" y="287" width="162" height="44"/>
+                                <rect key="frame" x="110" y="301" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.054901964960000001" green="0.35686275360000003" blue="0.82352948189999997" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="162" id="DKd-gP-EbE"/>
-                                    <constraint firstAttribute="height" constant="44" id="lSh-Pj-Vpm"/>
+                                    <constraint firstAttribute="width" constant="100" id="2jw-vs-hXH"/>
+                                    <constraint firstAttribute="height" constant="100" id="69T-rE-q07"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                <state key="normal" title="JOIN GAME">
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="Join">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -212,16 +214,17 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmN-cw-0aw">
-                                <rect key="frame" x="20" y="224" width="280" height="47"/>
+                                <rect key="frame" x="55" y="228" width="210" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-OG-Oqy">
-                                        <rect key="frame" x="8" y="5" width="264" height="38"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Player Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YbO-OG-Oqy">
+                                        <rect key="frame" x="7" y="5" width="196" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="A3Q-vn-Z1f"/>
-                                            <constraint firstAttribute="width" constant="264" id="GNX-G1-51O"/>
+                                            <constraint firstAttribute="height" constant="38" id="06t-jM-oFa"/>
+                                            <constraint firstAttribute="width" constant="196" id="j73-7z-bqG"/>
                                         </constraints>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="join"/>
                                         <connections>
@@ -229,32 +232,36 @@
                                         </connections>
                                     </textField>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="ByJ-QN-4PS"/>
-                                    <constraint firstAttribute="width" constant="280" id="oSL-iM-gQr"/>
-                                    <constraint firstItem="YbO-OG-Oqy" firstAttribute="top" secondItem="mmN-cw-0aw" secondAttribute="top" constant="5" id="pyR-Ee-ADv"/>
+                                    <constraint firstItem="YbO-OG-Oqy" firstAttribute="top" secondItem="mmN-cw-0aw" secondAttribute="top" constant="5" id="4Qh-VK-8CM"/>
+                                    <constraint firstItem="YbO-OG-Oqy" firstAttribute="leading" secondItem="mmN-cw-0aw" secondAttribute="leading" constant="7" id="4zN-8i-JJG"/>
+                                    <constraint firstAttribute="trailing" secondItem="YbO-OG-Oqy" secondAttribute="trailing" constant="7" id="7fi-m8-tTo"/>
+                                    <constraint firstAttribute="height" constant="47" id="GTS-Wi-Jab"/>
+                                    <constraint firstAttribute="width" constant="210" id="bUZ-Vb-Bev"/>
+                                    <constraint firstAttribute="bottom" secondItem="YbO-OG-Oqy" secondAttribute="bottom" constant="4" id="oav-md-KDQ"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logomadtags_222x186.png" translatesAutoresizingMaskIntoConstraints="NO" id="5kN-rj-Bv8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="logomadtags_222x186.png" translatesAutoresizingMaskIntoConstraints="NO" id="5kN-rj-Bv8">
                                 <rect key="frame" x="50" y="57" width="221" height="118"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mmN-cw-0aw" firstAttribute="leading" secondItem="9xl-jh-dHp" secondAttribute="leading" constant="20" id="6VW-ZZ-CWA"/>
-                            <constraint firstItem="mmN-cw-0aw" firstAttribute="top" secondItem="7hB-Mj-mjF" secondAttribute="bottom" constant="224" id="990-bd-D7c"/>
-                            <constraint firstItem="1A8-39-TkO" firstAttribute="leading" secondItem="9xl-jh-dHp" secondAttribute="leading" constant="79" id="DrW-QX-DvA"/>
-                            <constraint firstAttribute="trailing" secondItem="1A8-39-TkO" secondAttribute="trailing" constant="79" id="Fm8-IR-Fsz"/>
-                            <constraint firstAttribute="trailing" secondItem="mmN-cw-0aw" secondAttribute="trailing" constant="20" id="dP8-CS-fAT"/>
-                            <constraint firstItem="1A8-39-TkO" firstAttribute="top" secondItem="mmN-cw-0aw" secondAttribute="bottom" constant="16" id="eSQ-qz-Nzr"/>
+                            <constraint firstAttribute="trailing" secondItem="1A8-39-TkO" secondAttribute="trailing" constant="110" id="1L5-Hw-GbY"/>
+                            <constraint firstItem="9Ye-RV-Ugp" firstAttribute="top" secondItem="1A8-39-TkO" secondAttribute="bottom" constant="103" id="5Ge-1q-svR"/>
+                            <constraint firstItem="mmN-cw-0aw" firstAttribute="top" secondItem="5kN-rj-Bv8" secondAttribute="bottom" constant="53" id="6Jz-sI-Dde"/>
+                            <constraint firstAttribute="trailing" secondItem="mmN-cw-0aw" secondAttribute="trailing" constant="55" id="GRC-tj-CN6"/>
+                            <constraint firstItem="1A8-39-TkO" firstAttribute="leading" secondItem="9xl-jh-dHp" secondAttribute="leading" constant="110" id="a42-qA-gXb"/>
+                            <constraint firstItem="mmN-cw-0aw" firstAttribute="leading" secondItem="9xl-jh-dHp" secondAttribute="leading" constant="55" id="dyR-tT-7jQ"/>
+                            <constraint firstItem="1A8-39-TkO" firstAttribute="top" secondItem="mmN-cw-0aw" secondAttribute="bottom" constant="26" id="qiW-QG-xPv"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
                         <outlet property="joinButton" destination="1A8-39-TkO" id="K6p-q8-xIO"/>
                         <outlet property="userNameTextField" destination="YbO-OG-Oqy" id="hHj-aE-mlq"/>
+                        <outlet property="userNameTextFieldContainer" destination="mmN-cw-0aw" id="JoV-ou-Kss"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KRQ-f5-tef" userLabel="First Responder" sceneMemberID="firstResponder"/>
