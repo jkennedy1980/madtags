@@ -78,34 +78,37 @@
     self.judgeGameContainer.alpha = 0.0;
     
     
-    MTCard *card1 = [[MTCard alloc] init];
-    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
-    card1.words = @[@"Toyota"];
-    
-    MTCard *card2 = [[MTCard alloc] init];
-    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
-    card2.words = @[@"Toyota"];
+//    MTCard *card1 = [[MTCard alloc] init];
+//    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+//    card1.words = @[@"Toyota"];
+//    
+//    MTCard *card2 = [[MTCard alloc] init];
+//    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
+//    card2.words = @[@"Toyota"];
+//
+//    MTCard *card3 = [[MTCard alloc] init];
+//    card3.sentence = @"This is a card 3";
+//    
+//    MTCard *card4 = [[MTCard alloc] init];
+//    card4.sentence = @"This is a card 4";
+//    
+//    MTCard *card5 = [[MTCard alloc] init];
+//    card5.sentence = @"This is a card 5";
+//    
+//    NSMutableArray *cards = [NSMutableArray array];
+//    [cards addObject:card1];
+//    [cards addObject:card2];
+//    [cards addObject:card3];
+//    [cards addObject:card4];
+//    [cards addObject:card5];
 
-    MTCard *card3 = [[MTCard alloc] init];
-    card3.sentence = @"This is a card 3";
+//    self.judgeGameController.isJudge = NO;
+//    self.judgeGameController.cards = cards;
+//    [self transitionToContainerView:self.judgeGameContainer];
     
-    MTCard *card4 = [[MTCard alloc] init];
-    card4.sentence = @"This is a card 4";
-    
-    MTCard *card5 = [[MTCard alloc] init];
-    card5.sentence = @"This is a card 5";
-    
-    NSMutableArray *cards = [NSMutableArray array];
-    [cards addObject:card1];
-    [cards addObject:card2];
-    [cards addObject:card3];
-    [cards addObject:card4];
-    [cards addObject:card5];
-
-    self.judgeGameController.isJudge = NO;
-    self.judgeGameController.cards = cards;
-    
-    [self transitionToContainerView:self.judgeGameContainer];
+//    self.playerChooseCardController.isJudge = YES;
+//    self.playerChooseCardController.cards = cards;
+//    [self transitionToContainerView:self.playerChooseCardContainer];
 //
 //    [self startPlayTimer];
 }
