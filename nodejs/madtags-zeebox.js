@@ -37,6 +37,9 @@
 
 			if( !body ) return callback( false, false );
 
+			if( body.indexOf('{') < 0 && body.indexOf('[') < 0 ) return callback( false, false );
+
+			console.log( "BRAND DATA: ", body );
 			var parsedBody = JSON.parse( body );
 			if( !parsedBody.length ) return callback( false, false );
 
@@ -54,6 +57,8 @@
 		request( req, function( error, response, body ){
 			if( error ) return callback( error, false );
 			if( !body ) return callback( false, false );
+
+			if( body.indexOf('{') < 0 && body.indexOf('[') < 0 ) return callback( false, false );
 
 			var parsedBody = JSON.parse( body );
 			console.log( "LAST ON: ", parsedBody );
@@ -73,6 +78,8 @@
 		request( req, function( error, response, body ){
 			if( error ) return callback( error, false );
 			if( !body ) return callback( false, false );
+
+			if( body.indexOf('{') < 0 && body.indexOf('[') < 0 ) return callback( false, false );
 
 			var parsedBody = JSON.parse( body );
 			if( !parsedBody.zeetags ) return callback( false, false );

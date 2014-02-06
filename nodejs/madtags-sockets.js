@@ -26,7 +26,7 @@
 				console.log( "GETTING TAG: ", data );
 				tags.addTag( data.tag );
 
-				zeeBox.fetchZeeData( tag, function( error, words ){
+				zeeBox.fetchZeeData( data.tag, function( error, words ){
 					console.log( "GOT ZEE TAGS: ", error, words );
 					if( !error && words && words.length ){
 						for( var i = 0; i < words.length; i++ ){
