@@ -50,8 +50,12 @@
 
 -(void) discoveredTag:(NSDictionary*) tag;
 {
-    [self.discoveredTags addObject:tag];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    
+    [self.discoveredTags insertObject:tag atIndex:0];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView endUpdates];
 }
 
 
