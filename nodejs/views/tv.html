@@ -11,7 +11,7 @@
 					<!-- <div class="card-content tv-tag-logo-al"> -->
 					<div class="card-content">
 						<p>
-							<span class="header">Now Playing:</span>
+							<span class="header">Now Playing!</span>
 							<br/>
 							<span class="title">Helmann's Real Mayonnaise</span>
 						</p>
@@ -63,7 +63,7 @@
 			// message = { phase: 'Playing', data: {tag: 'tag'}}
 			if (message['phase'] == 'Playing') {
 				// show card
-				showNewCard(message['data']['tag'], 'Now Playing:');
+				showNewCard(message['data']['tag'], 'Now Playing!', false);
 			} else if (message['phase'] == 'waitingForPlayers') {
 				console.log('message:', message);
 			}
@@ -88,14 +88,22 @@
 			// data = {card: 'sentence', tag: 'tag'}
 			console.log('final: socket message:', data);
 			var tag = data['tag'];
-			var sentence = data['card'].replace('<<WORD>>', '<span class="highlight">' + tag + '</span>');
-			showNewCard(sentence, 'Winning MadTag!');
+			var sentenceLength = data['card'].replace('<<WORD>>', tag).length;
+			var sentence = '';
+			if (sentenceLength > 45) {
+				sentence += '<span class="sentence-long">';
+			} else {
+				sentence += '<span class="sentence-short">';
+			}
+			sentence += data['card'].replace('<<WORD>>', '<span class="highlight">' + tag + '</span>');
+			sentence += '</span>';
+			showNewCard(sentence, 'Winning MadTag!', true);
 		});
 
 		// frontend UI shitz
 
 		var tagDelay = 10000;
-		var cardDelay = 30000;
+		var cardDelay = 5000;
 
 		// tv video (looping and shitz)
 		videoCount = 0;
@@ -185,9 +193,9 @@
 		var cardMonitor;
 		var cardState = 0; // 0 - minimized, 1 - maximized
 
-		function showNewCard(sentence, header, type) {
+		function showNewCard(sentence, header, autoClose, type) {
 			if (!header) {
-				header = 'Now Playing:';
+				header = 'Now Playing!';
 			}
 
 			// disabling type for now
@@ -200,7 +208,7 @@
 				setTimeout(function() {
 					$('.tv .card-content .header').hide().html(header);
 					$('.tv .card-content .title').hide().html(sentence);
-					maximizeCard(function() {
+					maximizeCard(autoClose, function() {
 						$('.tv .card-content .header').delay(200).fadeIn(250);
 						$('.tv .card-content .title').delay(200).fadeIn(250);
 					});
@@ -208,19 +216,21 @@
 			} else {
 				$('.tv .card-content .header').hide().html(header);
 				$('.tv .card-content .title').hide().html(sentence);
-				maximizeCard(function() {
+				maximizeCard(autoClose, function() {
 					$('.tv .card-content .header').delay(200).fadeIn(250);
 					$('.tv .card-content .title').delay(200).fadeIn(250)
 				});
 			}
 		}
 
-		function maximizeCard(callback) {
+		function maximizeCard(autoClose, callback) {
 			$('.tv .card-minimized').removeClass('card-minimized').addClass('card-maximized');
 			$('.tv .card-content').show();
 			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
-			clearInterval(cardMonitor);
-			cardMonitor = setInterval(minimizeCard, tagDelay);
+			if (autoClose) {
+				clearInterval(cardMonitor);
+				cardMonitor = setInterval(minimizeCard, cardDelay);
+			}
 			cardState = 1;
 			callback();
 		}
@@ -230,10 +240,11 @@
 			$('.tv .card-content').hide();
 			$('.tv .card-bottom-logo-maximized').removeClass('card-bottom-logo-maximized').addClass('card-bottom-logo-minimized');
 			cardState = 0;
+			clearInterval(cardMonitor);
 		}
 
-		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
-		cardMonitor = setInterval(minimizeCard, tagDelay);
+		// monitor tag removal, make sure tags don't stay on screen for longer than X seconds
+		//cardMonitor = setInterval(minimizeCard, cardDelay);
 	</script>
 </div>
 <% include footer.html %>
