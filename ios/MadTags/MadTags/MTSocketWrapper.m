@@ -32,7 +32,7 @@
 -(void) connect;
 {
     if( !self.socket.isConnected ){
-        [self.socket connectToHost:@"localhost" onPort:80];
+        [self.socket connectToHost:@"192.168.1.4" onPort:80];
     }
 }
 
@@ -70,7 +70,12 @@
 -(void) sendToGameCode:(NSString*) gameCode tag:(NSDictionary*)tagDict;
 {
 	NSString *word = [tagDict objectForKey:MTTaggerWordKey];
-    [self.socket sendEvent:@"tag" withData:@{ @"gameCode": gameCode, @"tagWord": word }];
+    [self.socket sendEvent:@"tag" withData:@{ @"gameCode": gameCode, @"tag": word }];
+}
+
+-(void) sendJudgementSentence:(NSString*) sentence;
+{
+    [self.socket sendEvent:@"judgement" withData:@{ @"sentence": sentence }];
 }
 
 
@@ -92,7 +97,6 @@
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
 	NSLog( @"Did Disconnect");
-    [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.0];
     [self.delegate didDisconnect];
 }
 

@@ -15,7 +15,7 @@
 #import "MTUserJoinViewController.h"
 #import "MTTaggers.h"
 
-@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate,MTTaggerDelegate>
+@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate,MTTaggerDelegate,MTJudgeViewControllerDelegate>
 
 @property (nonatomic,strong) MTSocketWrapper *wrapper;
 
@@ -68,6 +68,7 @@
             self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
         }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
             self.judgeGameController = (MTJudgeViewController*)childController;
+            self.judgeGameController.delegate = self;
         }
     }
 	
@@ -100,11 +101,15 @@
 //    [cards addObject:card3];
 //    [cards addObject:card4];
 //    [cards addObject:card5];
-//
+
+//    self.judgeGameController.isJudge = NO;
+//    self.judgeGameController.cards = cards;
+//    [self transitionToContainerView:self.judgeGameContainer];
+    
+//    self.playerChooseCardController.isJudge = YES;
 //    self.playerChooseCardController.cards = cards;
-//    
 //    [self transitionToContainerView:self.playerChooseCardContainer];
-//    
+//
 //    [self startPlayTimer];
 }
 
@@ -205,6 +210,11 @@
 {
     [self.startNewGameButton setTitle:username forState:UIControlStateNormal];
     [self.wrapper joinGameWithCode:@"1234" username:username];
+}
+
+-(void) didChooseFavCard:(MTCard*) card;
+{
+    [self.wrapper sendJudgementSentence:card.sentence];
 }
 
 #pragma mark - Wrapper Delegate
