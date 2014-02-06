@@ -29,7 +29,7 @@
 
 @property (assign, nonatomic) BOOL isJudge;
 
-#define kPlayTimerLength 30
+#define kPlayTimerLength 10
 @property (strong, nonatomic) NSTimer *playTimer;
 @property (assign, nonatomic) NSInteger playClock;
 
@@ -68,34 +68,34 @@
     self.judgeGameContainer.alpha = 0.0;
     
     
-//    MTCard *card1 = [[MTCard alloc] init];
-//    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
-//    card1.words = @[@"Toyota"];
-//    
-//    MTCard *card2 = [[MTCard alloc] init];
-//    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
-//    card2.words = @[@"Toyota"];
-//
-//    MTCard *card3 = [[MTCard alloc] init];
-//    card3.sentence = @"This is a card 3";
-//    
-//    MTCard *card4 = [[MTCard alloc] init];
-//    card4.sentence = @"This is a card 4";
-//    
-//    MTCard *card5 = [[MTCard alloc] init];
-//    card5.sentence = @"This is a card 5";
-//    
-//    NSMutableArray *cards = [NSMutableArray array];
-//    [cards addObject:card1];
-//    [cards addObject:card2];
-//    [cards addObject:card3];
-//    [cards addObject:card4];
-//    [cards addObject:card5];
-//
-//    self.playerChooseCardController.cards = cards;
-//    
-//    [self transitionToContainerView:self.playerChooseCardContainer];
-//    
+    MTCard *card1 = [[MTCard alloc] init];
+    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+    card1.words = @[@"Toyota"];
+    
+    MTCard *card2 = [[MTCard alloc] init];
+    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
+    card2.words = @[@"Toyota"];
+
+    MTCard *card3 = [[MTCard alloc] init];
+    card3.sentence = @"This is a card 3";
+    
+    MTCard *card4 = [[MTCard alloc] init];
+    card4.sentence = @"This is a card 4";
+    
+    MTCard *card5 = [[MTCard alloc] init];
+    card5.sentence = @"This is a card 5";
+    
+    NSMutableArray *cards = [NSMutableArray array];
+    [cards addObject:card1];
+    [cards addObject:card2];
+    [cards addObject:card3];
+    [cards addObject:card4];
+    [cards addObject:card5];
+
+    self.playerChooseCardController.cards = cards;
+    
+    [self transitionToContainerView:self.playerChooseCardContainer];
+    
 //    [self startPlayTimer];
 }
 
@@ -231,6 +231,21 @@
         [self startPlayTimer];
 		[self transitionToContainerView:self.playerChooseCardContainer];
         
+    }else if( [@"Judging" isEqualToString:gamePhase] ){
+        
+        NSArray *sentences = [data objectForKey:@"sentences"];
+		NSString *tag = [data objectForKey:@"tag"];
+		
+		NSMutableArray *cards = [NSMutableArray array];
+		for ( NSString *sentence in sentences ){
+			MTCard *card = [[MTCard alloc] initWithSentence:sentence words:@[tag]];
+			[cards addObject:card];
+		}
+		
+		self.judgeGameController.cards = cards;
+		self.judgeGameController.isJudge = self.isJudge;
+        [self transitionToContainerView:self.judgeGameContainer];
+
     }else if( [@"error" isEqualToString:gamePhase] ){
         
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:[data objectForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
