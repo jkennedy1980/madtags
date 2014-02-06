@@ -132,14 +132,14 @@
 		
     } else if( [@"tag" isEqualToString:eventName] ){
 		
-        NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
-        
-        NSDictionary *data = [args objectForKey:@"data"];
-		NSString *tagWord = [data objectForKey:@"tag"];
-		NSString *source = [data objectForKey:@"source"];
-		NSDictionary *tagDict = @{MTTaggerWordKey : tagWord, MTTaggerSourceNameKey : source};
-        
-        [self.delegate clientsDidDiscoverTag:tagDict];
+//        NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
+//        
+//        NSDictionary *data = [args objectForKey:@"data"];
+//		NSString *tagWord = [data objectForKey:@"tag"];
+//		NSString *source = [data objectForKey:@"source"];
+//		NSDictionary *tagDict = @{MTTaggerWordKey : tagWord, MTTaggerSourceNameKey : source};
+//        
+//        [self.delegate clientsDidDiscoverTag:tagDict];
 		
 	}
 	
