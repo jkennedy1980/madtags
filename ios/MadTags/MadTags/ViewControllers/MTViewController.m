@@ -119,7 +119,7 @@
 //    self.playerChooseCardController.cards = cards;
 //    [self transitionToContainerView:self.playerChooseCardContainer];
 
-//    
+    
 //    MTCard *card1 = [[MTCard alloc] init];
 //    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
 //    card1.words = @[@"Toyota"];
