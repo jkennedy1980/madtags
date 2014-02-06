@@ -77,10 +77,15 @@
 
 		// on every new tag discovery
 		socket.on( 'tag', function( data ) {
-			// data = {tag: 'tag'}
-			// when found new tag - we still need {source: 'alphonso'}
+			// data = {tag: 'tag', 'source': 'Zeebox'} // or Gracenote or 
+			// when found new tag
 			console.log('tag: socket message:', data);
-			showNewTag(data['tag']);
+			var source = data['source'].toLowerCase();
+			var legitSources = ['zeebox', 'gracenote', 'alphonso'];
+			if (legitSources.indexOf(source) == -1) {
+				source = 'gracenote';
+			}
+			showNewTag(data['tag'], source);
 		});
 
 		// after judging
