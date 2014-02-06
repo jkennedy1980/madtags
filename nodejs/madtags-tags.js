@@ -14,7 +14,8 @@
 	}
 
 	exports.addTag = function( tag ){
-		tags.push( tag );
+		tags.unshift( tag );
+		nextTagIndex = 0;
 	}
 
 })();
