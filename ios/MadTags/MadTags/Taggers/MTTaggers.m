@@ -17,18 +17,18 @@
 
 @implementation MTTaggers
 
-- (id)initWithSeed:(int)seed andTaggerClasses:(NSArray*)classes delegate:(id<MTTaggerDelegate>)delegate;
+- (id)initWithSeed:(NSUInteger)seed delegate:(id<MTTaggerDelegate>)delegate;
 {
     self = [super init];
     if (self) {
-		self.taggerClasses = classes;
+		self.taggerClasses = @[[MTGracenoteEntourage class]]; //, [MTAlphonso class]];
 		self.tagger = [self taggerForSeed:seed];
 		self.tagger.delegate = delegate;
     }
     return self;
 }
 
--(id<MTTagger>) taggerForSeed:(int)seed;
+-(id<MTTagger>) taggerForSeed:(NSUInteger)seed;
 {
 	NSUInteger numTaggers = [self.taggerClasses count];
 	NSUInteger index = seed % numTaggers;

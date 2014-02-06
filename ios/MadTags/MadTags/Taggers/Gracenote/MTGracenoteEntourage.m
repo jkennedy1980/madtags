@@ -154,7 +154,7 @@
             textToDisplay = match.title.display;
         }
         
-		NSDictionary *tagDict = @{MTTaggerWordKey : match.title.display, MTTaggerIsTVShowKey : @(YES)};
+		NSDictionary *tagDict = @{ MTTaggerWordKey : match.title.display, MTTaggerIsTVShowKey : @(YES), MTTaggerSourceNameKey : @"Gracenote" };
 		[self.delegate didTagContent:tagDict];
         NSLog( @"RESULT: %@, %@, %@", match.title.display, match, tagDict );
     }

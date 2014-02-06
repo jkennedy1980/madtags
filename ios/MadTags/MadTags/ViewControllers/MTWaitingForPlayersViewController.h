@@ -14,4 +14,6 @@
 @property (nonatomic,assign) BOOL canStartGame;
 @property (strong, nonatomic) MTSocketWrapper *wrapper;
 
+-(void) discoveredTag:(NSDictionary*) tag;
+
 @end

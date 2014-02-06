@@ -45,7 +45,7 @@
 - (IBAction)didClickJoinButton:(id)sender;
 {
     [self.userNameTextField resignFirstResponder];
-    [self.delegate didClickJoinWithGameCode:@"1234" username:@"Josh Kennedy"];
+    [self.delegate didClickJoinWithGameCode:@"1234" username:self.userNameTextField.text];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField;

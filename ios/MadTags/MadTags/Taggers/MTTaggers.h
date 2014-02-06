@@ -12,6 +12,7 @@
 #define MTTaggerIsProductKey	@"MTTaggerIsProductKey"
 #define MTTaggerIsTVShowKey		@"MTTaggerIsTVShowKey"
 #define MTTaggerTMSIdKey		@"MTTaggerTMSIdKey"
+#define MTTaggerSourceNameKey	@"MTTaggerSourceNameKey"
 
 @protocol MTTaggerDelegate <NSObject>
 
@@ -25,6 +26,6 @@
 
 @interface MTTaggers : NSObject
 
-- (id)initWithSeed:(int)seed andTaggerClasses:(NSArray*)classes delegate:(id<MTTaggerDelegate>)delegate;
+- (id)initWithSeed:(NSUInteger)seed delegate:(id<MTTaggerDelegate>)delegate;
 
 @end
