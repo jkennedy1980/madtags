@@ -63,7 +63,7 @@
 			if (message['phase'] == 'playing') {
 				// show card
 				showNewCard(data['tag'], 'Now Playing:');
-			} else (message['phase'] == 'waitingForPlayers') {
+			} else if (message['phase'] == 'waitingForPlayers') {
 				console.log('message:', message);
 			}
 		});
