@@ -118,12 +118,12 @@
 //    [self transitionToContainerView:self.playerChooseCardContainer];
 
     
-//    MTCard *card1 = [[MTCard alloc] init];
-//    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
-//    card1.words = @[@"Toyota"];
-//
-//    self.roundWinnerViewController.card = card1;
-//    [self transitionToContainerView:self.roundWinnerContainer];
+    MTCard *card1 = [[MTCard alloc] init];
+    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+    card1.words = @[@"Toyota"];
+
+    self.roundWinnerViewController.card = card1;
+    [self transitionToContainerView:self.roundWinnerContainer];
     
     
 //    [self startPlayTimer];

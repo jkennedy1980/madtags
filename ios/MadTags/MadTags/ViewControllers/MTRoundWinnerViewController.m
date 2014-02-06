@@ -7,14 +7,13 @@
 //
 
 #import "MTRoundWinnerViewController.h"
-#import "MTCardView.h"
 #import "MTSentenceUtils.h"
 
 #define kPadding 10.0
 #define kGreen [UIColor colorWithRed:0.318 green:0.509 blue:0.166 alpha:1.000]
 #define kBlue [UIColor colorWithRed:0.057 green:0.259 blue:0.782 alpha:1.000]
 
-@interface MTRoundWinnerViewController ()<MTCardViewDelegate>
+@interface MTRoundWinnerViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *sentenceLabel;
 @property (weak, nonatomic) IBOutlet UIButton *endButton;
@@ -69,12 +68,7 @@
     self.sentenceLabel.frame = CGRectMake( kPadding, kPadding, self.sentenceLabel.bounds.size.width - kPadding*2, size.height );
 }
 
--(void) didSelectCardView:(MTCardView*) cardView;
-{
-    [self.delegate didClickStart];
-}
-
--(void) didDeselectCardView:(MTCardView*) cardView;
+- (IBAction)didClickNext:(id)sender;
 {
     [self.delegate didClickStart];
 }

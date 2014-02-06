@@ -497,7 +497,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="didClickJoinButton:" destination="nCm-y7-59H" eventType="touchUpInside" id="Xui-Np-h1p"/>
+                                    <action selector="didClickNext:" destination="cH3-Nu-Yfi" eventType="touchUpInside" id="vn1-cF-Ypm"/>
                                 </connections>
                             </button>
                         </subviews>
