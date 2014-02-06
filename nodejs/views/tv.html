@@ -174,22 +174,27 @@
 			if (cardState == 1) {
 				minimizeCard();
 				setTimeout(function() {
-					$('.tv .card-content .title').text(sentence);
-					maximizeCard();
+					$('.tv .card-content .title').hide().text(sentence);
+					maximizeCard(function() {
+						$('.tv .card-content .title').delay(200).fadeIn(250)
+					});
 				}, 500);
 			} else {
-				$('.tv .card-content .title').text(sentence);
-				maximizeCard();
+				$('.tv .card-content .title').hide().text(sentence);
+				maximizeCard(function() {
+					$('.tv .card-content .title').delay(200).fadeIn(250)
+				});
 			}
 		}
 
-		function maximizeCard() {
+		function maximizeCard(callback) {
 			$('.tv .card-minimized').removeClass('card-minimized').addClass('card-maximized');
 			$('.tv .card-content').show();
 			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
 			clearInterval(cardMonitor);
 			cardMonitor = setInterval(minimizeCard, tagDelay);
 			cardState = 1;
+			callback();
 		}
 
 		function minimizeCard() {
