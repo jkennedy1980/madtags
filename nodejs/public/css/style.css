@@ -149,6 +149,10 @@ body {
 	font-family: 'Helvetica Neue';
 }
 
+.highlight {
+	color: #0061FE;
+}
+
 .tv .card-content .title {
 	color: #000;
 	line-height: 1.1em;

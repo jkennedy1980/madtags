@@ -320,6 +320,10 @@
 		self.roundWinnerViewController.card = card;
         [self transitionToContainerView:self.roundWinnerContainer];
         
+    }else if( [@"gameEnd" isEqualToString:gamePhase] ){
+    
+        [self transitionToContainerView:self.userJoinContainer];
+        
     }else if( [@"error" isEqualToString:gamePhase] ){
         
         [[[UIAlertView alloc] initWithTitle:@"Oops!" message:[data objectForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
