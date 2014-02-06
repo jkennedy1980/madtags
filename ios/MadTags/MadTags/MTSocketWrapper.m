@@ -32,7 +32,7 @@
 -(void) connect;
 {
     if( !self.socket.isConnected ){
-        [self.socket connectToHost:@"192.168.1.4" onPort:80];
+        [self.socket connectToHost:@"192.168.1.3" onPort:80];
     }
 }
 
