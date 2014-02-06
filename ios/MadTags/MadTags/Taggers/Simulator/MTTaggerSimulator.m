@@ -34,7 +34,10 @@
 
 -(void) giveUpATag;
 {
-	NSArray *tag = [self.tagDB objectAtIndex:self.nextTagIndex++];
+	self.nextTagIndex++;
+	self.nextTagIndex = self.nextTagIndex % self.tagDB.count;
+	
+	NSArray *tag = [self.tagDB objectAtIndex:self.nextTagIndex];
 	NSDictionary *tagDict = @{MTTaggerWordKey : [tag objectAtIndex:0], MTTaggerSourceNameKey : [tag objectAtIndex:1]};
 	[self.delegate didTagContent:tagDict];
 }
