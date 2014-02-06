@@ -198,7 +198,11 @@
 		self.playerChooseCardController.isJudge = self.isJudge;
 
 		[self transitionToContainerView:self.playerChooseCardContainer];
-	}else{
+    }else if( [@"error" isEqualToString:gamePhase] ){
+        
+        [[[UIAlertView alloc] initWithTitle:@"Oops!" message:[data objectForKey:@"message"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+	
+    }else{
         NSLog( @"Unknown game phase: %@", gamePhase );
     }
 }

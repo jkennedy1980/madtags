@@ -31,7 +31,7 @@
 -(void) connect;
 {
     if( !self.socket.isConnected ){
-        [self.socket connectToHost:@"localhost" onPort:80];
+        [self.socket connectToHost:@"192.168.1.4" onPort:80];
     }
 }
 
@@ -79,7 +79,7 @@
 	NSLog( @"didReceiveEvent");
 	NSDictionary *dict = [NSJSONSerialization JSONObjectWithData: [packet.data dataUsingEncoding:NSUTF8StringEncoding]
                                                          options: NSJSONReadingMutableContainers
-                                                           error: nil];
+                                                        error: nil];
     
     NSString *eventName = [dict objectForKey:@"name"];
     if( [@"gamePhase" isEqualToString:eventName] ){
