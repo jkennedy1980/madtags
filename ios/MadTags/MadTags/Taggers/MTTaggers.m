@@ -17,7 +17,7 @@
 
 @implementation MTTaggers
 
-- (id)initWithSeed:(int)seed delegate:(id<MTTaggerDelegate>)delegate;
+- (id)initWithSeed:(NSUInteger)seed delegate:(id<MTTaggerDelegate>)delegate;
 {
     self = [super init];
     if (self) {
@@ -28,7 +28,7 @@
     return self;
 }
 
--(id<MTTagger>) taggerForSeed:(int)seed;
+-(id<MTTagger>) taggerForSeed:(NSUInteger)seed;
 {
 	NSUInteger numTaggers = [self.taggerClasses count];
 	NSUInteger index = seed % numTaggers;

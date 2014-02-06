@@ -26,6 +26,6 @@
 
 @interface MTTaggers : NSObject
 
-- (id)initWithSeed:(int)seed delegate:(id<MTTaggerDelegate>)delegate;
+- (id)initWithSeed:(NSUInteger)seed delegate:(id<MTTaggerDelegate>)delegate;
 
 @end
