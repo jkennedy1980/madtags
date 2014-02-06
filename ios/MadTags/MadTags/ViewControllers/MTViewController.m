@@ -236,6 +236,11 @@
     [self.wrapper joinGameWithCode:@"1234" username:username];
 }
 
+-(void) didClickRestartGame;
+{
+    [self.wrapper restartGame:@"1234"];
+}
+
 -(void) didChooseFavCard:(MTCard*) card;
 {
     [self.wrapper sendJudgementSentence:card.sentence];

@@ -98,7 +98,9 @@
 	}
 
 	exports.restartGame = function( socket, gameCode ){
-		socketUtils.respondOnAllClientSockets( socket, 'gameEnd', {} );
+		if( socket ){
+			socketUtils.respondOnAllClientSockets( socket, 'gameEnd', {} );
+		}
 		game = new Game();
 	}
 

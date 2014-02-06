@@ -12,6 +12,8 @@
 
 -(void) didClickJoinWithGameCode:(NSString*) gameCode username:(NSString*) username;
 
+-(void) didClickRestartGame;
+
 @end
 
 

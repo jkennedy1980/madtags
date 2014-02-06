@@ -66,4 +66,8 @@
     return YES;
 }
 
+- (IBAction)didTouchMyTV:(id)sender {
+	[self.delegate didClickRestartGame];
+}
+
 @end
