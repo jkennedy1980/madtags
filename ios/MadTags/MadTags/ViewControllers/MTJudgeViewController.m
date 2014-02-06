@@ -7,8 +7,11 @@
 //
 
 #import "MTJudgeViewController.h"
+#import "MTCardViewContainer.h"
 
 @interface MTJudgeViewController ()
+
+@property (weak, nonatomic) IBOutlet MTCardViewContainer *cardViewContainer;
 
 @end
 
@@ -17,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.cardViewContainer.cards = self.cards;
 }
 
 @end

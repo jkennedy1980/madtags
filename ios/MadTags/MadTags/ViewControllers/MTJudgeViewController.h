@@ -10,4 +10,6 @@
 
 @interface MTJudgeViewController : UIViewController
 
+@property (nonatomic,strong) NSArray *cards;
+
 @end

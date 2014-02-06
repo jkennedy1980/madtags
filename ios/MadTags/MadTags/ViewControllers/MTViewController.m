@@ -10,6 +10,7 @@
 #import "MTSocketWrapper.h"
 #import "MTPlayerChooseCardViewController.h"
 #import "MTCard.h"
+#import "MTJudgeViewController.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate>
 
@@ -19,8 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIView *userJoinContainer;
 @property (weak, nonatomic) IBOutlet UIView *waitingForPlayersContainer;
 @property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
+@property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
 
 @property (weak, nonatomic) IBOutlet MTPlayerChooseCardViewController *playerChooseCardController;
+@property (weak, nonatomic) IBOutlet MTJudgeViewController *judgeViewController;
 
 
 #define kPlayTimerLength 30
@@ -49,6 +52,8 @@
     for( UIViewController *childController in self.childViewControllers ){
         if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
             self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
+        }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
+            self.judgeViewController = (MTJudgeViewController*)childController;
         }
     }
     
@@ -77,11 +82,10 @@
     [cards addObject:card4];
     [cards addObject:card5];
 
-    self.playerChooseCardController.cards = cards;
+    self.judgeViewController.cards = cards;
     
-    [self transitionToContainerView:self.playerChooseCardContainer];
+    [self transitionToContainerView:self.judgeGameContainer];
     
-    [self startPlayTimer];
 }
 
 - (void)dealloc

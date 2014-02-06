@@ -59,7 +59,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <connections>
-                                            <segue destination="HQC-0v-cIL" kind="embed" id="3Xz-tm-hFY"/>
+                                            <segue destination="HQC-0v-cIL" kind="embed" identifier="judgeGame" id="3Xz-tm-hFY"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -87,6 +87,7 @@
                     <navigationItem key="navigationItem" id="Edy-KQ-kIJ"/>
                     <connections>
                         <outlet property="containerViewContainer" destination="f24-Jg-SCj" id="EFe-2k-gaW"/>
+                        <outlet property="judgeGameContainer" destination="hby-wl-ru5" id="pVE-E3-VRO"/>
                         <outlet property="playerChooseCardContainer" destination="794-cO-57i" id="E6L-bT-rZP"/>
                         <outlet property="userJoinContainer" destination="bYf-2R-SQo" id="SFA-e2-cYc"/>
                         <outlet property="waitingForPlayersContainer" destination="SOY-nd-aUI" id="zlP-WW-8iP"/>
@@ -273,10 +274,10 @@
             </objects>
             <point key="canvasLocation" x="644" y="882"/>
         </scene>
-        <!--View Controller-->
+        <!--Judge View Controller-->
         <scene sceneID="WJO-U7-lzr">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HQC-0v-cIL" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HQC-0v-cIL" customClass="MTJudgeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Mhe-vQ-r2e"/>
                         <viewControllerLayoutGuide type="bottom" id="X4m-8c-Z3Q"/>
@@ -284,12 +285,29 @@
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v7Y-Eh-j4x">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdh-HL-BS0" customClass="MTCardViewContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.52156865600000002" green="0.087972152250000005" blue="0.037597625320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X4m-8c-Z3Q" firstAttribute="top" secondItem="Cdh-HL-BS0" secondAttribute="bottom" id="2xj-Ss-XBg"/>
+                            <constraint firstAttribute="trailing" secondItem="Cdh-HL-BS0" secondAttribute="trailing" id="4WD-A8-qnU"/>
+                            <constraint firstItem="Cdh-HL-BS0" firstAttribute="leading" secondItem="v7Y-Eh-j4x" secondAttribute="leading" id="a5T-Pn-5P3"/>
+                            <constraint firstItem="Cdh-HL-BS0" firstAttribute="top" secondItem="Mhe-vQ-r2e" secondAttribute="bottom" id="aFx-ZE-Jwz"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="cardViewContainer" destination="Cdh-HL-BS0" id="46g-tt-lkX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCy-JL-whT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1172" y="882"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

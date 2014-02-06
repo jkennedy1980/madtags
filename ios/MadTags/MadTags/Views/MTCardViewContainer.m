@@ -44,6 +44,8 @@
         CGPoint point = [recognizer locationInView:self];
         MTCardView *tappedView = (MTCardView *) [self hitTest:point withEvent:nil];
         
+        if( [tappedView isEqual:self] ) return;
+        
         if( self.displayedCard ){
             self.displayedCard = nil;
         }else{
