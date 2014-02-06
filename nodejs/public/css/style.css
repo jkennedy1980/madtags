@@ -142,7 +142,7 @@ body {
 	display: none;
 }
 
-.tv .card-content .now-playing {
+.tv .card-content .header {
 	color: #0061FE;
 	font-size: 20pt;
 	font-weight: bold;

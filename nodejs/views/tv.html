@@ -11,7 +11,7 @@
 					<!-- <div class="card-content tv-tag-logo-al"> -->
 					<div class="card-content">
 						<p>
-							<span class="now-playing">Now Playing:</span>
+							<span class="header">Now Playing:</span>
 							<br/>
 							<span class="title">Helmann's Real Mayonnaise</span>
 						</p>
@@ -56,22 +56,32 @@
 			$('#gamePhaseChanges').append( html );
 		});	
 
-		socket.on( '', function ( data ){
-			// when found new tag
-			var name = data['name'];
-			var source = data['source'];
-			showNewTag(name, source);
+		// game phases
+		socket.on( 'gamePhase', function( message ) {
+			// message = { phase: 'waitingForPlayers', data: }
+			// message = { phase: 'playing', data: {tag: 'tag'}}
+			if (message['phase'] == 'playing') {
+				// show card
+				showNewCard(data['tag'], 'Now Playing:');
+			}
 		});
 
-		socket.on( '', function ( data ){
-			// show card
-			var name = data['name'];
-			showNewCard(name);
+		// when player submits - I don't think we need this.
+		socket.on( 'submission', function( data ) {
+			// data = {card: 'sentence', tag: 'tag'}
 		});
 
-		socket.on( '', function ( data ){
-			// dismiss card
-			minimizeCard();
+		// on every new tag discovery
+		socket.on( 'tag', function( data ) {
+			// data = {tag: 'tag'}
+			// when found new tag - we still need {source: 'alphonso'}
+			showNewTag(data['tag']);
+		});
+
+		// after judging
+		socket.on( 'final', function( data ) {
+			// data = {card: 'sentence', tag: 'tag'}
+			showNewCard(data['card'], 'Winning MadTag:');
 		});
 
 		// frontend UI shitz
@@ -167,21 +177,30 @@
 		var cardMonitor;
 		var cardState = 0; // 0 - minimized, 1 - maximized
 
-		function showNewCard(sentence, type) {
+		function showNewCard(sentence, header, type) {
+			if (!header) {
+				header = 'Now Playing:';
+			}
+
+			// disabling type for now
 			// var logoCss = getLogoCss(type);
 			// $('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
 			console.log('cardState:', cardState);
 			if (cardState == 1) {
 				minimizeCard();
 				setTimeout(function() {
+					$('.tv .card-content .header').hide().text(header);
 					$('.tv .card-content .title').hide().text(sentence);
 					maximizeCard(function() {
-						$('.tv .card-content .title').delay(200).fadeIn(250)
+						$('.tv .card-content .header').delay(200).fadeIn(250);
+						$('.tv .card-content .title').delay(200).fadeIn(250);
 					});
 				}, 500);
 			} else {
+				$('.tv .card-content .header').hide().text(header);
 				$('.tv .card-content .title').hide().text(sentence);
 				maximizeCard(function() {
+					$('.tv .card-content .header').delay(200).fadeIn(250);
 					$('.tv .card-content .title').delay(200).fadeIn(250)
 				});
 			}
