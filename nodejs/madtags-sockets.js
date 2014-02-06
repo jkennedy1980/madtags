@@ -23,6 +23,7 @@
 			socket.on( 'tag', function( data) {
 				console.log( "GETTING TAG: ", data );
 				tags.addTag( data.tag );
+				socketUtils.sendMessageToAllTVs( socket, 'tag', { 'tag' : data.tag });
 			});
 
 			socket.on( 'start', function( data ){
@@ -42,7 +43,7 @@
 
 			socket.on( 'judgement', function( data) {
 				console.log( "GOT A VOTE", data );
-				game.judgment( socket, data.card );
+				game.judgment( socket, data.sentence );
 			});
 
 			socket.on( 'restart', function( data ){

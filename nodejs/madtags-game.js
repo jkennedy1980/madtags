@@ -17,13 +17,8 @@
 
 			console.log("Making Judge: ", username );
 			game.gamePhase = 'JOINING';
-<<<<<<< HEAD
 			player.role = 'JUDGE';
 			game.judgeSocket = socket;
-
-=======
-			// player.role = 'JUDGE';
->>>>>>> c61399ad7164b0505db7e9feae2a06e2dbd9e795
 		} else if ( game.gamePhase !== 'JOINING' ){
 
 			game.otherPlayerSockets.push(socket);
@@ -86,8 +81,13 @@
 		socketUtils.sendMessageToAllTVs( socket, 'judging', { 'tag' : game.tag });
 	}
 
+	exports.judgment = function( socket, gameCode, card ){
+		socketUtils.sendMessageToAllTVs( socket, 'final', { 'card' : game.card, 'tag' : game.tag });
+		game = new Game();
+	}
+
 	exports.restartGame = function( socket, gameCode ){
-		var game = new Game();
+		game = new Game();
 	}
 
 	// function emitChangeToGamePhase( socket, phaseToChangeTo, data ){
