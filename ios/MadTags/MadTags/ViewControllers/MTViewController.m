@@ -47,11 +47,13 @@
     
     
     MTCard *card1 = [[MTCard alloc] init];
-    card1.sentence = @"This is a card 1";
+    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+    card1.words = @[@"Toyota"];
     
     MTCard *card2 = [[MTCard alloc] init];
-    card2.sentence = @"This is a card 2";
-    
+    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
+    card2.words = @[@"Toyota"];
+
     MTCard *card3 = [[MTCard alloc] init];
     card3.sentence = @"This is a card 3";
     

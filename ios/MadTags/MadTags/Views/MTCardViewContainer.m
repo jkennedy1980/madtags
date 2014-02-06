@@ -43,7 +43,6 @@
         }else{
             self.selectedCard = tappedView.card;
         }
-
     }
 }
 
@@ -59,7 +58,6 @@
         MTCardView *view = [[MTCardView alloc] initWithFrame:self.bounds];
         view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         view.card = card;
-        view.backgroundColor = [UIColor greenColor];
         [self addSubview:view];
     }
     
