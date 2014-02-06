@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "MTUserJoinViewController.h"
 
+static NSString *MTPlayTimerTickNotification = @"MTPlayTimerTickNotification";
+static NSString *MTPlayTimerTickTimeKey = @"MTPlayTimerTickTimeKey";
+
 @interface MTViewController : UIViewController<MTUserJoinViewControllerDelegate>
 
 @end
