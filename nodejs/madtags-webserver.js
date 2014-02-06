@@ -17,8 +17,9 @@
 	}
 	
 	function getZee( req, res ){
-		zeeBox.fetchZeeData( "Modern Family", function( error, response ){
-			res.send( {"error": error, "data": response } ).end();
+		zeeBox.fetchZeeData( "Modern Family", function( error, words ){
+			console.log( "GOT WOREDS", words );
+			res.send( { "error": error, "data": words } ).end();
 		});
 	}
 

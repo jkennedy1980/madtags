@@ -9,17 +9,17 @@
 
 			console.log( "GOT BRAND ID: ", brandId );
 
-			exports.fetchLastOnForBrand( brandId, function( error, epg ){
+			exports.fetchLastOnForBrand( brandId, function( error, broadCastId ){
 				if( error ) return callback( error, false );
-				if( !epg ) return callback( false, false );
+				if( !broadCastId ) return callback( false, false );
 
-				console.log( "GOT AN EPG: ", epg );
-				exports.fetchZeeTagsForEpg( epg, function( error, response ){
+				console.log( "GOT AN BROADCAST ID: ", broadCastId );
+				exports.fetchZeeTagsForBroadcastId( broadCastId, function( error, words ){
 					if( error ) return callback( error, false );
 				
-					console.log( "GET A RESPONSE: ", response );
+					console.log( "GET A RESPONSE: ", words );
 
-					callback( false, epg );
+					callback( false, words );
 
 				});
 			});
@@ -56,29 +56,40 @@
 			if( !body ) return callback( false, false );
 
 			var parsedBody = JSON.parse( body );
+			console.log( "LAST ON: ", parsedBody );
+
 			if( !parsedBody.length ) return callback( false, false );
 
 			var result1 = parsedBody[0];
-			callback( false, result1.epg );
+			callback( false, result1.epg.replace( 'https://w.zeebox.com/epg/1/broadcastevent/', '' ) );
 		});
 	}
 
-	exports.fetchZeeTagsForEpg = function( epg, callback ){
+	exports.fetchZeeTagsForBroadcastId = function( broadcastId, callback ){
 		var req = {
-			url: epg
+			url: "http://w.zeebox.com/zta/zeetags?broadcastevent=" + broadcastId
 		};
 
 		request( req, function( error, response, body ){
 			if( error ) return callback( error, false );
 			if( !body ) return callback( false, false );
 
-			console.log( "RESPONSE: ", body );
-
 			var parsedBody = JSON.parse( body );
-			if( !parsedBody.length ) return callback( false, false );
+			if( !parsedBody.zeetags ) return callback( false, false );
 
+			var zeeTags = parsedBody.zeetags;
+			if( !zeeTags ) return callback( false, false );
 
-			callback( false, parsedBody );
+			var words = [];
+			for( var i = 0; i < zeeTags.length; i++ ){
+				var zeeTag = zeeTags[i];
+				if( zeeTag.icon === 'place' || zeeTag.icon === 'info' ){
+					console.log( "ZEE TAG: ", zeeTag );
+					words.push( zeeTag.title );
+				}
+			}
+
+			callback( false, words );
 		});
 	}
 
