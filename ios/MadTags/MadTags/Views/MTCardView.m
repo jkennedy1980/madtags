@@ -7,15 +7,20 @@
 //
 
 #import "MTCardView.h"
-
+#import "MTViewController.h"
 
 @interface MTCardView()
 
 @property (nonatomic,strong) UILabel *textLabel;
+@property (nonatomic,strong) UIButton *selectButton;
 
 @end
 
 #define kPadding 20.0
+#define kSelectButtonDimension 100.0
+#define kSelectButtonBottomPadding 100.0
+
+#define kGreen [UIColor colorWithRed:0.318 green:0.509 blue:0.166 alpha:1.000]
 
 @implementation MTCardView
 
@@ -35,8 +40,30 @@
         self.textLabel.numberOfLines = 999;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self addSubview:self.textLabel];
+        
+        self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.selectButton.frame = CGRectMake( floor((self.bounds.size.width - kSelectButtonDimension) / 2.0), self.bounds.size.height - kSelectButtonDimension - kSelectButtonBottomPadding, kSelectButtonDimension, kSelectButtonDimension);
+        self.selectButton.layer.backgroundColor = kGreen.CGColor;
+        self.selectButton.backgroundColor = kGreen;
+        self.selectButton.layer.cornerRadius = floor( kSelectButtonDimension / 2.0 );
+//        [self.selectButton setTitle:@":30" forState:UIControlStateNormal];
+        self.selectButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0];
+        [self addSubview:self.selectButton];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playClockDidTick:) name:MTPlayTimerTickNotification object:nil];
     }
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+         
+-(void) playClockDidTick:(NSNotification*) notification;
+{
+    NSNumber *clockTime = [notification.userInfo objectForKey:MTPlayTimerTickTimeKey];
+    [self.selectButton setTitle:[NSString stringWithFormat:@":%@", clockTime] forState:UIControlStateNormal];
 }
 
 -(void) setCard:(MTCard *)card;
@@ -81,7 +108,7 @@
 -(NSAttributedString*) attributedStringForWord:(NSString*) word;
 {
     NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] initWithString:word];
-    [attText addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.318 green:0.509 blue:0.166 alpha:1.000] range:NSMakeRange(0, attText.length)];
+    [attText addAttribute:NSForegroundColorAttributeName value:kGreen range:NSMakeRange(0, attText.length)];
     [attText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0] range:NSMakeRange(0, attText.length)];
     return attText;
 }

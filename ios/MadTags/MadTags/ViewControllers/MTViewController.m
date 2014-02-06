@@ -22,6 +22,11 @@
 
 @property (weak, nonatomic) IBOutlet MTPlayerChooseCardViewController *playerChooseCardController;
 
+
+#define kPlayTimerLength 30
+@property (strong, nonatomic) NSTimer *playTimer;
+@property (assign, nonatomic) NSInteger playClock;
+
 @end
 
 
@@ -32,6 +37,8 @@
     [super viewDidLoad];
     self.wrapper = [[MTSocketWrapper alloc] init];
     self.wrapper.delegate = self;
+    
+    self.playTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(playTimerTick) userInfo:nil repeats:YES];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -73,6 +80,8 @@
     self.playerChooseCardController.cards = cards;
     
     [self transitionToContainerView:self.playerChooseCardContainer];
+    
+    [self startPlayTimer];
 }
 
 - (void)dealloc
@@ -93,6 +102,25 @@
 -(void) appWillEnterBackground;
 {
     [self.wrapper disconnect];
+}
+
+-(void) startPlayTimer;
+{
+    self.playClock = kPlayTimerLength;
+    [[NSRunLoop mainRunLoop] addTimer:self.playTimer forMode:NSRunLoopCommonModes];
+}
+
+-(void) stopPlayTimer;
+{
+    self.playClock = kPlayTimerLength;
+    [self.playTimer invalidate];
+}
+
+-(void) playTimerTick;
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:MTPlayTimerTickNotification object:nil userInfo:@{MTPlayTimerTickTimeKey:@(self.playClock)}];
+    self.playClock = self.playClock - 1;
+    if( self.playClock < 0 ) [self stopPlayTimer];
 }
 
 -(void) transitionToContainerView:(UIView*) containerView;
@@ -124,17 +152,18 @@
 
 -(void) didConnect;
 {
-    
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 -(void) didDisconnect;
 {
-    
+    // TODO: resume
 }
 
 -(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) dictionary;
 {
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
+        
         [self transitionToContainerView:self.waitingForPlayersContainer];
     }else{
         NSLog( @"Unknown game phase: %@", gamePhase );
