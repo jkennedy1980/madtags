@@ -89,6 +89,7 @@
     }
     
     self.selectedCard = cardView.card;
+    [self.delegate didSelectCard:self.selectedCard];
 }
 
 -(void) updateCardLayoutAnimated:(BOOL) animated;
@@ -114,6 +115,8 @@
     CGFloat visibleCardHeight = self.bounds.size.height / self.cards.count;
     
     for( MTCardView *cardView in self.subviews ){
+        cardView.buttonVisible = self.buttonVisible;
+        cardView.isJudge = self.isJudge;
         cardView.frame = CGRectMake( 0, yOffset, cardView.bounds.size.width, cardView.bounds.size.height );
         yOffset += visibleCardHeight;
     }
@@ -124,6 +127,14 @@
     _isJudge = isJudge;
     for( MTCardView *cardView in self.subviews ){
         cardView.isJudge = self.isJudge;
+    }
+}
+
+-(void) setButtonVisible:(BOOL)buttonVisible;
+{
+    _buttonVisible = buttonVisible;
+    for( MTCardView *cardView in self.subviews ){
+        cardView.buttonVisible = self.buttonVisible;
     }
 }
 

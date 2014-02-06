@@ -9,7 +9,7 @@
 #import "MTPlayerChooseCardViewController.h"
 #import "MTCardViewContainer.h"
 
-@interface MTPlayerChooseCardViewController ()
+@interface MTPlayerChooseCardViewController ()<MTCardViewContainerDelegate>
 
 @property (weak, nonatomic) IBOutlet MTCardViewContainer *cardContainerView;
 
@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.cardContainerView.delegate = self;
     self.cardContainerView.cards = self.cards;
 }
 
@@ -27,6 +28,14 @@
 {
     _cards = cards;
     self.cardContainerView.cards = cards;
+}
+
+
+#pragma mark - MTCardViewContainerDelegate
+
+-(void) didSelectCard:(MTCard*) card;
+{
+    
 }
 
 @end

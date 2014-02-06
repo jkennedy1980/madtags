@@ -9,7 +9,7 @@
 #import "MTJudgeViewController.h"
 #import "MTCardViewContainer.h"
 
-@interface MTJudgeViewController ()
+@interface MTJudgeViewController()<MTCardViewContainerDelegate>
 
 @property (weak, nonatomic) IBOutlet MTCardViewContainer *cardViewContainer;
 
@@ -20,7 +20,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.cardViewContainer.isJudge = YES;
+    
+    BOOL isJudge = YES;
+    
+    if( isJudge ){
+        self.cardViewContainer.isJudge = YES;
+        self.cardViewContainer.buttonVisible = YES;
+    }else{
+        self.cardViewContainer.isJudge = NO;
+        self.cardViewContainer.buttonVisible = NO;
+    }
+    self.cardViewContainer.delegate = self;
     self.cardViewContainer.cards = self.cards;
 }
 
@@ -30,5 +40,12 @@
     self.cardViewContainer.cards = cards;
 }
 
+
+#pragma mark - MTCardViewContainerDelegate
+
+-(void) didSelectCard:(MTCard*) card;
+{
+    NSLog( @"Done" );
+}
 
 @end
