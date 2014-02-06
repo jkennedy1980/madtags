@@ -67,8 +67,22 @@
                                             <segue destination="HQC-0v-cIL" kind="embed" identifier="judgeGame" id="3Xz-tm-hFY"/>
                                         </connections>
                                     </containerView>
+                                    <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puz-Ku-iOC" userLabel="roundWinner">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="cH3-Nu-Yfi" kind="embed" id="5Cs-Zd-hzB"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="puz-Ku-iOC" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="Yfq-Tg-I4A"/>
+                                    <constraint firstItem="puz-Ku-iOC" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="jPN-uY-nbs"/>
+                                    <constraint firstAttribute="trailing" secondItem="puz-Ku-iOC" secondAttribute="trailing" id="shV-Bh-mC5"/>
+                                    <constraint firstAttribute="bottom" secondItem="puz-Ku-iOC" secondAttribute="bottom" id="y23-UP-AMb"/>
+                                </constraints>
                             </view>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MadTags" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ttC-hF-iPG">
                                 <rect key="frame" x="20" y="17" width="88" height="32"/>
@@ -99,6 +113,7 @@
                         <outlet property="containerViewContainer" destination="f24-Jg-SCj" id="EFe-2k-gaW"/>
                         <outlet property="judgeGameContainer" destination="hby-wl-ru5" id="pVE-E3-VRO"/>
                         <outlet property="playerChooseCardContainer" destination="794-cO-57i" id="E6L-bT-rZP"/>
+                        <outlet property="roundWinnerContainer" destination="puz-Ku-iOC" id="I3C-e8-1J0"/>
                         <outlet property="startNewGameButton" destination="BFp-vK-v5q" id="NZF-qx-uu5"/>
                         <outlet property="userJoinContainer" destination="bYf-2R-SQo" id="SFA-e2-cYc"/>
                         <outlet property="waitingForPlayersContainer" destination="SOY-nd-aUI" id="zlP-WW-8iP"/>
@@ -307,7 +322,7 @@
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TagCell" textLabel="jIV-oU-ke9" imageView="PgB-LE-ETh" rowHeight="60" style="IBUITableViewCellStyleDefault" id="IYz-Mq-H2u">
                                         <rect key="frame" x="0.0" y="22" width="320" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IYz-Mq-H2u">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IYz-Mq-H2u" id="ycV-bI-h8O">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -435,6 +450,57 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UCy-JL-whT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1172" y="882"/>
+        </scene>
+        <!--Round Winner View Controller-->
+        <scene sceneID="gl2-Pq-WD2">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="cH3-Nu-Yfi" customClass="MTRoundWinnerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="pWS-db-bRj"/>
+                        <viewControllerLayoutGuide type="bottom" id="WQw-zS-I7H"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5ce-eT-UEr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Winner!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0O-8v-oji">
+                                <rect key="frame" x="104" y="28" width="113" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="113" id="N1W-b3-WFE"/>
+                                    <constraint firstAttribute="height" constant="27" id="SCL-ah-HSa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="29"/>
+                                <color key="textColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGN-hA-mVn">
+                                <rect key="frame" x="0.0" y="78" width="320" height="426"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.043376036710000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="426" id="gp7-ct-Chm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WQw-zS-I7H" firstAttribute="top" secondItem="BGN-hA-mVn" secondAttribute="bottom" id="BrS-yY-nNZ"/>
+                            <constraint firstItem="W0O-8v-oji" firstAttribute="top" secondItem="pWS-db-bRj" secondAttribute="bottom" constant="28" id="Q7H-xa-dLY"/>
+                            <constraint firstAttribute="trailing" secondItem="BGN-hA-mVn" secondAttribute="trailing" id="o1Y-Bj-Vxi"/>
+                            <constraint firstItem="BGN-hA-mVn" firstAttribute="leading" secondItem="5ce-eT-UEr" secondAttribute="leading" id="qiI-4D-frI"/>
+                            <constraint firstAttribute="trailing" secondItem="W0O-8v-oji" secondAttribute="trailing" constant="103" id="tuf-c5-qSO"/>
+                            <constraint firstItem="W0O-8v-oji" firstAttribute="leading" secondItem="5ce-eT-UEr" secondAttribute="leading" constant="104" id="wes-bv-1Zy"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="cardViewContainer" destination="BGN-hA-mVn" id="iPB-CQ-DWI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Oh-6f-7cs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1640" y="882"/>
         </scene>
     </scenes>
     <resources>

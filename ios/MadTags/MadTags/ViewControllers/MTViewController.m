@@ -14,8 +14,9 @@
 #import "MTWaitingForPlayersViewController.h"
 #import "MTUserJoinViewController.h"
 #import "MTTaggers.h"
+#import "MTRoundWinnerViewController.h"
 
-@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate,MTTaggerDelegate,MTJudgeViewControllerDelegate>
+@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate,MTTaggerDelegate,MTJudgeViewControllerDelegate,MTRoundWinnerViewControllerDelegate>
 
 @property (nonatomic,strong) MTSocketWrapper *wrapper;
 
@@ -26,11 +27,13 @@
 @property (weak, nonatomic) IBOutlet UIView *waitingForPlayersContainer;
 @property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
 @property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
+@property (weak, nonatomic) IBOutlet UIView *roundWinnerContainer;
 
 @property (weak, nonatomic) MTUserJoinViewController *userJoinViewController;
 @property (weak, nonatomic) MTWaitingForPlayersViewController *waitingForPlayersController;
 @property (weak, nonatomic) MTPlayerChooseCardViewController *playerChooseCardController;
 @property (weak, nonatomic) MTJudgeViewController *judgeGameController;
+@property (weak, nonatomic) MTRoundWinnerViewController *roundWinnerViewController;
 
 @property (assign, nonatomic) BOOL isJudge;
 
@@ -69,6 +72,9 @@
         }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
             self.judgeGameController = (MTJudgeViewController*)childController;
             self.judgeGameController.delegate = self;
+        }else if( [childController isKindOfClass:[MTRoundWinnerViewController class]] ){
+            self.roundWinnerViewController = (MTRoundWinnerViewController*) childController;
+            self.roundWinnerViewController.delegate = self;
         }
     }
 	
@@ -76,6 +82,7 @@
 	self.waitingForPlayersContainer.alpha = 0.0;
 	self.playerChooseCardContainer.alpha = 0.0;
     self.judgeGameContainer.alpha = 0.0;
+    self.roundWinnerContainer.alpha = 0.0;
     
     
 //    MTCard *card1 = [[MTCard alloc] init];
@@ -109,7 +116,15 @@
 //    self.playerChooseCardController.isJudge = YES;
 //    self.playerChooseCardController.cards = cards;
 //    [self transitionToContainerView:self.playerChooseCardContainer];
+
+//    MTCard *card1 = [[MTCard alloc] init];
+//    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+//    card1.words = @[@"Toyota"];
 //
+//    self.roundWinnerViewController.card = card1;
+//    [self transitionToContainerView:self.roundWinnerContainer];
+//    
+    
 //    [self startPlayTimer];
 }
 
@@ -215,6 +230,12 @@
 -(void) didChooseFavCard:(MTCard*) card;
 {
     [self.wrapper sendJudgementSentence:card.sentence];
+}
+
+-(void) didClickStart;
+{
+    [self.wrapper restartGame:@"1234"];
+    [self transitionToContainerView:self.waitingForPlayersContainer];
 }
 
 #pragma mark - Wrapper Delegate

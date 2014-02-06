@@ -63,6 +63,7 @@
     return self;
 }
 
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -146,6 +147,11 @@
         [self.selectButton setTitle:@"Wait" forState:UIControlStateNormal];
         self.selectButton.enabled = NO;
 
+    }else if( self.buttonState == kMTButtonStateWinner ){
+        
+        [self.selectButton setTitle:@"Start" forState:UIControlStateNormal];
+        self.selectButton.enabled = YES;
+        
     }
  
     

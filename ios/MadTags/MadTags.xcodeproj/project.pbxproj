@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03B94AAC18A415CA00FC3E1E /* MTRoundWinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03B94AAB18A415CA00FC3E1E /* MTRoundWinnerViewController.m */; };
 		03F32B3818A2DF5500C7129F /* MTSocketWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B3718A2DF5500C7129F /* MTSocketWrapper.m */; };
 		03F32B3B18A2E64700C7129F /* MTUserJoinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B3A18A2E64700C7129F /* MTUserJoinViewController.m */; };
 		03F32B3E18A2E65600C7129F /* MTWaitingForPlayersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B3D18A2E65600C7129F /* MTWaitingForPlayersViewController.m */; };
@@ -69,6 +70,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03B94AAA18A415CA00FC3E1E /* MTRoundWinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTRoundWinnerViewController.h; sourceTree = "<group>"; };
+		03B94AAB18A415CA00FC3E1E /* MTRoundWinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTRoundWinnerViewController.m; sourceTree = "<group>"; };
 		03F32B3618A2DF5500C7129F /* MTSocketWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSocketWrapper.h; sourceTree = "<group>"; };
 		03F32B3718A2DF5500C7129F /* MTSocketWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTSocketWrapper.m; sourceTree = "<group>"; };
 		03F32B3918A2E64700C7129F /* MTUserJoinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTUserJoinViewController.h; sourceTree = "<group>"; };
@@ -385,6 +388,8 @@
 				03F32B4B18A2F39F00C7129F /* MTPlayerChooseCardViewController.m */,
 				03F32B4D18A3486000C7129F /* MTJudgeViewController.h */,
 				03F32B4E18A3486000C7129F /* MTJudgeViewController.m */,
+				03B94AAA18A415CA00FC3E1E /* MTRoundWinnerViewController.h */,
+				03B94AAB18A415CA00FC3E1E /* MTRoundWinnerViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -521,6 +526,7 @@
 				03F32B3818A2DF5500C7129F /* MTSocketWrapper.m in Sources */,
 				03F32B4918A2F1C700C7129F /* MTCardView.m in Sources */,
 				D22D009818A3DD4300FBE7A3 /* MTTaggers.m in Sources */,
+				03B94AAC18A415CA00FC3E1E /* MTRoundWinnerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,8 @@ typedef enum {
     kMTButtonStateVoting,
     kMTButtonStateWaitingForVotes,
     kMTButtonStateJudging,
-    kMTButtonStateWaitingForJudging
+    kMTButtonStateWaitingForJudging,
+    kMTButtonStateWinner
 } MTButtonState;
 
 
