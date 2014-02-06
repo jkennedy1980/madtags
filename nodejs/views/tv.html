@@ -1,7 +1,7 @@
 <% include header.html %>
 <div class="tv">
 	<video id="tvvideo" width="320" height="240" autoplay onended="cycleVideo()">
-	  <source src="/video/1.m4v" type="video/mp4">
+	  <source src="http://ponycode.com/videos/sample1.mp4" type="video/mp4">
 	</video>
 
 	<div class="overlay">
@@ -41,6 +41,10 @@
 
 	<% include scripts.html %>
 	<script>
+		// frontend UI shitz
+		var tagDelay = 10000;
+		var cardDelay = 10000;
+
 		//sockets
 		var socket = io.connect();
 
@@ -63,7 +67,7 @@
 			// message = { phase: 'Playing', data: {tag: 'tag'}}
 			if (message['phase'] == 'Playing') {
 				// show card
-				showNewCard(message['data']['tag'], 'Now Playing!', false);
+				showNewCard(message['data']['tag'], 'Now Playing!', 30000);
 			} else if (message['phase'] == 'waitingForPlayers') {
 				console.log('message:', message);
 			}
@@ -102,18 +106,13 @@
 			}
 			sentence += data['card'].replace('<<WORD>>', '<span class="highlight">' + tag + '</span>');
 			sentence += '</span>';
-			showNewCard(sentence, 'Winning Mad Tag!', true);
+			showNewCard(sentence, 'Winning Mad Tag!', cardDelay);
 		});
-
-		// frontend UI shitz
-
-		var tagDelay = 10000;
-		var cardDelay = 10000;
 
 		// tv video (looping and shitz)
 		videoCount = 0;
 		videoPlayer = document.getElementById("tvvideo");
-		tvVideos = ['/video/1.m4v', '/video/2.mp4'];
+		tvVideos = ['http://ponycode.com/videos/sample1.mp4', 'http://ponycode.com/videos/sample1.mp4'];
 
 		function cycleVideo(){
 			videoCount++;
@@ -208,6 +207,7 @@
 			// $('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
 
 			console.log('cardState:', cardState);
+			console.log('autoClose:', autoClose);
 			if (cardState == 1) {
 				minimizeCard();
 				setTimeout(function() {
@@ -234,7 +234,8 @@
 			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
 			if (autoClose) {
 				clearInterval(cardMonitor);
-				cardMonitor = setInterval(minimizeCard, cardDelay);
+				console.log('autoClose2:', autoClose);
+				cardMonitor = setInterval(minimizeCard, autoClose);
 			}
 			cardState = 1;
 			callback();
