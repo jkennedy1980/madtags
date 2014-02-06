@@ -13,6 +13,7 @@
 
 @property (nonatomic,strong) UILabel *textLabel;
 @property (nonatomic,strong) UIButton *selectButton;
+@property (nonatomic,strong) UIView *selectedMarker;
 
 @end
 
@@ -51,7 +52,14 @@
         [self.selectButton addTarget:self action:@selector(didClickSelectButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.selectButton];
         [self setupButton];
-
+        
+        
+        self.selectedMarker = [[UIView alloc] initWithFrame:CGRectMake( self.bounds.size.width - 30.0, 10.0, 20, 20)];
+        self.selectedMarker.layer.cornerRadius = 10.0;
+        self.selectedMarker.backgroundColor = [self highlightColor];
+        self.selectedMarker.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        [self addSubview:self.selectedMarker];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playClockDidTick:) name:MTPlayTimerTickNotification object:nil];
     }
     return self;
@@ -64,7 +72,8 @@
 
 -(void) didClickSelectButton;
 {
-    self.selected = !self.selected;
+
+//    self.selected = !self.selected;
     
     [UIView animateWithDuration:0.2 animations:^{
         self.selectButton.transform = CGAffineTransformMakeScale( 1.1, 1.1 );
@@ -74,10 +83,11 @@
         }];
     }];
     
-    [self.delegate didSelectCardView:self];
-    
-//    [self setupButton];
-
+    if( self.selected ){
+        [self.delegate didDeselectCardView:self];
+    }else{
+        [self.delegate didSelectCardView:self];
+    }
 }
 
 -(UIColor*) highlightColor;
@@ -127,17 +137,21 @@
         [self.selectButton setTitle:@"Fav" forState:UIControlStateNormal];
     }
     
+    self.selectedMarker.backgroundColor = [self highlightColor];
+
     if( self.selected ){
         self.selectButton.selected = YES;
         self.selectButton.layer.backgroundColor = [UIColor clearColor].CGColor;
         [self.selectButton setTitleColor:[self highlightColor] forState:UIControlStateSelected];
+        self.selectedMarker.alpha = 1.0;
     }else{
         self.selectButton.selected = NO;
         self.selectButton.layer.backgroundColor = [self highlightColor].CGColor;
         [self.selectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.selectedMarker.alpha = 0.0;
     }
 }
-         
+
 -(void) playClockDidTick:(NSNotification*) notification;
 {
     if( self.buttonVisible && !self.isJudge ){
