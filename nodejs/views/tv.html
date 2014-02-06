@@ -63,7 +63,7 @@
 			// message = { phase: 'Playing', data: {tag: 'tag'}}
 			if (message['phase'] == 'Playing') {
 				// show card
-				showNewCard(data['tag'], 'Now Playing:');
+				showNewCard(mesage['tag'], 'Now Playing:');
 			} else if (message['phase'] == 'waitingForPlayers') {
 				console.log('message:', message);
 			}
