@@ -9,11 +9,15 @@
 #import "MTTestViewController.h"
 #import "SocketIO.h"
 #import "SocketIOPacket.h"
+#import "MTAlphonso.h"
+#import "MTGracenoteEntourage.h"
 
 @interface MTTestViewController ()<SocketIODelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *pingResponseLabel;
 @property (nonatomic, strong) SocketIO *socket;
+@property (nonatomic, strong) MTAlphonso *leAlphonso;
+@property (nonatomic, strong)MTGracenoteEntourage *entouage;
 @end
 
 @implementation MTTestViewController
@@ -23,7 +27,9 @@
 {
     [super viewDidLoad];
 	self.socket = [[SocketIO alloc] initWithDelegate:self];
-	[self.socket connectToHost:@"Snickers.local" onPort:80];
+//	[self.socket connectToHost:@"Snickers.local" onPort:80];
+//	self.leAlphonso = [[MTAlphonso alloc] init];
+	self.entouage = [[MTGracenoteEntourage alloc] init];
 }
 
 - (IBAction)didClickSendPing:(id)sender {
