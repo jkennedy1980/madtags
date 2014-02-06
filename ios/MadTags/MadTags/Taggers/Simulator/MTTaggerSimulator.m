@@ -42,8 +42,11 @@
 -(void) makeTagDB;
 {
 	self.tagDB = @[
+		@[@"So You Think You Can Dance",@"ZeeBox"],
+		@[@"Modern Family",@"Gracenote"],
 		@[@"Cadillac",@"Alphonso"],
 		@[@"Cadillac ATS",@"Alphonso"],
+		@[@"Game of Thrones",@"Gracenote"],
 		@[@"Yeah Yeah Yeahs",@"Gracenote"],
 		@[@"Phenomena",@"Gracenote"],
 		@[@"Vanity Fair",@"ZeeBox"],
@@ -70,7 +73,6 @@
 		@[@"Chevy",@"Alphonso"],
 		@[@"Cruze",@"Alphonso"],
 		@[@"FOX",@"Alphonso"],
-		@[@"So You Think You Can Dance",@"ZeeBox"],
 		@[@"Cat Deeley",@"ZeeBox"],
 		@[@"Nigel Lythgoe",@"ZeeBox"],
 		@[@"Mary Murphy",@"ZeeBox"],
