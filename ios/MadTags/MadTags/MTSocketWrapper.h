@@ -35,4 +35,6 @@
 
 -(void) sendPlayerEndOfPlayMessage:(NSString*) gameCode selectedCardString:(NSString*) cardString;
 
+-(void) restartGame:(NSString*)gameCode;
+
 @end

@@ -40,9 +40,15 @@
     [self.socket disconnect];
 }
 
+
 -(void) joinGameWithCode:(NSString*) gameCode username:(NSString*) username;
 {
     [self.socket sendEvent:@"joinClient" withData:@{ @"username": username, @"gameCode": gameCode }];
+}
+
+-(void) restartGame:(NSString*)gameCode;
+{
+    [self.socket sendEvent:@"restart" withData:@{ @"gameCode": gameCode }];
 }
 
 -(void) startGameWithCode:(NSString*) gameCode;

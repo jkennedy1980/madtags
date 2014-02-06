@@ -67,6 +67,19 @@
 		socketUtils.respondOnAllClientSockets( socket, 'Judging', { 'sentences' : game.playedCards, 'tag' : game.tag });
 	}
 
+	exports.restartGame = function( socket, gameCode ){
+		game.restart();
+
+		var allClientSockets = socketUtils.allClientSockets( socket );
+		for( var socket in allClientSockets ){
+			var player = socket.player;
+			if( player ){
+				socketUtils.respondOnSocket( socket, 'waitingForPlayers', { 'role' : player.role } );
+			}
+		}
+
+	}
+
 	// function emitChangeToGamePhase( socket, phaseToChangeTo, data ){
 	// 	var messageData = {};
 	// 	messageData.phase = phaseToChangeTo;
@@ -97,13 +110,33 @@
 		}
 
 		function _setJudge( player ){
-			if( self.judge != false ) {
-				console.error( "I already have a judge, bro" );
-				return;
+			self.judge.role = 'PLAYER';
+			self.judge = player;
+			self.judge.role = 'JUDGE';
+		}
+
+		function _getNextJudge(){
+
+		}
+
+		function _restart(){
+			var indexOfJudge = -1;
+			for( var i=0; i < this.players.length; i++ ){
+				if( this.players[i].role === 'JUDGE' ){
+					indexOfJudge = i;
+					break;
+				}
 			}
 
-			self.judge = player;
-			player.role = 'JUDGE';
+			indexOfJudge++;
+
+			if( indexOfJudge < this.players.length ){
+				_setJudge( this.players[ indexOfJudge ] )
+			}
+
+			this.gamePhase = 'INIT';
+			this.tag = false;
+			this.cards = false;
 		}
 
 		return {
@@ -114,6 +147,7 @@
 			"setJudge" : _setJudge,
 			"newPlayer" : _newPlayer,
 			"tag" : false,
+			"restart" : _restart,
 			"playedCards" : []
 		}
 

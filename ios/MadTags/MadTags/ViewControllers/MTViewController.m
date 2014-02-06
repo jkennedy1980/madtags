@@ -99,6 +99,10 @@
 //    [self startPlayTimer];
 }
 
+- (IBAction)didClickNewGame:(id)sender {
+	[self.wrapper restartGame:@"1234"];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
