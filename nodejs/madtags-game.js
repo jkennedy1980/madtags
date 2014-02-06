@@ -50,10 +50,19 @@
 		}
 
 		game.gamePhase = 'PLAYING';
+		var cardIndex = 0;
 		var cards = cardDeck.cards();
 		var tag = tags.nextTag();
 		game.tag = tag;
-		socketUtils.respondOnAllClientSockets( socket, 'Playing', { 'sentences' : cards, 'tag' : tag });
+		for( var cSocket in socketUtils.allClientSockets( socket) ){
+			var payload = {};
+			payload.phase = 'Playing';
+			var sentences = cards.slice( cardIndex, cardIndex + 5);
+			cardIndex+=5;
+			payload.data = { 'sentences' : sentences, 'tag' : tag },
+			cSocket.emit( 'gamePhase', payload );
+		}
+		// socketUtils.respondOnAllClientSockets( socket, 'Playing', { 'sentences' : cards, 'tag' : tag });
 
 		socketUtils.sendMessageToAllTVs(socket, 'playing', { 'tag' : tag } );
 	}
@@ -82,7 +91,8 @@
 	}
 
 	exports.judgment = function( socket, gameCode, card ){
-		socketUtils.sendMessageToAllTVs( socket, 'final', { 'card' : game.card, 'tag' : game.tag });
+		socketUtils.sendMessageToAllTVs( socket, 'final', { 'card' : card, 'tag' : game.tag });
+		socketUtils.respondOnAllClientSockets( socket, 'final', { 'sentence' : card, 'tag' : game.tag });
 		game = new Game();
 	}
 
