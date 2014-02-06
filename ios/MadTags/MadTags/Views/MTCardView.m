@@ -75,7 +75,7 @@
     
     [self.delegate didSelectCardView:self];
     
-    [self setupButton];
+//    [self setupButton];
 
 }
 

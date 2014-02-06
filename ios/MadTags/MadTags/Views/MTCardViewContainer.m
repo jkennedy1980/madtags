@@ -79,9 +79,12 @@
 
 -(void) didSelectCardView:(MTCardView*) cardView;
 {
-    for( MTCardView *cardView in self.subviews ){
-        cardView.selected = NO;
+    for( MTCardView *card in self.subviews ){
+        if( cardView != card ){
+            card.selected = NO;
+        }
     }
+    
     self.selectedCard = cardView.card;
 }
 
