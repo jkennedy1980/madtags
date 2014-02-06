@@ -13,7 +13,7 @@
 #import "MTJudgeViewController.h"
 #import "MTWaitingForPlayersViewController.h"
 
-@interface MTViewController ()<MTSocketWrapperDelegate>
+@interface MTViewController ()<MTSocketWrapperDelegate,UIAlertViewDelegate>
 
 @property (nonatomic,strong) MTSocketWrapper *wrapper;
 
@@ -198,10 +198,22 @@
     
 }
 
+-(void) didError:(NSError *)error;
+{
+    [[[UIAlertView alloc] initWithTitle:@"Oh, Sockets!" message:@"Your connection wouldn't open. Check the hoses and try again." delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil] show];
+}
+
 -(void) didDisconnect;
 {
     // TODO: resume
-    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your connection disconnected. Press OK to try again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	if( buttonIndex == alertView.cancelButtonIndex ){
+		[self.wrapper connect];
+	}
 }
 
 -(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) data;

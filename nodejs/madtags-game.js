@@ -68,16 +68,7 @@
 	}
 
 	exports.restartGame = function( socket, gameCode ){
-		game.restart();
-
-		var allClientSockets = socketUtils.allClientSockets( socket );
-		for( var socket in allClientSockets ){
-			var player = socket.player;
-			if( player ){
-				socketUtils.respondOnSocket( socket, 'waitingForPlayers', { 'role' : player.role } );
-			}
-		}
-
+		var game = new Game();
 	}
 
 	// function emitChangeToGamePhase( socket, phaseToChangeTo, data ){
@@ -115,29 +106,25 @@
 			self.judge.role = 'JUDGE';
 		}
 
-		function _getNextJudge(){
+		// function _restart(){
+		// 	var indexOfJudge = -1;
+		// 	for( var i=0; i < this.players.length; i++ ){
+		// 		if( this.players[i].role === 'JUDGE' ){
+		// 			indexOfJudge = i;
+		// 			break;
+		// 		}
+		// 	}
 
-		}
+		// 	indexOfJudge++;
 
-		function _restart(){
-			var indexOfJudge = -1;
-			for( var i=0; i < this.players.length; i++ ){
-				if( this.players[i].role === 'JUDGE' ){
-					indexOfJudge = i;
-					break;
-				}
-			}
+		// 	if( indexOfJudge < this.players.length ){
+		// 		_setJudge( this.players[ indexOfJudge ] )
+		// 	}
 
-			indexOfJudge++;
-
-			if( indexOfJudge < this.players.length ){
-				_setJudge( this.players[ indexOfJudge ] )
-			}
-
-			this.gamePhase = 'INIT';
-			this.tag = false;
-			this.cards = false;
-		}
+		// 	this.gamePhase = 'INIT';
+		// 	this.tag = false;
+		// 	this.cards = false;
+		// }
 
 		return {
 			"gameCode" : gameCode,
@@ -147,7 +134,7 @@
 			"setJudge" : _setJudge,
 			"newPlayer" : _newPlayer,
 			"tag" : false,
-			"restart" : _restart,
+			// "restart" : _restart,
 			"playedCards" : []
 		}
 
