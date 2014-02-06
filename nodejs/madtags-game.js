@@ -18,7 +18,7 @@
 			console.log("Making Judge: ", username );
 			game.gamePhase = 'JOINING';
 			player.role = 'JUDGE';
-			game.judgeSocket.push(socket);
+			game.judgeSocket = socket;
 
 		} else if ( game.gamePhase !== 'JOINING' ){
 
@@ -56,7 +56,7 @@
 		game.tag = tag;
 		socketUtils.respondOnAllClientSockets( socket, 'Playing', { 'sentences' : cards, 'tag' : tag });
 
-		socket.join( socketUtils.tvRoomNameForSocket( socket ), 'playing', { 'tag' : tag } );
+		socketUtils.sendMessageToAllTVs(socket, 'playing', { 'tag' : tag } );
 	}
 
 	exports.submit = function( socket, gameCode, card ){
@@ -79,7 +79,7 @@
 
 		game.gamePhase = 'JUDGING';
 		socketUtils.respondOnAllClientSockets( socket, 'Judging', { 'sentences' : game.playedCards, 'tag' : game.tag });
-		socketUtils.sendMessageToAllTVs( socket, 'judging', { 'card' : card, 'tag' : game.tag });
+		socketUtils.sendMessageToAllTVs( socket, 'judging', { 'tag' : game.tag });
 	}
 
 	exports.restartGame = function( socket, gameCode ){
