@@ -87,7 +87,9 @@
 		socket.on( 'final', function( data ) {
 			// data = {card: 'sentence', tag: 'tag'}
 			console.log('final: socket message:', data);
-			showNewCard(data['card'], 'Winning MadTag!');
+			var tag = data['tag'];
+			var sentence = data['card'].replace('<<WORD>>', '<span class="highlight">' + tag + '</span>');
+			showNewCard(sentence, 'Winning MadTag!');
 		});
 
 		// frontend UI shitz
