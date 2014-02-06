@@ -7,12 +7,17 @@
 //
 
 #import "MTAlphonso.h"
+
+#if ! TARGET_IPHONE_SIMULATOR
 #import "asapi/asapi.h"
+#endif
 
 #define ALPHONSO_API_KEY   "Alphonso-ios-sdktest-app-API-key-7Gt281Np4"
 
 @interface MTAlphonso ()
+#if ! TARGET_IPHONE_SIMULATOR
 @property (nonatomic, strong) asapi *asapi_thang;
+#endif
 @end
 
 
@@ -21,9 +26,10 @@
 - (id)init
 {
     self = [super init];
+#if ! TARGET_IPHONE_SIMULATOR
     if (self) {
 
-        self.asapi_thang = [asapi sharedInstance];
+       self.asapi_thang = [asapi sharedInstance];
 		
 		asapi_err_t errcode = [self.asapi_thang init_with_api_key:[NSString stringWithUTF8String:ALPHONSO_API_KEY] and_status_callback:^(asapi_state *state){
 			if(state.err == ASAPI_SUCCESS) {
@@ -54,14 +60,15 @@
 			NSLog( @"Alphonso: Setup went le Crap" );
 		}
 	}
-	
+#endif
     return self;
 }
 
+#if ! TARGET_IPHONE_SIMULATOR
 
 - (void) progress_callback:(NSNumber *)state_m
 {
-    asapi_state_t state = (asapi_state_t)[state_m integerValue];
+   asapi_state_t state = (asapi_state_t)[state_m integerValue];
     NSString *msg;
     
     switch (state) {
@@ -86,13 +93,10 @@
     }
 }
 
-
-
 - (void) progress_callback_err:(NSNumber *)errNum
 {
     NSLog( @"Got Callback: %d", (int)[errNum integerValue] );
 }
-
 
 
 - (void) start_listening
@@ -105,4 +109,8 @@
         NSLog( @"Alphonso Start went shit" );
     }
 }
+
+
+#endif
+
 @end

@@ -153,6 +153,15 @@ body {
 	color: #0061FE;
 }
 
+.tv .card-content .sentence-short {
+	font-size: 35pt;
+}
+
+.tv .card-content .sentence-long {
+	font-size: 26pt;
+	display: inline-block;
+}
+
 .tv .card-content .title {
 	color: #000;
 	line-height: 1.1em;
