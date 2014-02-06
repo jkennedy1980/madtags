@@ -6,11 +6,25 @@
 
 	<div class="overlay">
 		<div class="row">
-			<div class="col-sm-8">
+			<div class="col-sm-12">
 				<h1>TV Game Phase Changes</h1>
 				<ul id="gamePhaseChanges"></ul>
 			</div>
-			<div class="col-sm-1">
+		</div>
+		<div class="row">
+			<div class="col-sm-6 card-container">
+				<div class="card card-minimized">
+					<div class="card-content tv-tag-logo-al">
+						<p>
+							<span class="now-playing">Now Playing:</span>
+							<br/>
+							<span class="title">Helmann's Real Mayonnaise</span>
+						</p>
+					</div>
+					<div class="card-bottom-logo card-bottom-logo-minimized">&nbsp;</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
 			</div>
 			<div class="col-sm-3">
 				<div class="tv-tag tv-tag-1 tv-tag-logo-zb">Rogain</div>
@@ -39,6 +53,9 @@
 			var html = $("<li><strong>MESSAGE</strong> - " + data.message + "</li>");
 			$('#gamePhaseChanges').append( html );
 		});	
+
+
+		// frontend UI shitz
 
 		// tv video (looping and shitz)
 		videoCount = 0;
@@ -76,8 +93,8 @@
 			console.log('tagsInUse:', tagsInUse);
 			return newTag;
 		}
-		
-		function popInTag(newBrand, type) {
+
+		function getLogoCss(type) {
 			var logoCss = 'tv-tag-logo-zb';
 			if (type) {
 				if (type == 'zeebox') {
@@ -90,6 +107,11 @@
 			} else {
 				logoCss = tagLogos[Math.floor((Math.random()*tagLogos.length))];
 			}
+			return logoCss;
+		}
+		
+		function popInTag(newBrand, type) {
+			var logoCss = getLogoCss(type);
 			useOddPosition = !useOddPosition;
 			var randomTag =  getNewRandomTag();
 			console.log('randomTag:', randomTag);
@@ -118,6 +140,33 @@
 
 		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
 		tagMonitor = setInterval(removeTag, 10000);
+
+		// card popups
+		var cardMonitor;
+
+		function showNewCard(sentence, type) {
+			var logoCss = getLogoCss(type);
+			$('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
+			$('.tv .card-content .title').text(sentence);
+			maximizeCard();
+		}
+
+		function maximizeCard() {
+			$('.tv .card-minimized').removeClass('card-minimized').addClass('card-maximized');
+			$('.tv .card-content').show();
+			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
+			clearInterval(cardMonitor);
+			cardMonitor = setInterval(minimizeCard, 5000);
+		}
+
+		function minimizeCard() {
+			$('.tv .card-maximized').removeClass('card-maximized').addClass('card-minimized');
+			$('.tv .card-content').hide();
+			$('.tv .card-bottom-logo-maximized').removeClass('card-bottom-logo-maximized').addClass('card-bottom-logo-minimized');
+		}
+
+		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
+		cardMonitor = setInterval(minimizeCard, 5000);
 	</script>
 </div>
 <% include footer.html %>

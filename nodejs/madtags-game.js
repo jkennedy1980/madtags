@@ -15,6 +15,10 @@
 		if( game.gamePhase === 'INIT' ){
 			game.gamePhase = 'JOINING';
 			player.role = 'JUDGE';
+		} else if ( game.gamePhase !== 'JOINING' ){
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, "WE AINT JOINING" );
+			socketUtils.respondOnSocket( socket, 'error', { 'message' : 'Sorry. The game has already started' } );
+			return;
 		}
 
 		socket.madtagsPlayer = player;
