@@ -35,18 +35,36 @@
 
 	exports.startTurn = function( socket, gameCode ){
 		if( game.gamePhase !== 'JOINING' ){
-			console.log("STATE NO MAKE SENSE: ", game.gamePhase, "WE AINT JOINING" );
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, ". WE AINT JOINING" );
 			return;
 		}
 
 		game.gamePhase = 'PLAYING';
 		var cards = cardDeck.cards();
 		var tag = tags.nextTag();
+		game.tag = tag;
 		socketUtils.respondOnAllClientSockets( socket, 'Playing', { 'sentences' : cards, 'tag' : tag });
 	}
 
-	exports.startGame = function( socket, gameCode ){
-		emitChangeGamePhase( socket, 'waitingForTags', {} );
+	exports.submit = function( socket, gameCode, card ){
+
+		if( game.gamePhase !== 'PLAYING' ){
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, ". WE AINT PLAYING" );
+			return;
+		}
+
+		game.playedCards.push( card );
+	}
+
+	exports.getSubmissions = function( socket, gameCode ){
+
+		if( game.gamePhase !== 'PLAYING' ){
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, ". WE AINT PLAYING" );
+			return;
+		}
+
+		game.gamePhase = 'JUDGING';
+		socketUtils.respondOnAllClientSockets( socket, 'Judging', { 'sentences' : game.playedCards, 'tag' : game.tag });
 	}
 
 	// function emitChangeToGamePhase( socket, phaseToChangeTo, data ){
@@ -94,7 +112,9 @@
 			"gamePhase" : 'INIT',
 			"judge" : false,
 			"setJudge" : _setJudge,
-			"newPlayer" : _newPlayer
+			"newPlayer" : _newPlayer,
+			"tag" : false,
+			"playedCards" : []
 		}
 
 	}
