@@ -95,10 +95,10 @@
 	exports.judgment = function( socket, card ){
 		socketUtils.sendMessageToAllTVs( socket, 'final', { 'card' : card, 'tag' : game.tag });
 		socketUtils.respondOnAllClientSockets( socket, 'final', { 'sentence' : card, 'tag' : game.tag });
-		game = new Game();
 	}
 
 	exports.restartGame = function( socket, gameCode ){
+		socketUtils.respondOnAllClientSockets( socket, 'gameEnd', {} );
 		game = new Game();
 	}
 

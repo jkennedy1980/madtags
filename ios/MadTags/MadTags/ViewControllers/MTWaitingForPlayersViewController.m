@@ -50,8 +50,12 @@
 
 -(void) discoveredTag:(NSDictionary*) tag;
 {
-    [self.discoveredTags addObject:tag];
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    
+    [self.discoveredTags insertObject:tag atIndex:0];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForItem:0 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
+    [self.tableView endUpdates];
 }
 
 
@@ -71,10 +75,12 @@
     
     NSString *tagEngine = [tag objectForKey:MTTaggerSourceNameKey];
     
-    if( [@"gracenote" isEqualToString:tagEngine] ){
+    if( [@"Gracenote" isEqualToString:tagEngine] ){
         cell.imageView.image = [UIImage imageNamed:@"gracenotetag_48x48"];
-    }else if( [@"alphonso" isEqualToString:tagEngine] ){
+    }else if( [@"Alphonso" isEqualToString:tagEngine] ){
         cell.imageView.image = [UIImage imageNamed:@"alphonsotag_48x48"];
+    }else if( [@"ZeeBox" isEqualToString:tagEngine] ){
+        cell.imageView.image = [UIImage imageNamed:@"zeeboxtag_48x48"];
     }
     
     cell.backgroundColor = [UIColor clearColor];

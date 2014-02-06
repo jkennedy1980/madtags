@@ -9,6 +9,7 @@
 #import "MTTaggers.h"
 #import "MTGracenoteEntourage.h"
 #import "MTAlphonso.h"
+#import "MTTaggerSimulator.h"
 
 @interface MTTaggers ()
 @property (nonatomic, strong) id<MTTagger> tagger;
@@ -21,7 +22,11 @@
 {
     self = [super init];
     if (self) {
-		self.taggerClasses = @[[MTGracenoteEntourage class]]; //, [MTAlphonso class]];
+#if TARGET_IPHONE_SIMULATOR
+		self.taggerClasses = @[[MTGracenoteEntourage class], [MTTaggerSimulator class]]; //, [MTAlphonso class]];
+#else
+		self.taggerClasses = @[[MTGracenoteEntourage class], [MTAlphonso class]];
+#endif
 		self.tagger = [self taggerForSeed:seed];
 		self.tagger.delegate = delegate;
     }
