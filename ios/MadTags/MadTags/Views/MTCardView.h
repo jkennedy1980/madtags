@@ -24,5 +24,7 @@
 @property (nonatomic,strong) MTCard *card;
 @property (nonatomic,assign) BOOL selected;
 @property (nonatomic,weak) id<MTCardViewDelegate> delegate;
+@property (nonatomic,assign) BOOL isJudge;
+@property (nonatomic,assign) BOOL buttonVisible;
 
 @end

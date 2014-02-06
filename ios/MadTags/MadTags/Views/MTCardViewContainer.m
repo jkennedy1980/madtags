@@ -44,6 +44,8 @@
         CGPoint point = [recognizer locationInView:self];
         MTCardView *tappedView = (MTCardView *) [self hitTest:point withEvent:nil];
         
+        if( [tappedView isEqual:self] ) return;
+        
         if( self.displayedCard ){
             self.displayedCard = nil;
         }else{
@@ -65,6 +67,7 @@
         view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         view.card = card;
         view.delegate = self;
+        view.isJudge = self.isJudge;
         [self addSubview:view];
     }
     
@@ -86,6 +89,7 @@
     }
     
     self.selectedCard = cardView.card;
+    [self.delegate didSelectCard:self.selectedCard];
 }
 
 -(void) updateCardLayoutAnimated:(BOOL) animated;
@@ -111,8 +115,26 @@
     CGFloat visibleCardHeight = self.bounds.size.height / self.cards.count;
     
     for( MTCardView *cardView in self.subviews ){
+        cardView.buttonVisible = self.buttonVisible;
+        cardView.isJudge = self.isJudge;
         cardView.frame = CGRectMake( 0, yOffset, cardView.bounds.size.width, cardView.bounds.size.height );
         yOffset += visibleCardHeight;
+    }
+}
+
+-(void) setIsJudge:(BOOL)isJudge;
+{
+    _isJudge = isJudge;
+    for( MTCardView *cardView in self.subviews ){
+        cardView.isJudge = self.isJudge;
+    }
+}
+
+-(void) setButtonVisible:(BOOL)buttonVisible;
+{
+    _buttonVisible = buttonVisible;
+    for( MTCardView *cardView in self.subviews ){
+        cardView.buttonVisible = self.buttonVisible;
     }
 }
 

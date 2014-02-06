@@ -54,13 +54,25 @@
                                             <segue destination="PkM-Mb-rPo" kind="embed" id="Rh2-Xd-UNe"/>
                                         </connections>
                                     </containerView>
+                                    <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hby-wl-ru5" userLabel="judge">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="HQC-0v-cIL" kind="embed" identifier="judgeGame" id="3Xz-tm-hFY"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="794-cO-57i" secondAttribute="bottom" id="DIE-5w-rvA"/>
                                     <constraint firstItem="794-cO-57i" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="HHU-Hv-TAl"/>
+                                    <constraint firstItem="hby-wl-ru5" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="Kqp-3P-4RO"/>
+                                    <constraint firstAttribute="bottom" secondItem="hby-wl-ru5" secondAttribute="bottom" id="NgH-QE-JLU"/>
                                     <constraint firstAttribute="trailing" secondItem="794-cO-57i" secondAttribute="trailing" id="PoA-mk-WkF"/>
+                                    <constraint firstAttribute="trailing" secondItem="hby-wl-ru5" secondAttribute="trailing" id="QhS-Oq-4FW"/>
                                     <constraint firstItem="794-cO-57i" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="a4W-pG-uK4"/>
+                                    <constraint firstItem="hby-wl-ru5" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="gaK-Nh-hj2"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -75,6 +87,7 @@
                     <navigationItem key="navigationItem" id="Edy-KQ-kIJ"/>
                     <connections>
                         <outlet property="containerViewContainer" destination="f24-Jg-SCj" id="EFe-2k-gaW"/>
+                        <outlet property="judgeGameContainer" destination="hby-wl-ru5" id="pVE-E3-VRO"/>
                         <outlet property="playerChooseCardContainer" destination="794-cO-57i" id="E6L-bT-rZP"/>
                         <outlet property="userJoinContainer" destination="bYf-2R-SQo" id="SFA-e2-cYc"/>
                         <outlet property="waitingForPlayersContainer" destination="SOY-nd-aUI" id="zlP-WW-8iP"/>
@@ -217,6 +230,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmw-wZ-3dw">
+                                <rect key="frame" x="114" y="276" width="92" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="didClickStartButton:" destination="3gb-je-ih1" eventType="touchUpInside" id="O6a-Py-a6t"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -260,6 +283,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LCT-ZK-Luo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="644" y="882"/>
+        </scene>
+        <!--Judge View Controller-->
+        <scene sceneID="WJO-U7-lzr">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HQC-0v-cIL" customClass="MTJudgeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mhe-vQ-r2e"/>
+                        <viewControllerLayoutGuide type="bottom" id="X4m-8c-Z3Q"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v7Y-Eh-j4x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdh-HL-BS0" customClass="MTCardViewContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.52156865600000002" green="0.087972152250000005" blue="0.037597625320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X4m-8c-Z3Q" firstAttribute="top" secondItem="Cdh-HL-BS0" secondAttribute="bottom" id="2xj-Ss-XBg"/>
+                            <constraint firstAttribute="trailing" secondItem="Cdh-HL-BS0" secondAttribute="trailing" id="4WD-A8-qnU"/>
+                            <constraint firstItem="Cdh-HL-BS0" firstAttribute="leading" secondItem="v7Y-Eh-j4x" secondAttribute="leading" id="a5T-Pn-5P3"/>
+                            <constraint firstItem="Cdh-HL-BS0" firstAttribute="top" secondItem="Mhe-vQ-r2e" secondAttribute="bottom" id="aFx-ZE-Jwz"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="cardViewContainer" destination="Cdh-HL-BS0" id="46g-tt-lkX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UCy-JL-whT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1172" y="882"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
