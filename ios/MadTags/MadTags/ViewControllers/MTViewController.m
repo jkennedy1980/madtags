@@ -8,6 +8,9 @@
 
 #import "MTViewController.h"
 #import "MTSocketWrapper.h"
+#import "MTPlayerChooseCardViewController.h"
+#import "MTCard.h"
+#import "MTJudgeViewController.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate>
 
@@ -16,6 +19,16 @@
 @property (weak, nonatomic) IBOutlet UIView *containerViewContainer;
 @property (weak, nonatomic) IBOutlet UIView *userJoinContainer;
 @property (weak, nonatomic) IBOutlet UIView *waitingForPlayersContainer;
+@property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
+@property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
+
+@property (weak, nonatomic) IBOutlet MTPlayerChooseCardViewController *playerChooseCardController;
+@property (weak, nonatomic) IBOutlet MTJudgeViewController *judgeViewController;
+
+
+#define kPlayTimerLength 30
+@property (strong, nonatomic) NSTimer *playTimer;
+@property (assign, nonatomic) NSInteger playClock;
 
 @end
 
@@ -28,10 +41,51 @@
     self.wrapper = [[MTSocketWrapper alloc] init];
     self.wrapper.delegate = self;
     
+    self.playTimer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(playTimerTick) userInfo:nil repeats:YES];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground) name:UIApplicationWillResignActiveNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterForeground) name:UIApplicationWillEnterForegroundNotification object:nil];
 
     [self appWillEnterForeground];
+    
+    
+    for( UIViewController *childController in self.childViewControllers ){
+        if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
+            self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
+        }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
+            self.judgeViewController = (MTJudgeViewController*)childController;
+        }
+    }
+    
+    
+    MTCard *card1 = [[MTCard alloc] init];
+    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";
+    card1.words = @[@"Toyota"];
+    
+    MTCard *card2 = [[MTCard alloc] init];
+    card2.sentence = @"Tonight is 50 cent shot night. We gettin' <<WORD>> wasted fa sure.";
+    card2.words = @[@"Toyota"];
+
+    MTCard *card3 = [[MTCard alloc] init];
+    card3.sentence = @"This is a card 3";
+    
+    MTCard *card4 = [[MTCard alloc] init];
+    card4.sentence = @"This is a card 4";
+    
+    MTCard *card5 = [[MTCard alloc] init];
+    card5.sentence = @"This is a card 5";
+    
+    NSMutableArray *cards = [NSMutableArray array];
+    [cards addObject:card1];
+    [cards addObject:card2];
+    [cards addObject:card3];
+    [cards addObject:card4];
+    [cards addObject:card5];
+
+    self.judgeViewController.cards = cards;
+    
+    [self transitionToContainerView:self.judgeGameContainer];
+    
 }
 
 - (void)dealloc
@@ -52,6 +106,25 @@
 -(void) appWillEnterBackground;
 {
     [self.wrapper disconnect];
+}
+
+-(void) startPlayTimer;
+{
+    self.playClock = kPlayTimerLength;
+    [[NSRunLoop mainRunLoop] addTimer:self.playTimer forMode:NSRunLoopCommonModes];
+}
+
+-(void) stopPlayTimer;
+{
+    self.playClock = kPlayTimerLength;
+    [self.playTimer invalidate];
+}
+
+-(void) playTimerTick;
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:MTPlayTimerTickNotification object:nil userInfo:@{MTPlayTimerTickTimeKey:@(self.playClock)}];
+    self.playClock = self.playClock - 1;
+    if( self.playClock < 0 ) [self stopPlayTimer];
 }
 
 -(void) transitionToContainerView:(UIView*) containerView;
@@ -83,17 +156,18 @@
 
 -(void) didConnect;
 {
-    
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 -(void) didDisconnect;
 {
-    
+    // TODO: resume
 }
 
 -(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) dictionary;
 {
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
+        
         [self transitionToContainerView:self.waitingForPlayersContainer];
     }else{
         NSLog( @"Unknown game phase: %@", gamePhase );

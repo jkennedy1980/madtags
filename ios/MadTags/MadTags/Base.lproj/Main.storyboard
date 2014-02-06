@@ -46,11 +46,37 @@
                                             <segue destination="3gb-je-ih1" kind="embed" identifier="waitingForPlayers" id="EIx-ZX-MVw"/>
                                         </connections>
                                     </containerView>
+                                    <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="794-cO-57i" userLabel="playerChooseCard">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="PkM-Mb-rPo" kind="embed" id="Rh2-Xd-UNe"/>
+                                        </connections>
+                                    </containerView>
+                                    <containerView contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hby-wl-ru5" userLabel="judge">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="HQC-0v-cIL" kind="embed" identifier="judgeGame" id="3Xz-tm-hFY"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="794-cO-57i" secondAttribute="bottom" id="DIE-5w-rvA"/>
+                                    <constraint firstItem="794-cO-57i" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="HHU-Hv-TAl"/>
+                                    <constraint firstItem="hby-wl-ru5" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="Kqp-3P-4RO"/>
+                                    <constraint firstAttribute="bottom" secondItem="hby-wl-ru5" secondAttribute="bottom" id="NgH-QE-JLU"/>
+                                    <constraint firstAttribute="trailing" secondItem="794-cO-57i" secondAttribute="trailing" id="PoA-mk-WkF"/>
+                                    <constraint firstAttribute="trailing" secondItem="hby-wl-ru5" secondAttribute="trailing" id="QhS-Oq-4FW"/>
+                                    <constraint firstItem="794-cO-57i" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="top" id="a4W-pG-uK4"/>
+                                    <constraint firstItem="hby-wl-ru5" firstAttribute="leading" secondItem="f24-Jg-SCj" secondAttribute="leading" id="gaK-Nh-hj2"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="oo5-Yl-Pnb" firstAttribute="top" secondItem="f24-Jg-SCj" secondAttribute="bottom" id="2aC-iw-skI"/>
                             <constraint firstAttribute="trailing" secondItem="f24-Jg-SCj" secondAttribute="trailing" id="eAU-Dg-y6n"/>
@@ -61,6 +87,8 @@
                     <navigationItem key="navigationItem" id="Edy-KQ-kIJ"/>
                     <connections>
                         <outlet property="containerViewContainer" destination="f24-Jg-SCj" id="EFe-2k-gaW"/>
+                        <outlet property="judgeGameContainer" destination="hby-wl-ru5" id="pVE-E3-VRO"/>
+                        <outlet property="playerChooseCardContainer" destination="794-cO-57i" id="E6L-bT-rZP"/>
                         <outlet property="userJoinContainer" destination="bYf-2R-SQo" id="SFA-e2-cYc"/>
                         <outlet property="waitingForPlayersContainer" destination="SOY-nd-aUI" id="zlP-WW-8iP"/>
                     </connections>
@@ -158,9 +186,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="userJoin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="12e-0u-Inc">
-                                <rect key="frame" x="127" y="42" width="66" height="19"/>
+                                <rect key="frame" x="127" y="20" width="66" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1A8-39-TkO">
@@ -174,7 +203,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                 </viewController>
@@ -195,19 +224,90 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="waitingForPlayers" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWg-ag-I2c">
-                                <rect key="frame" x="92" y="165" width="137" height="21"/>
+                                <rect key="frame" x="92" y="20" width="137" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BG-nD-CLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="146" y="882"/>
+        </scene>
+        <!--Player Choose Card View Controller-->
+        <scene sceneID="XWl-gI-rC2">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="PkM-Mb-rPo" customClass="MTPlayerChooseCardViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Twn-BN-iMs"/>
+                        <viewControllerLayoutGuide type="bottom" id="6qj-IL-xth"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="MR6-kO-q7C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kzp-cu-Tsu" customClass="MTCardViewContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Kzp-cu-Tsu" firstAttribute="top" secondItem="Twn-BN-iMs" secondAttribute="bottom" id="ZdX-4Y-dzn"/>
+                            <constraint firstItem="6qj-IL-xth" firstAttribute="top" secondItem="Kzp-cu-Tsu" secondAttribute="bottom" id="fra-MI-XB8"/>
+                            <constraint firstItem="Kzp-cu-Tsu" firstAttribute="leading" secondItem="MR6-kO-q7C" secondAttribute="leading" id="gXK-ic-TEM"/>
+                            <constraint firstAttribute="trailing" secondItem="Kzp-cu-Tsu" secondAttribute="trailing" id="xvN-Q7-rK2"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="cardContainerView" destination="Kzp-cu-Tsu" id="MK9-Rf-uNu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LCT-ZK-Luo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="644" y="882"/>
+        </scene>
+        <!--Judge View Controller-->
+        <scene sceneID="WJO-U7-lzr">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="HQC-0v-cIL" customClass="MTJudgeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Mhe-vQ-r2e"/>
+                        <viewControllerLayoutGuide type="bottom" id="X4m-8c-Z3Q"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="v7Y-Eh-j4x">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cdh-HL-BS0" customClass="MTCardViewContainer">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.52156865600000002" green="0.087972152250000005" blue="0.037597625320000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="X4m-8c-Z3Q" firstAttribute="top" secondItem="Cdh-HL-BS0" secondAttribute="bottom" id="2xj-Ss-XBg"/>
+                            <constraint firstAttribute="trailing" secondItem="Cdh-HL-BS0" secondAttribute="trailing" id="4WD-A8-qnU"/>
+                            <constraint firstItem="Cdh-HL-BS0" firstAttribute="leading" secondItem="v7Y-Eh-j4x" secondAttribute="leading" id="a5T-Pn-5P3"/>
+                            <constraint firstItem="Cdh-HL-BS0" firstAttribute="top" secondItem="Mhe-vQ-r2e" secondAttribute="bottom" id="aFx-ZE-Jwz"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <connections>
+                        <outlet property="cardViewContainer" destination="Cdh-HL-BS0" id="46g-tt-lkX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UCy-JL-whT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1172" y="882"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
