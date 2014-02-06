@@ -129,19 +129,23 @@
     if( self.buttonState == kMTButtonStateVoting ){
         
         [self.selectButton setTitle:@":30" forState:UIControlStateNormal];
+        self.selectButton.enabled = YES;
 
     }else if( self.buttonState == kMTButtonStateJudging ){
         
         [self.selectButton setTitle:@"Fav" forState:UIControlStateNormal];
-        
+        self.selectButton.enabled = YES;
+
     }else if( self.buttonState == kMTButtonStateWaitingForJudging ){
         
         [self.selectButton setTitle:@"Wait" forState:UIControlStateNormal];
+        self.selectButton.enabled = NO;
 
     }else if( self.buttonState == kMTButtonStateWaitingForVotes ){
         
         [self.selectButton setTitle:@"Wait" forState:UIControlStateNormal];
-        
+        self.selectButton.enabled = NO;
+
     }
  
     

@@ -42,7 +42,7 @@
 
 -(void) didSelectCard:(MTCard*) card;
 {
-    NSLog( @"Done" );
+    [self.delegate didChooseFavCard:card];
 }
 
 @end
