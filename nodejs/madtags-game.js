@@ -1,6 +1,8 @@
   ( function(){
 
 	var socketUtils = require('./madtags-socketutils.js');
+	var cardDeck = require('./madtags-cards.js');
+	var tags = require('./madtags-tags.js');
 	var game = new Game();
 
 	exports.joinClient = function( socket, gameCode, username ){
@@ -8,10 +10,15 @@
 		socket.madtagsGameCode = gameCode;
 		socket.join( socketUtils.clientRoomNameForSocket( socket ) );
 
-		var player = game.newPlayer( username );
-		var role = player.isJudge() ? 'judge' : 'player';
+		var player = game.newPlayer( username, socket );
 
-		socketUtils.respondOnSocket( socket, 'waitingForPlayers', { 'role' : role } );
+		if( game.gamePhase === 'INIT' ){
+			game.gamePhase = 'JOINING';
+			player.role = 'JUDGE';
+		}
+
+		socket.madtagsPlayer = player;
+		socketUtils.respondOnSocket( socket, 'waitingForPlayers', { 'role' : player.role } );
 	}
 
 	exports.joinTV = function( socket, gameCode ){
@@ -19,8 +26,18 @@
 		socket.madtagsGameCode = gameCode;
 		socket.join( socketUtils.tvRoomNameForSocket( socket ) );
 
-		socketUtils.respondOnSocket( socket, 'waitingForPlayers', { 'role' : role })
-		emitChangeGamePhase( socket, 'waitingForPlayers', {} );
+		socketUtils.respondOnSocket( socket, 'waitingForPlayers', { 'role' : 'TV' } );
+	}
+
+	exports.startTurn = function( socket, gameCode ){
+		if( game.gamePhase !== 'JOINING' ){
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, "WE AINT JOINING" );
+			return;
+		}
+
+		var cards = cardDeck.cards();
+		var tag = tags.nextTag();
+		socketUtils.responsOnAllClientSockets( socket, 'START', { 'cards' : cards, 'tag' : tag });
 	}
 
 	exports.startGame = function( socket, gameCode ){
@@ -35,7 +52,7 @@
 	// }
 
 
-
+	// PHASES: INIT, JOINING, READY, PLAYING, JUDGING, DONE
 
 	// ========    GAME   ======= //
 
@@ -43,8 +60,6 @@
 		var self = this;
 
 		var _nextUserId = 0;
-		var _hasJudge = false;
-		var _gameCode = gameCode;
 
 		function _newPlayer( username ){
 
@@ -53,19 +68,27 @@
 
 			return {
 				"username" : username,
-				isJudge : false,
-				userId : _nextUserId
+				"role" : 'PLAYER',
+				"userId" : _nextUserId
 			}
 		}
 
-		function _hasJudge() {
-			return _hasJudge;
+		function _setJudge( player ){
+			if( self.judge != false ) {
+				console.error( "I already have a judge, bro" );
+				return;
+			}
+
+			self.judge = player;
+			player.role = 'JUDGE';
 		}
 
 		return {
-			"gameCode" : _gameCode,
-			"hasJudge" : _hasJudge,
-			"players" : Array(),
+			"gameCode" : gameCode,
+			"players" : [],
+			"gamePhase" : 'INIT',
+			"judge" : false,
+			"setJudge" : _setJudge,
 			"newPlayer" : _newPlayer
 		}
 

@@ -31,7 +31,7 @@
 -(void) connect;
 {
     if( !self.socket.isConnected ){
-        [self.socket connectToHost:@"JOSHs-MacBook-Pro.local" onPort:80];
+        [self.socket connectToHost:@"Snickers.local" onPort:80];
     }
 }
 
@@ -77,7 +77,7 @@
                                                            error: nil];
     
     NSString *eventName = [dict objectForKey:@"name"];
-    if( [@"changeGamePhase" isEqualToString:eventName] ){
+    if( [@"gamePhase" isEqualToString:eventName] ){
         NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
         
         NSDictionary *data = [args objectForKey:@"data"];

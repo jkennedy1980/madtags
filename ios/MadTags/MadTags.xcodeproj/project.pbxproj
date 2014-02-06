@@ -23,7 +23,6 @@
 		D22D001D18A2CBA200FBE7A3 /* SocketIOTransportWebsocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D001718A2CBA200FBE7A3 /* SocketIOTransportWebsocket.m */; };
 		D22D001E18A2CBA200FBE7A3 /* SocketIOTransportXHR.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D001918A2CBA200FBE7A3 /* SocketIOTransportXHR.m */; };
 		D22D002118A2DCCD00FBE7A3 /* asapi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D002018A2DCCD00FBE7A3 /* asapi.framework */; };
-		D22D002618A2E04D00FBE7A3 /* MTAlphonso.m in Sources */ = {isa = PBXBuildFile; fileRef = D22D002518A2E04D00FBE7A3 /* MTAlphonso.m */; };
 		D22D002818A2E3BB00FBE7A3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D002718A2E3BB00FBE7A3 /* AudioToolbox.framework */; };
 		D22D002A18A2E3D800FBE7A3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D002918A2E3D800FBE7A3 /* CoreLocation.framework */; };
 		D22D002C18A2E3F700FBE7A3 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D002B18A2E3F700FBE7A3 /* CoreAudio.framework */; };
@@ -49,7 +48,6 @@
 		D2791CE818A2A4AF0043A465 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CE018A2A4AF0043A465 /* NSData+SRB64Additions.m */; };
 		D2791CE918A2A4AF0043A465 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CE318A2A4AF0043A465 /* SRWebSocket.m */; };
 		D2791CEA18A2A4AF0043A465 /* MTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CE618A2A4AF0043A465 /* MTViewController.m */; };
-		D2791CED18A2A8790043A465 /* MTTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2791CEC18A2A8790043A465 /* MTTestViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -460,13 +458,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D22D002618A2E04D00FBE7A3 /* MTAlphonso.m in Sources */,
 				D2791CE818A2A4AF0043A465 /* NSData+SRB64Additions.m in Sources */,
 				D2791CEA18A2A4AF0043A465 /* MTViewController.m in Sources */,
 				D22D001C18A2CBA200FBE7A3 /* SocketIOPacket.m in Sources */,
 				D22D009318A2FC1000FBE7A3 /* MTGracenoteEntourage.m in Sources */,
 				D2791CB418A2A2DF0043A465 /* main.m in Sources */,
-				D2791CED18A2A8790043A465 /* MTTestViewController.m in Sources */,
 				D22D001E18A2CBA200FBE7A3 /* SocketIOTransportXHR.m in Sources */,
 				03F32B4618A2F12000C7129F /* MTCard.m in Sources */,
 				03F32B3B18A2E64700C7129F /* MTUserJoinViewController.m in Sources */,
