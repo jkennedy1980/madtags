@@ -8,16 +8,21 @@
 
 #import "MTWaitingForPlayersViewController.h"
 
-@interface MTWaitingForPlayersViewController ()
+@interface MTWaitingForPlayersViewController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *startButton;
+@property (strong, nonatomic) NSMutableArray *discoveredTags;
+
 @end
+
 
 @implementation MTWaitingForPlayersViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.discoveredTags = [NSMutableArray array];
 }
 
 - (IBAction)didClickStartButton:(id)sender;
@@ -35,6 +40,18 @@
         self.startButton.alpha = 0.0;
     }
 
+}
+
+#pragma mark - TableView
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
+{
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+    
 }
 
 @end
