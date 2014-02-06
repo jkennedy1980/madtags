@@ -20,6 +20,7 @@
 {
     self = [super init];
     if (self) {
+		self.sourceName = @"";
         self.timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(giveUpATag) userInfo:nil repeats:YES];
 		[self makeTagDB];
     }
