@@ -20,6 +20,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.cardContainerView.cards = self.cards;
 }
 
 -(void) setCards:(NSArray*) cards;

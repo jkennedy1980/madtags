@@ -21,6 +21,7 @@
 #define kSelectButtonBottomPadding 100.0
 
 #define kGreen [UIColor colorWithRed:0.318 green:0.509 blue:0.166 alpha:1.000]
+#define kBlue [UIColor colorWithRed:0.057 green:0.259 blue:0.782 alpha:1.000]
 
 @implementation MTCardView
 
@@ -45,8 +46,6 @@
         self.selectButton.frame = CGRectMake( floor((self.bounds.size.width - kSelectButtonDimension) / 2.0), self.bounds.size.height - kSelectButtonDimension - kSelectButtonBottomPadding, kSelectButtonDimension, kSelectButtonDimension);
         self.selectButton.layer.cornerRadius = floor( kSelectButtonDimension / 2.0 );
         self.selectButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0];
-        [self.selectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.selectButton setTitleColor:kGreen forState:UIControlStateSelected];
         [self.selectButton addTarget:self action:@selector(didClickSelectButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.selectButton];
         [self setupButton];
@@ -79,14 +78,51 @@
 
 }
 
+-(UIColor*) highlightColor;
+{
+    if( self.isJudge ){
+        return kBlue;
+    }else{
+        return kGreen;
+    }
+}
+
 -(void) setupButton;
 {
+    NSArray *sentenceParts = [self.card.sentence componentsSeparatedByString: @"<<WORD>>"];
+    if( (sentenceParts.count - 1) > self.card.words.count ){
+        NSLog( @"Invalid card" );
+        return;
+    }
+    
+    NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] init];
+    
+    int index = 0;
+    
+    for( NSString *part in sentenceParts ){
+        [attText appendAttributedString:[self attributedStringForSentence:part]];
+        
+        NSString *word = nil;
+        if( index < self.card.words.count ){
+            word = [self.card.words objectAtIndex:index];
+        }
+        
+        if( word ) [attText appendAttributedString:[self attributedStringForWord:word]];
+        index++;
+    }
+    
+    self.textLabel.attributedText = attText;
+    CGSize size = [self.textLabel sizeThatFits:CGSizeMake( self.bounds.size.width - kPadding*2, 100.0 )];
+    self.textLabel.frame = CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, size.height );
+    
     if( self.selected ){
         self.selectButton.selected = YES;
         self.selectButton.layer.backgroundColor = [UIColor clearColor].CGColor;
+        [self.selectButton setTitleColor:[self highlightColor] forState:UIControlStateSelected];
     }else{
         self.selectButton.selected = NO;
-        self.selectButton.layer.backgroundColor = kGreen.CGColor;
+        self.selectButton.layer.backgroundColor = [self highlightColor].CGColor;
+        [self.selectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
 }
          
@@ -106,32 +142,13 @@
 -(void) setCard:(MTCard *)card;
 {
     _card = card;
-    
-    NSArray *sentenceParts = [card.sentence componentsSeparatedByString: @"<<WORD>>"];
-    if( (sentenceParts.count - 1) > card.words.count ){
-        NSLog( @"Invalid card" );
-        return;
-    }
-    
-    NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] init];
-    
-    int index = 0;
-    
-    for( NSString *part in sentenceParts ){
-        [attText appendAttributedString:[self attributedStringForSentence:part]];
-        
-        NSString *word = nil;
-        if( index < card.words.count ){
-            word = [card.words objectAtIndex:index];
-        }
-        
-        if( word ) [attText appendAttributedString:[self attributedStringForWord:word]];
-        index++;
-    }
+    [self setupButton];
+}
 
-    self.textLabel.attributedText = attText;
-    CGSize size = [self.textLabel sizeThatFits:CGSizeMake( self.bounds.size.width - kPadding*2, 100.0 )];
-    self.textLabel.frame = CGRectMake( kPadding, kPadding, self.bounds.size.width - kPadding*2, size.height );
+-(void) setIsJudge:(BOOL)isJudge;
+{
+    _isJudge = isJudge;
+    [self setupButton];
 }
 
 -(NSAttributedString*) attributedStringForSentence:(NSString*) sentence;
@@ -145,7 +162,7 @@
 -(NSAttributedString*) attributedStringForWord:(NSString*) word;
 {
     NSMutableAttributedString *attText = [[NSMutableAttributedString alloc] initWithString:word];
-    [attText addAttribute:NSForegroundColorAttributeName value:kGreen range:NSMakeRange(0, attText.length)];
+    [attText addAttribute:NSForegroundColorAttributeName value:[self highlightColor] range:NSMakeRange(0, attText.length)];
     [attText addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0] range:NSMakeRange(0, attText.length)];
     return attText;
 }

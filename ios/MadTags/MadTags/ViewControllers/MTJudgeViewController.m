@@ -20,7 +20,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.cardViewContainer.isJudge = YES;
     self.cardViewContainer.cards = self.cards;
 }
+
+-(void) setCards:(NSArray*) cards;
+{
+    _cards = cards;
+    self.cardViewContainer.cards = cards;
+}
+
 
 @end

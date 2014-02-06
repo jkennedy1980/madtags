@@ -67,6 +67,7 @@
         view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         view.card = card;
         view.delegate = self;
+        view.isJudge = self.isJudge;
         [self addSubview:view];
     }
     
@@ -115,6 +116,14 @@
     for( MTCardView *cardView in self.subviews ){
         cardView.frame = CGRectMake( 0, yOffset, cardView.bounds.size.width, cardView.bounds.size.height );
         yOffset += visibleCardHeight;
+    }
+}
+
+-(void) setIsJudge:(BOOL)isJudge;
+{
+    _isJudge = isJudge;
+    for( MTCardView *cardView in self.subviews ){
+        cardView.isJudge = self.isJudge;
     }
 }
 
