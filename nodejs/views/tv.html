@@ -58,7 +58,7 @@
 
 		// game phases
 		socket.on( 'gamePhase', function( message ) {
-			console.log('socket message:', message);
+			console.log('gamePhase: socket message:', message);
 			// message = { phase: 'waitingForPlayers', data: }
 			// message = { phase: 'Playing', data: {tag: 'tag'}}
 			if (message['phase'] == 'Playing') {
@@ -72,21 +72,21 @@
 		// when player submits - I don't think we need this.
 		socket.on( 'submission', function( data ) {
 			// data = {card: 'sentence', tag: 'tag'}
-			console.log('socket message:', data);
+			console.log('submission: socket message:', data);
 		});
 
 		// on every new tag discovery
 		socket.on( 'tag', function( data ) {
 			// data = {tag: 'tag'}
 			// when found new tag - we still need {source: 'alphonso'}
-			console.log('socket message:', data);
+			console.log('tag: socket message:', data);
 			showNewTag(data['tag']);
 		});
 
 		// after judging
 		socket.on( 'final', function( data ) {
 			// data = {card: 'sentence', tag: 'tag'}
-			console.log('socket message:', data);
+			console.log('final: socket message:', data);
 			showNewCard(data['card'], 'Winning MadTag!');
 		});
 
