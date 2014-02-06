@@ -236,6 +236,8 @@
 		self.waitingForPlayersController.wrapper = self.wrapper;
         [self transitionToContainerView:self.waitingForPlayersContainer];
         
+        [self.waitingForPlayersController discoveredTag:@{ @"MTTaggerWordKey": @"Toyota" }];
+        
 	}else if ([@"Playing" isEqualToString:gamePhase] ){
         
 		NSArray *sentences = [data objectForKey:@"sentences"];

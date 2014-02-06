@@ -7,6 +7,7 @@
 //
 
 #import "MTWaitingForPlayersViewController.h"
+#import "MTTaggers.h"
 
 @interface MTWaitingForPlayersViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -22,6 +23,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableView.backgroundView = [[UIView alloc] initWithFrame:self.tableView.bounds];
+    self.tableView.backgroundView.backgroundColor = [UIColor clearColor];
+    
     self.discoveredTags = [NSMutableArray array];
 }
 
@@ -42,16 +48,31 @@
 
 }
 
-#pragma mark - TableView
+-(void) discoveredTag:(NSDictionary*) tag;
+{
+    [self.discoveredTags addObject:tag];
+    [self.tableView reloadData];
+}
 
+
+#pragma mark - TableView
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
 {
+    return self.discoveredTags.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
+    NSDictionary *tag = [self.discoveredTags objectAtIndex:indexPath.row];
     
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TagCell" forIndexPath:indexPath];
+    cell.textLabel.text = [tag objectForKey:MTTaggerWordKey];
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
+    
+    return cell;
 }
 
 @end
