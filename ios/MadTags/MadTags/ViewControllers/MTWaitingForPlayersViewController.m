@@ -10,6 +10,8 @@
 
 @interface MTWaitingForPlayersViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *startButton;
+
 @end
 
 @implementation MTWaitingForPlayersViewController
@@ -31,6 +33,17 @@
 - (IBAction)didClickStartButton:(id)sender;
 {
     
+}
+
+-(void) setCanStartGame:(BOOL)canStartGame;
+{
+    _canStartGame = canStartGame;
+    
+    if( _canStartGame ){
+        self.startButton.alpha = 1.0;
+    }else{
+        self.startButton.alpha = 0.0;
+    }
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "MTPlayerChooseCardViewController.h"
 #import "MTCard.h"
 #import "MTJudgeViewController.h"
+#import "MTWaitingForPlayersViewController.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate>
 
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
 @property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
 
+@property (weak, nonatomic) MTWaitingForPlayersViewController *waitingForPlayersController;
 @property (weak, nonatomic) MTPlayerChooseCardViewController *playerChooseCardController;
 @property (weak, nonatomic) MTJudgeViewController *judgeGameController;
 
@@ -50,7 +52,9 @@
     
     
     for( UIViewController *childController in self.childViewControllers ){
-        if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
+        if( [childController isKindOfClass:[MTWaitingForPlayersViewController class]] ){
+            self.waitingForPlayersController = (MTWaitingForPlayersViewController*) childController;
+        }else if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
             self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
         }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
             self.judgeGameController = (MTJudgeViewController*)childController;
@@ -162,18 +166,20 @@
 
 -(void) didConnect;
 {
-    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    
 }
 
 -(void) didDisconnect;
 {
     // TODO: resume
+    [[[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Your socket has disconnected. Please try again later." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
--(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) dictionary;
+-(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) data;
 {
     if( [@"waitingForPlayers" isEqualToString:gamePhase] ){
-        
+        NSString *role = [data objectForKey:@"role"];
+        self.waitingForPlayersController.canStartGame = [@"JUDGE" isEqualToString:role];
         [self transitionToContainerView:self.waitingForPlayersContainer];
     }else{
         NSLog( @"Unknown game phase: %@", gamePhase );

@@ -244,6 +244,9 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="startButton" destination="jmw-wZ-3dw" id="g7T-C2-CfY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6BG-nD-CLs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,4 +10,6 @@
 
 @interface MTWaitingForPlayersViewController : UIViewController
 
+@property (nonatomic,assign) BOOL canStartGame;
+
 @end
