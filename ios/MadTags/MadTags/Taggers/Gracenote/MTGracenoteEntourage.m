@@ -154,7 +154,9 @@
             textToDisplay = match.title.display;
         }
         
-        NSLog( @"RESULT: %@, %@", textToDisplay, match );
+		NSDictionary *tagDict = @{MTTaggerWordKey : match.title.display, MTTaggerIsTVShowKey : @(YES)};
+		[self.delegate didTagContent:tagDict];
+        NSLog( @"RESULT: %@, %@, %@", match.title.display, match, tagDict );
     }
 }
 

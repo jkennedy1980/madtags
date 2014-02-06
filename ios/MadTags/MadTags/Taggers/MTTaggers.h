@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+#define MTTaggerWordKey			@"MTTaggerWordKey"
+#define MTTaggerIsProductKey	@"MTTaggerIsProductKey"
+#define MTTaggerIsTVShowKey		@"MTTaggerIsTVShowKey"
+#define MTTaggerTMSIdKey		@"MTTaggerTMSIdKey"
+
 @protocol MTTaggerDelegate <NSObject>
 
 -(void) didTagContent:(NSDictionary*)tagDict;

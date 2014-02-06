@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MTTaggers.h"
 
 @interface MTAlphonso : NSObject<MTTagger>
 @property (nonatomic, weak) id<MTTaggerDelegate>delegate;
