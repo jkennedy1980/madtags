@@ -33,7 +33,8 @@
     "connect": "2.12.0",
     "ejs": "~0.8.4",
     "socket.io": "0.9.16",
-    "socket.io-client": "0.9.16"
+    "socket.io-client": "0.9.16",
+    "request": "2.33.0"
   },
   "devDependencies": {
     "grunt-contrib-jshint": "~0.6.4",
