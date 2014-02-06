@@ -6,15 +6,10 @@
 
 	<div class="overlay">
 		<div class="row">
-			<div class="col-sm-12">
-				<h1>TV Game Phase Changes</h1>
-				<ul id="gamePhaseChanges"></ul>
-			</div>
-		</div>
-		<div class="row">
 			<div class="col-sm-6 card-container">
 				<div class="card card-minimized">
-					<div class="card-content tv-tag-logo-al">
+					<!-- <div class="card-content tv-tag-logo-al"> -->
+					<div class="card-content">
 						<p>
 							<span class="now-playing">Now Playing:</span>
 							<br/>
@@ -27,15 +22,21 @@
 			<div class="col-sm-3">
 			</div>
 			<div class="col-sm-3">
-				<div class="tv-tag tv-tag-1 tv-tag-logo-zb">Rogain</div>
-				<div class="tv-tag tv-tag-7 tv-tag-logo-zb">Chevrolet</div>
-				<div class="tv-tag tv-tag-2 tv-tag-logo-gn">Toyota</div>
-				<div class="tv-tag tv-tag-6 tv-tag-logo-al">So You Think You Can Dance</div>
-				<div class="tv-tag tv-tag-3 tv-tag-logo-al">Special K</div>
-				<div class="tv-tag tv-tag-5 tv-tag-logo-gn">NyQuil</div>
-				<div class="tv-tag tv-tag-4 tv-tag-logo-zb">Tampax</div>
+				<div class="tags-container">
+					<div class="tv-tag tv-tag-1 tv-tag-logo-zb">Rogain</div>
+					<div class="tv-tag tv-tag-7 tv-tag-logo-zb">Chevrolet</div>
+					<div class="tv-tag tv-tag-2 tv-tag-logo-gn">Toyota</div>
+					<div class="tv-tag tv-tag-6 tv-tag-logo-al">So You Think You Can Dance</div>
+					<div class="tv-tag tv-tag-3 tv-tag-logo-al">Special K</div>
+					<div class="tv-tag tv-tag-5 tv-tag-logo-gn">NyQuil</div>
+					<div class="tv-tag tv-tag-4 tv-tag-logo-zb">Tampax</div>
+				</div>
 			</div>
 		</div>
+	</div>
+	<div>
+		<h1>TV Game Phase Changes</h1>
+		<ul id="gamePhaseChanges"></ul>
 	</div>
 
 	<% include scripts.html %>
@@ -148,8 +149,8 @@
 		var cardMonitor;
 
 		function showNewCard(sentence, type) {
-			var logoCss = getLogoCss(type);
-			$('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
+			// var logoCss = getLogoCss(type);
+			// $('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
 			$('.tv .card-content .title').text(sentence);
 			maximizeCard();
 		}

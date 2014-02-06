@@ -241,6 +241,8 @@
 		NSUInteger playerIndex = [[data objectForKey:@"playerIndex"] integerValue];
 		self.taggers = [[MTTaggers alloc] initWithSeed:playerIndex delegate:self];
         
+        [self.waitingForPlayersController discoveredTag:@{ @"MTTaggerWordKey": @"Toyota" }];
+        
 	}else if ([@"Playing" isEqualToString:gamePhase] ){
         
 		NSArray *sentences = [data objectForKey:@"sentences"];
