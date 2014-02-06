@@ -15,6 +15,12 @@
 		03F32B4918A2F1C700C7129F /* MTCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B4818A2F1C700C7129F /* MTCardView.m */; };
 		03F32B4C18A2F39F00C7129F /* MTPlayerChooseCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B4B18A2F39F00C7129F /* MTPlayerChooseCardViewController.m */; };
 		03F32B4F18A3486000C7129F /* MTJudgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03F32B4E18A3486000C7129F /* MTJudgeViewController.m */; };
+		03F32B5718A3E13A00C7129F /* alphonsotag_48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F32B5118A3E13A00C7129F /* alphonsotag_48x48@2x.png */; };
+		03F32B5818A3E13A00C7129F /* appiconmadtags.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F32B5218A3E13A00C7129F /* appiconmadtags.png */; };
+		03F32B5918A3E13A00C7129F /* gracenotetag_48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F32B5318A3E13A00C7129F /* gracenotetag_48x48@2x.png */; };
+		03F32B5A18A3E13A00C7129F /* logomadtags_222x186@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F32B5418A3E13A00C7129F /* logomadtags_222x186@2x.png */; };
+		03F32B5B18A3E13A00C7129F /* logomadtags_60x50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F32B5518A3E13A00C7129F /* logomadtags_60x50@2x.png */; };
+		03F32B5C18A3E13A00C7129F /* zeeboxtag_48x48@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 03F32B5618A3E13A00C7129F /* zeeboxtag_48x48@2x.png */; };
 		D22D000918A2C98800FBE7A3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D000818A2C98800FBE7A3 /* CFNetwork.framework */; };
 		D22D000B18A2C99000FBE7A3 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D000A18A2C99000FBE7A3 /* libicucore.dylib */; };
 		D22D000D18A2C99900FBE7A3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D22D000C18A2C99900FBE7A3 /* Security.framework */; };
@@ -78,6 +84,12 @@
 		03F32B4B18A2F39F00C7129F /* MTPlayerChooseCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTPlayerChooseCardViewController.m; sourceTree = "<group>"; };
 		03F32B4D18A3486000C7129F /* MTJudgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTJudgeViewController.h; sourceTree = "<group>"; };
 		03F32B4E18A3486000C7129F /* MTJudgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTJudgeViewController.m; sourceTree = "<group>"; };
+		03F32B5118A3E13A00C7129F /* alphonsotag_48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alphonsotag_48x48@2x.png"; sourceTree = "<group>"; };
+		03F32B5218A3E13A00C7129F /* appiconmadtags.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appiconmadtags.png; sourceTree = "<group>"; };
+		03F32B5318A3E13A00C7129F /* gracenotetag_48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gracenotetag_48x48@2x.png"; sourceTree = "<group>"; };
+		03F32B5418A3E13A00C7129F /* logomadtags_222x186@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logomadtags_222x186@2x.png"; sourceTree = "<group>"; };
+		03F32B5518A3E13A00C7129F /* logomadtags_60x50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logomadtags_60x50@2x.png"; sourceTree = "<group>"; };
+		03F32B5618A3E13A00C7129F /* zeeboxtag_48x48@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zeeboxtag_48x48@2x.png"; sourceTree = "<group>"; };
 		D22D000818A2C98800FBE7A3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D22D000A18A2C99000FBE7A3 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D22D000C18A2C99900FBE7A3 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -189,6 +201,19 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		03F32B5018A3E13A00C7129F /* images */ = {
+			isa = PBXGroup;
+			children = (
+				03F32B5118A3E13A00C7129F /* alphonsotag_48x48@2x.png */,
+				03F32B5218A3E13A00C7129F /* appiconmadtags.png */,
+				03F32B5318A3E13A00C7129F /* gracenotetag_48x48@2x.png */,
+				03F32B5418A3E13A00C7129F /* logomadtags_222x186@2x.png */,
+				03F32B5518A3E13A00C7129F /* logomadtags_60x50@2x.png */,
+				03F32B5618A3E13A00C7129F /* zeeboxtag_48x48@2x.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		D22D000E18A2CB5500FBE7A3 /* Socket.IO */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,6 +303,7 @@
 		D2791CAD18A2A2DF0043A465 /* MadTags */ = {
 			isa = PBXGroup;
 			children = (
+				03F32B5018A3E13A00C7129F /* images */,
 				D22D002218A2DFBC00FBE7A3 /* Taggers */,
 				D2791CB918A2A2DF0043A465 /* Main.storyboard */,
 				03F32B4318A2F10000C7129F /* Models */,
@@ -442,9 +468,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03F32B5718A3E13A00C7129F /* alphonsotag_48x48@2x.png in Resources */,
+				03F32B5B18A3E13A00C7129F /* logomadtags_60x50@2x.png in Resources */,
+				03F32B5918A3E13A00C7129F /* gracenotetag_48x48@2x.png in Resources */,
+				03F32B5818A3E13A00C7129F /* appiconmadtags.png in Resources */,
 				D2791CC018A2A2DF0043A465 /* Images.xcassets in Resources */,
+				03F32B5A18A3E13A00C7129F /* logomadtags_222x186@2x.png in Resources */,
 				D2791CB218A2A2DF0043A465 /* InfoPlist.strings in Resources */,
 				D2791CBB18A2A2DF0043A465 /* Main.storyboard in Resources */,
+				03F32B5C18A3E13A00C7129F /* zeeboxtag_48x48@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
