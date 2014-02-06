@@ -93,14 +93,17 @@
 	height: 86px;
 	margin-top: 0px;
 	padding: 10px;
-	bottom: 86px;
+	bottom: 40px;
 	position: absolute;
 }
 
 .tv .card-maximized {
+	width: 100%;
 	height: 300px;
 	margin-top: -86px;
-	padding: 30px;
+	padding: 45px;
+	bottom: -70px;
+	position: absolute;
 }
 
 .tv .card-bottom-logo {
@@ -117,12 +120,14 @@
 }
 
 .tv .card-content .now-playing {
+	color: #0061FE;
 	font-size: 20pt;
-	font-style: italic;
+	font-weight: bold;
 	font-family: 'Helvetica Neue';
 }
 
 .tv .card-content .title {
+	color: #000;
 	font-size: 40pt;
 	font-family: 'Helvetica Neue';
 	font-weight: bold;
@@ -133,7 +138,8 @@
 }
 
 .tv .card-bottom-logo-maximized {
-	bottom: 115px;
-	left: 40px;
+	display: none;
+	bottom: 35px;
+	left: 35px;
 	position: absolute;
 }
