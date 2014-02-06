@@ -41,6 +41,7 @@
 
 	<% include scripts.html %>
 	<script>
+		//sockets
 		var socket = io.connect();
 
 		socket.emit( 'joinTV', { username: "Josh", gameCode: "1234" } );
@@ -55,6 +56,23 @@
 			$('#gamePhaseChanges').append( html );
 		});	
 
+		socket.on( '', function ( data ){
+			// when found new tag
+			var name = data['name'];
+			var source = data['source'];
+			showNewTag(name, source);
+		});
+
+		socket.on( '', function ( data ){
+			// show card
+			var name = data['name'];
+			showNewCard(name);
+		});
+
+		socket.on( '', function ( data ){
+			// dismiss card
+			minimizeCard();
+		});
 
 		// frontend UI shitz
 
@@ -147,26 +165,43 @@
 
 		// card popups
 		var cardMonitor;
+		var cardState = 0; // 0 - minimized, 1 - maximized
 
 		function showNewCard(sentence, type) {
 			// var logoCss = getLogoCss(type);
 			// $('.tv .card-content').removeClass('tv-tag-logo-zb').removeClass('tv-tag-logo-gn').removeClass('tv-tag-logo-al').addClass(logoCss);
-			$('.tv .card-content .title').text(sentence);
-			maximizeCard();
+			console.log('cardState:', cardState);
+			if (cardState == 1) {
+				minimizeCard();
+				setTimeout(function() {
+					$('.tv .card-content .title').hide().text(sentence);
+					maximizeCard(function() {
+						$('.tv .card-content .title').delay(200).fadeIn(250)
+					});
+				}, 500);
+			} else {
+				$('.tv .card-content .title').hide().text(sentence);
+				maximizeCard(function() {
+					$('.tv .card-content .title').delay(200).fadeIn(250)
+				});
+			}
 		}
 
-		function maximizeCard() {
+		function maximizeCard(callback) {
 			$('.tv .card-minimized').removeClass('card-minimized').addClass('card-maximized');
 			$('.tv .card-content').show();
 			$('.tv .card-bottom-logo-minimized').removeClass('card-bottom-logo-minimized').addClass('card-bottom-logo-maximized');
 			clearInterval(cardMonitor);
 			cardMonitor = setInterval(minimizeCard, tagDelay);
+			cardState = 1;
+			callback();
 		}
 
 		function minimizeCard() {
 			$('.tv .card-maximized').removeClass('card-maximized').addClass('card-minimized');
 			$('.tv .card-content').hide();
 			$('.tv .card-bottom-logo-maximized').removeClass('card-bottom-logo-maximized').addClass('card-bottom-logo-minimized');
+			cardState = 0;
 		}
 
 		// monitor tag removal, make sure tags don't stay on screen for longer than 10 seconds
