@@ -51,7 +51,7 @@
 			}
 		} and_result_callback:^(asapi_match *content) {
 			NSLog(@"Got a Tagline %@, brand %@, Hits %ld, Timestamp %@", content.tagline, content.brand, (long)content.hits, content.start );
-			NSDictionary *tagDict = @{MTTaggerWordKey : content.brand, MTTaggerIsProductKey : @(1), MTTaggerSourceName : @"Alphonso" };
+			NSDictionary *tagDict = @{MTTaggerWordKey : content.brand, MTTaggerIsProductKey : @(1), MTTaggerSourceNameKey : @"Alphonso" };
 			[self.delegate didTagContent:tagDict];
 		}];
 		

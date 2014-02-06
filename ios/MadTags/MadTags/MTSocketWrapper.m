@@ -81,7 +81,6 @@
     [self.socket sendEvent:@"judgement" withData:@{ @"sentence": sentence }];
 }
 
-
 -(void) reconnect;
 {
     [self.socket disconnect];
@@ -121,15 +120,29 @@
                                                         error: nil];
     
     NSString *eventName = [dict objectForKey:@"name"];
+	
     if( [@"gamePhase" isEqualToString:eventName] ){
+		
         NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
         
         NSDictionary *data = [args objectForKey:@"data"];
         NSString *phaseName = [args objectForKey:@"phase"];
         
         [self.delegate changeToGamePhase:phaseName data:data];
-    }
-    
+		
+    } else if( [@"tag" isEqualToString:eventName] ){
+		
+//        NSDictionary *args = [[dict objectForKey:@"args"] objectAtIndex:0];
+//        
+//        NSDictionary *data = [args objectForKey:@"data"];
+//		NSString *tagWord = [data objectForKey:@"tag"];
+//		NSString *source = [data objectForKey:@"source"];
+//		NSDictionary *tagDict = @{MTTaggerWordKey : tagWord, MTTaggerSourceNameKey : source};
+//        
+//        [self.delegate clientsDidDiscoverTag:tagDict];
+		
+	}
+	
 	NSLog( @"dict: %@", dict );
 }
 

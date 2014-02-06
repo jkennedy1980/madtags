@@ -18,6 +18,8 @@
 
 -(void) changeToGamePhase:(NSString*) gamePhase data:(NSDictionary*) dictionary;
 
+-(void) clientsDidDiscoverTag:(NSDictionary*)tagDict;
+
 @end
 
 

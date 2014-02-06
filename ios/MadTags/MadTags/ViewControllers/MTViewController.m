@@ -349,4 +349,8 @@
 	[self.waitingForPlayersController discoveredTag:tagDict];
 }
 
+-(void) clientsDidDiscoverTag:(NSDictionary*) tagDict;
+{
+	NSLog( @"tagDict received from server: %@", tagDict );
+}
 @end
