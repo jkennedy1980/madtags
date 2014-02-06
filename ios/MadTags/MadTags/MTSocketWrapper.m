@@ -40,9 +40,15 @@
     [self.socket disconnect];
 }
 
+
 -(void) joinGameWithCode:(NSString*) gameCode username:(NSString*) username;
 {
     [self.socket sendEvent:@"joinClient" withData:@{ @"username": username, @"gameCode": gameCode }];
+}
+
+-(void) restartGame:(NSString*)gameCode;
+{
+    [self.socket sendEvent:@"restart" withData:@{ @"gameCode": gameCode }];
 }
 
 -(void) startGameWithCode:(NSString*) gameCode;
@@ -78,7 +84,7 @@
 - (void) socketIODidDisconnect:(SocketIO *)socket disconnectedWithError:(NSError *)error;
 {
 	NSLog( @"Did Disconnect");
-    [self performSelector:@selector(reconnect) withObject:nil afterDelay:3.0];
+    [self performSelector:@selector(reconnect) withObject:nil afterDelay:2.0];
     [self.delegate didDisconnect];
 }
 
@@ -120,6 +126,7 @@
 - (void) socketIO:(SocketIO *)socket onError:(NSError *)error;
 {
 	NSLog( @"onError");
+	[self.delegate didError:error];
 }
 
 @end

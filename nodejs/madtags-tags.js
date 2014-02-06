@@ -5,7 +5,7 @@
 		"Pizza Hut", "McDonalds", "Kentucky Fried Chicken", "Folgers", "Your Father's Oldsmobile", "Spanx", "Apple", "Google"
 	];
 
-	var nextTagIndex = 0;
+	var nextTagIndex = Math.floor( Math.random() * tags.length );
 
 	exports.nextTag = function(){
 		var tag = tags[ nextTagIndex++ ];

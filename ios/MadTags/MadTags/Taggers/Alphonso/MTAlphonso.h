@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MTAlphonso : NSObject
-
+@interface MTAlphonso : NSObject<MTTagger>
+@property (nonatomic, weak) id<MTTaggerDelegate>delegate;
 @end

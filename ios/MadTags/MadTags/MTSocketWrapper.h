@@ -10,6 +10,8 @@
 
 @protocol MTSocketWrapperDelegate <NSObject>
 
+-(void) didError:(NSError*) error;
+
 -(void) didConnect;
 
 -(void) didDisconnect;
@@ -34,5 +36,7 @@
 -(void) sendJudgeEndOfPlayMessage:(NSString*) gameCode;
 
 -(void) sendPlayerEndOfPlayMessage:(NSString*) gameCode selectedCardString:(NSString*) cardString;
+
+-(void) restartGame:(NSString*)gameCode;
 
 @end

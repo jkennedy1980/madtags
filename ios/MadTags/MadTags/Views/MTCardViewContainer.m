@@ -71,6 +71,11 @@
         [self addSubview:view];
     }
     
+    if( self.subviews.count > 0 ){
+        MTCardView *firstView = [self.subviews objectAtIndex:0];
+        firstView.selected = YES;
+    }
+    
     [self updateCardLayout];
 }
 
@@ -78,6 +83,22 @@
 {
     _displayedCard = displayedCard;
     [self updateCardLayoutAnimated:YES];
+}
+
+-(void) didDeselectCardView:(MTCardView*) cardView;
+{
+    cardView.selected = NO;
+    
+    for( MTCardView *card in self.subviews ){
+        if( cardView != card ){
+            card.selected = NO;
+        }
+    }
+    
+    MTCardView *selectedCardView = [self.subviews objectAtIndex:0];
+    self.selectedCard = selectedCardView.card;
+    selectedCardView.selected = YES;
+    [self.delegate didSelectCard:self.selectedCard];
 }
 
 -(void) didSelectCardView:(MTCardView*) cardView;
@@ -89,6 +110,7 @@
     }
     
     self.selectedCard = cardView.card;
+    cardView.selected = YES;
     [self.delegate didSelectCard:self.selectedCard];
 }
 

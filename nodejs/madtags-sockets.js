@@ -32,7 +32,17 @@
 
 			socket.on( 'submit', function( data ){
 				console.log( "SUBMITTING: ", data );
-				game.submit( socket, data.card, data.username );
+				game.submit( socket, data.gameCode, data.selectedSentence, data.username );
+			});
+
+			socket.on( 'getSubmissions', function( data ){
+				console.log( "GETTING SUBMISSIONS: ", data );
+				game.getSubmissions( socket, data.gameCode, data.card );
+			});
+
+			socket.on( 'restart', function( data ){
+				console.log( "RESTARTING: ", data );
+				game.restartGame( socket, data.gameCode );
 			});
 
 			/**

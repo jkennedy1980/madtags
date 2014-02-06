@@ -16,6 +16,8 @@
 
 -(void) didSelectCardView:(MTCardView*) cardView;
 
+-(void) didDeselectCardView:(MTCardView*) cardView;
+
 @end
 
 

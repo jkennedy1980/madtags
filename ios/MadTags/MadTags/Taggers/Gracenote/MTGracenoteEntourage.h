@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MTTaggers.h"
 
-@interface MTGracenoteEntourage : NSObject
-
+@interface MTGracenoteEntourage : NSObject<MTTagger>
+@property (nonatomic, weak) id<MTTaggerDelegate>delegate;
 @end

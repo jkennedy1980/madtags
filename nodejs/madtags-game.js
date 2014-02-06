@@ -35,18 +35,40 @@
 
 	exports.startTurn = function( socket, gameCode ){
 		if( game.gamePhase !== 'JOINING' ){
-			console.log("STATE NO MAKE SENSE: ", game.gamePhase, "WE AINT JOINING" );
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, ". WE AINT JOINING" );
 			return;
 		}
 
 		game.gamePhase = 'PLAYING';
 		var cards = cardDeck.cards();
 		var tag = tags.nextTag();
+		game.tag = tag;
 		socketUtils.respondOnAllClientSockets( socket, 'Playing', { 'sentences' : cards, 'tag' : tag });
 	}
 
-	exports.startGame = function( socket, gameCode ){
-		emitChangeGamePhase( socket, 'waitingForTags', {} );
+	exports.submit = function( socket, gameCode, card ){
+
+		if( game.gamePhase !== 'PLAYING' ){
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, ". WE AINT PLAYING" );
+			return;
+		}
+
+		game.playedCards.push( card );
+	}
+
+	exports.getSubmissions = function( socket, gameCode ){
+
+		if( game.gamePhase !== 'PLAYING' ){
+			console.log("STATE NO MAKE SENSE: ", game.gamePhase, ". WE AINT PLAYING" );
+			return;
+		}
+
+		game.gamePhase = 'JUDGING';
+		socketUtils.respondOnAllClientSockets( socket, 'Judging', { 'sentences' : game.playedCards, 'tag' : game.tag });
+	}
+
+	exports.restartGame = function( socket, gameCode ){
+		var game = new Game();
 	}
 
 	// function emitChangeToGamePhase( socket, phaseToChangeTo, data ){
@@ -79,14 +101,30 @@
 		}
 
 		function _setJudge( player ){
-			if( self.judge != false ) {
-				console.error( "I already have a judge, bro" );
-				return;
-			}
-
+			self.judge.role = 'PLAYER';
 			self.judge = player;
-			player.role = 'JUDGE';
+			self.judge.role = 'JUDGE';
 		}
+
+		// function _restart(){
+		// 	var indexOfJudge = -1;
+		// 	for( var i=0; i < this.players.length; i++ ){
+		// 		if( this.players[i].role === 'JUDGE' ){
+		// 			indexOfJudge = i;
+		// 			break;
+		// 		}
+		// 	}
+
+		// 	indexOfJudge++;
+
+		// 	if( indexOfJudge < this.players.length ){
+		// 		_setJudge( this.players[ indexOfJudge ] )
+		// 	}
+
+		// 	this.gamePhase = 'INIT';
+		// 	this.tag = false;
+		// 	this.cards = false;
+		// }
 
 		return {
 			"gameCode" : gameCode,
@@ -94,7 +132,10 @@
 			"gamePhase" : 'INIT',
 			"judge" : false,
 			"setJudge" : _setJudge,
-			"newPlayer" : _newPlayer
+			"newPlayer" : _newPlayer,
+			"tag" : false,
+			// "restart" : _restart,
+			"playedCards" : []
 		}
 
 	}
