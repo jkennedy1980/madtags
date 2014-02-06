@@ -60,8 +60,8 @@
 		socket.on( 'gamePhase', function( message ) {
 			console.log('socket message:', message);
 			// message = { phase: 'waitingForPlayers', data: }
-			// message = { phase: 'playing', data: {tag: 'tag'}}
-			if (message['phase'] == 'playing') {
+			// message = { phase: 'Playing', data: {tag: 'tag'}}
+			if (message['phase'] == 'Playing') {
 				// show card
 				showNewCard(data['tag'], 'Now Playing:');
 			} else if (message['phase'] == 'waitingForPlayers') {
