@@ -10,6 +10,7 @@
 #import "MTSocketWrapper.h"
 #import "MTPlayerChooseCardViewController.h"
 #import "MTCard.h"
+#import "MTJudgeViewController.h"
 
 @interface MTViewController ()<MTSocketWrapperDelegate>
 
@@ -19,8 +20,10 @@
 @property (weak, nonatomic) IBOutlet UIView *userJoinContainer;
 @property (weak, nonatomic) IBOutlet UIView *waitingForPlayersContainer;
 @property (weak, nonatomic) IBOutlet UIView *playerChooseCardContainer;
+@property (weak, nonatomic) IBOutlet UIView *judgeGameContainer;
 
-@property (weak, nonatomic) IBOutlet MTPlayerChooseCardViewController *playerChooseCardController;
+@property (weak, nonatomic) MTPlayerChooseCardViewController *playerChooseCardController;
+@property (weak, nonatomic) MTJudgeViewController *judgeGameController;
 
 
 #define kPlayTimerLength 30
@@ -49,12 +52,16 @@
     for( UIViewController *childController in self.childViewControllers ){
         if( [childController isKindOfClass:[MTPlayerChooseCardViewController class]] ){
             self.playerChooseCardController = (MTPlayerChooseCardViewController*)childController;
+        }else if( [childController isKindOfClass:[MTJudgeViewController class]] ){
+            self.judgeGameController = (MTJudgeViewController*)childController;
         }
     }
 	
 	self.userJoinContainer.alpha = 1.0;
 	self.waitingForPlayersContainer.alpha = 0.0;
 	self.playerChooseCardContainer.alpha = 0.0;
+    self.judgeGameContainer.alpha = 0.0;
+    
     
 //    MTCard *card1 = [[MTCard alloc] init];
 //    card1.sentence = @"I'm suffering from a severe case of <<WORD>>.";

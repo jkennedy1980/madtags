@@ -31,7 +31,7 @@
 -(void) connect;
 {
     if( !self.socket.isConnected ){
-        [self.socket connectToHost:@"Snickers.local" onPort:80];
+        [self.socket connectToHost:@"localhost" onPort:80];
     }
 }
 
