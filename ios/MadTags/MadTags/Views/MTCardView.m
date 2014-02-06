@@ -43,13 +43,14 @@
         
         self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
         self.selectButton.frame = CGRectMake( floor((self.bounds.size.width - kSelectButtonDimension) / 2.0), self.bounds.size.height - kSelectButtonDimension - kSelectButtonBottomPadding, kSelectButtonDimension, kSelectButtonDimension);
-        self.selectButton.layer.backgroundColor = kGreen.CGColor;
-        self.selectButton.backgroundColor = kGreen;
         self.selectButton.layer.cornerRadius = floor( kSelectButtonDimension / 2.0 );
-//        [self.selectButton setTitle:@":30" forState:UIControlStateNormal];
         self.selectButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:30.0];
+        [self.selectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.selectButton setTitleColor:kGreen forState:UIControlStateSelected];
+        [self.selectButton addTarget:self action:@selector(didClickSelectButton) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.selectButton];
-        
+        [self setupButton];
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playClockDidTick:) name:MTPlayTimerTickNotification object:nil];
     }
     return self;
@@ -59,11 +60,47 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+-(void) didClickSelectButton;
+{
+    self.selected = !self.selected;
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        self.selectButton.transform = CGAffineTransformMakeScale( 1.1, 1.1 );
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.selectButton.transform = CGAffineTransformIdentity;
+        }];
+    }];
+    
+    [self.delegate didSelectCardView:self];
+    
+    [self setupButton];
+
+}
+
+-(void) setupButton;
+{
+    if( self.selected ){
+        self.selectButton.selected = YES;
+        self.selectButton.layer.backgroundColor = [UIColor clearColor].CGColor;
+    }else{
+        self.selectButton.selected = NO;
+        self.selectButton.layer.backgroundColor = kGreen.CGColor;
+    }
+}
          
 -(void) playClockDidTick:(NSNotification*) notification;
 {
     NSNumber *clockTime = [notification.userInfo objectForKey:MTPlayTimerTickTimeKey];
     [self.selectButton setTitle:[NSString stringWithFormat:@":%@", clockTime] forState:UIControlStateNormal];
+}
+
+-(void) setSelected:(BOOL)selected;
+{
+    _selected = selected;
+    self.selectButton.selected = selected;
+    [self setupButton];
 }
 
 -(void) setCard:(MTCard *)card;

@@ -10,6 +10,12 @@
 #import "MTCard.h"
 #import "MTCardView.h"
 
+
+@interface MTCardViewContainer()<MTCardViewDelegate>
+
+@end
+
+
 @implementation MTCardViewContainer
 
 - (id)initWithFrame:(CGRect)frame
@@ -38,10 +44,10 @@
         CGPoint point = [recognizer locationInView:self];
         MTCardView *tappedView = (MTCardView *) [self hitTest:point withEvent:nil];
         
-        if( self.selectedCard ){
-            self.selectedCard = nil;
+        if( self.displayedCard ){
+            self.displayedCard = nil;
         }else{
-            self.selectedCard = tappedView.card;
+            self.displayedCard = tappedView.card;
         }
     }
 }
@@ -58,16 +64,25 @@
         MTCardView *view = [[MTCardView alloc] initWithFrame:self.bounds];
         view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         view.card = card;
+        view.delegate = self;
         [self addSubview:view];
     }
     
     [self updateCardLayout];
 }
 
--(void) setSelectedCard:(MTCard *)selectedCard;
+-(void) setDisplayedCard:(MTCard *)displayedCard;
 {
-    _selectedCard = selectedCard;
+    _displayedCard = displayedCard;
     [self updateCardLayoutAnimated:YES];
+}
+
+-(void) didSelectCardView:(MTCardView*) cardView;
+{
+    for( MTCardView *cardView in self.subviews ){
+        cardView.selected = NO;
+    }
+    self.selectedCard = cardView.card;
 }
 
 -(void) updateCardLayoutAnimated:(BOOL) animated;
@@ -84,7 +99,7 @@
 
 -(void) updateCardLayout;
 {
-    if( self.selectedCard ){
+    if( self.displayedCard ){
         [self updateCardLayoutForSelectedCard];
         return;
     }
@@ -106,7 +121,7 @@
     NSInteger index = 0;
     
     for( MTCardView *cardView in self.subviews ){
-        if( cardView.card == self.selectedCard ){
+        if( cardView.card == self.displayedCard ){
             hitSelectedCard = YES;
             cardView.frame = CGRectMake( 0, 0, cardView.bounds.size.width, cardView.bounds.size.height);
         }else{

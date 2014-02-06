@@ -12,6 +12,7 @@
 @interface MTCardViewContainer : UIView
 
 @property (nonatomic,strong) NSArray *cards;
+@property (nonatomic,strong) MTCard *displayedCard;
 @property (nonatomic,strong) MTCard *selectedCard;
 
 @end

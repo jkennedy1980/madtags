@@ -9,8 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "MTCard.h"
 
+
+@class MTCardView;
+
+@protocol MTCardViewDelegate <NSObject>
+
+-(void) didSelectCardView:(MTCardView*) cardView;
+
+@end
+
+
 @interface MTCardView : UIView
 
 @property (nonatomic,strong) MTCard *card;
+@property (nonatomic,assign) BOOL selected;
+@property (nonatomic,weak) id<MTCardViewDelegate> delegate;
 
 @end
